@@ -1,0 +1,11 @@
+# Redirects for KOZAK website
+/* 
+  Redirects can be defined in the following format:
+  /old-path  /new-path  301
+  This will redirect from old-path to new-path with a 301 status code.
+*/
+
+// Example redirects
+/old-service  /services  301
+/about-us  /about  301
+/contact-us  /contact  301

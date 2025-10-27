@@ -1,0 +1,30 @@
+{
+  "name": "kozak-website",
+  "version": "1.0.0",
+  "description": "A website for planning romantic marriage proposals in Paris with KOZAK.",
+  "main": "src/index.jsx",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "keywords": [
+    "proposal",
+    "wedding",
+    "Paris",
+    "romantic",
+    "KOZAK"
+  ],
+  "author": "KOZAK",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^2.2.19",
+    "vite": "^4.0.0"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  }
+}
