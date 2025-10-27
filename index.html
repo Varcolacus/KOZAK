@@ -1,695 +1,134 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOZAK | Romantic Marriage Proposal Planning in Paris</title>
-    <meta name="description" content="Plan your dream marriage proposal in Paris with KOZAK. Exclusive, customizable packages with Eiffel Tower photography, trusted by couples worldwide.">
-    <meta name="keywords" content="proposal in Paris, Paris proposal, marriage proposal Paris, romantic proposal Paris, Eiffel Tower proposal, Paris wedding proposal, proposal planner Paris">
-    <meta name="author" content="KOZAK">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="KOZAK | Romantic Marriage Proposal Planning in Paris">
-    <meta property="og:description" content="Unforgettable Paris proposals with KOZAK. Custom packages, Eiffel Tower copyright for nighttime photos, and multilingual support.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
-    <meta property="og:url" content="https://[your-domain].com">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="KOZAK | Romantic Marriage Proposal Planning in Paris">
-    <meta name="twitter:description" content="Plan a magical proposal in Paris with KOZAK. Exclusive packages with Eiffel Tower views and professional photography.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
-    <link rel="canonical" href="https://[your-domain].com">
-    <link rel="alternate" hreflang="en" href="https://[your-domain].com/en">
-    <link rel="alternate" hreflang="fr" href="https://[your-domain].com/fr">
-    <link rel="alternate" hreflang="uk" href="https://[your-domain].com/uk">
-    <link rel="alternate" hreflang="ru" href="https://[your-domain].com/ru">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&family=Noto+Serif&display=swap" rel="stylesheet">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "KOZAK",
-        "description": "Premier marriage proposal planning service in Paris, offering exclusive, customizable packages with Eiffel Tower photography.",
-        "url": "https://[your-domain].com",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Paris",
-            "addressCountry": "FR"
-        },
-        "telephone": "[your-phone-number]",
-        "image": "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-        "sameAs": [
-            "https://instagram.com/paris.marryme?igsh=amp4cjlscjR4YjRl",
-            "https://wa.me/[your_whatsapp]"
-        ],
-        "openingHours": "Mo-Su 09:00-21:00",
-        "keywords": "proposal in Paris, Paris proposal, marriage proposal Paris, romantic proposal Paris, Eiffel Tower proposal, proposition à Paris, пропозиція в Парижі, предложение в Париже"
-    }
-    </script>
-    <style>
-        body { font-family: 'Roboto', sans-serif; }
-        .hero-bg {
-            background-image: url('https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            /* Fallback color if image fails */
-            background-color: #f0e6dc;
-        }
-        .section-bg { background-color: #f9f1ed; }
-        .package-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .package-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
-        .faq-item { transition: background-color 0.3s ease; }
-        .faq-item:hover { background-color: #f0e6dc; }
-        img { loading: "lazy"; }
-        .language-switcher { display: flex; align-items: center; }
-        .language-switcher a,
-        .nav-link {
-            color: #333;
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            margin-left: 1.5rem;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .language-switcher a:hover,
-        .nav-link:hover {
-            color: #d81b60;
-        }
-        .language-switcher .active,
-        .nav-link.active {
-            color: #d81b60;
-            font-weight: 600;
-        }
-        @media (max-width: 640px) {
-            .language-switcher a,
-            .nav-link {
-                margin-left: 1rem;
-                font-size: 0.9rem;
-            }
-        }
-        .section {
-            opacity: 0;
-            transform: translateY(100px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KOZAK — Demo</title>
+  <meta name="description" content="KOZAK — temporary static preview while debugging runtime error">
+  
+  <!-- small inline favicon to avoid automatic /favicon.ico 404 in DevTools -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='2' y='13' font-size='12'%3EK%3C/text%3E%3C/svg%3E">
+
+  <!-- Basic error catcher to show message inside #fallback for quick debugging -->
+  <script>
+    window.addEventListener('error', function (e) {
+      try {
+        var fb = document.getElementById('fallback');
+        var msg = (e && e.message) || String(e);
+        var src = (e && e.filename) || '';
+        var line = (e && e.lineno) || '';
+        var col = (e && e.colno) || '';
+        if (fb) fb.textContent = 'JS ERROR: ' + msg + ' at ' + src + ':' + line + ':' + col;
+      } catch (err) {
+        console.error('Error handler failed', err);
+      }
+      console.error('Captured error', e.error || e.message, e);
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      try {
+        var fb = document.getElementById('fallback');
+        var reason = (e && e.reason && (e.reason.message || e.reason)) || String(e);
+        if (fb) fb.textContent = 'Unhandled promise rejection: ' + reason;
+      } catch (err) {
+        console.error('Rejection handler failed', err);
+      }
+      console.error('Unhandled rejection', e);
+    });
+  </script>
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; padding-top: 80px; font-family: 'Roboto', Arial, sans-serif; }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .hero-bg { background-image: url('https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; }
+    .section { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+    .section.visible { opacity: 1; transform: none; }
+  </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="text/babel">
-        console.log("Checking image load for hero-bg: ", document.querySelector('.hero-bg'));
-        const translations = {
-            en: {
-                title: "Romantic Proposals in Paris",
-                subtitle: "Plan your dream marriage proposal with KOZAK",
-                tagline: "Exclusive Eiffel Tower experiences, trusted by couples worldwide",
-                cta: "Plan Your Proposal",
-                services: "Packages",
-                about: "About",
-                aboutText: "At KOZAK, we craft unforgettable marriage proposals in Paris with elegance and transparency. Trusted by the Eiffel Tower for nighttime photography, our multilingual team ensures a stress-free, personalized experience.",
-                transparency: "Complete Transparency",
-                transparencyText: "No hidden fees. All package details and prices are clearly listed on our verified website.",
-                eiffelTrust: "Eiffel Tower Trusted",
-                eiffelTrustText: "Our exclusive copyright allows stunning nighttime Eiffel Tower photography.",
-                multilingual: "Multilingual Support",
-                multilingualText: "We speak English, French, Ukrainian, Russian, and more for a seamless experience.",
-                gallery: "Gallery",
-                faq: "FAQ",
-                faqs: [
-                    { q: "How do I book a Paris proposal package?", a: "Contact us via WhatsApp, email, or our contact form. We’ll provide a detailed quotation and can arrange a call or video call to discuss your vision." },
-                    { q: "Can I see more examples of your Paris proposals?", a: "Yes! Reach out via WhatsApp or email, and we’ll share additional samples of our work and packages." },
-                    { q: "Are your proposal packages customizable?", a: "Absolutely, all packages are fully customizable. Share your ideas, and we’ll tailor the experience to your preferences." },
-                    { q: "What’s the best time for a proposal in Paris?", a: "We’ll help you choose the perfect date or season. Contact us to discuss your plans and get expert advice." },
-                    { q: "What is the minimum budget for a Paris proposal?", a: "Our packages start at €600. Final costs vary based on customization and selected services." }
-                ],
-                packages: [
-                    {
-                        title: "Luminous Marry Me Letters",
-                        desc: ["Eiffel Tower sparkling guarantee (copyrighted)", "Large luminous 'Marry Me' letters", "Red carpet, candles, and floral decor", "4 sparklers (3m high)"],
-                        price: "From €800",
-                        alt: "Eiffel Tower Proposal with Luminous Marry Me Letters"
-                    },
-                    {
-                        title: "Private Terrace Luxury",
-                        desc: ["Private terrace in 16th arrondissement (2 hours)", "Welcome glass of champagne", "Eiffel Tower sparkling guarantee (copyrighted)", "Custom floral decorations"],
-                        price: "From €1200",
-                        alt: "Eiffel Tower Proposal Private Terrace Luxury"
-                    },
-                    {
-                        title: "Big Heart Arch",
-                        desc: ["Eiffel Tower sparkling guarantee (copyrighted)", "Big heart arch with floral decor", "Red carpet, candles, and flowers", "2 sparklers (3m high)"],
-                        price: "From €900",
-                        alt: "Eiffel Tower Proposal Big Heart Arch"
-                    },
-                    {
-                        title: "Flower Fantasy",
-                        desc: ["2 towers with 6 real flower bouquets", "Candle towers and rose petals", "30-min professional photography (50 HD retouched photos)", "Fully customizable setup"],
-                        price: "From €600",
-                        alt: "Eiffel Tower Proposal Flower Fantasy"
-                    }
-                ],
-                contact: "Contact",
-                contactText: "Let’s create an unforgettable moment in Paris. Contact us to discuss your dream proposal.",
-                contactForm: {
-                    name: "Your Name",
-                    email: "Your Email",
-                    message: "Tell us about your dream proposal",
-                    submit: "Send Message"
-                },
-                footer: "© 2025 KOZAK. All rights reserved.",
-                privacy: "Privacy Policy",
-                terms: "Terms of Service"
-            },
-            fr: {
-                title: "Propositions Romantiques à Paris",
-                subtitle: "Planifiez votre demande en mariage de rêve avec KOZAK",
-                tagline: "Expériences exclusives à la Tour Eiffel, approuvées par des couples du monde entier",
-                cta: "Planifier Votre Proposition",
-                services: "Packages",
-                about: "À propos",
-                aboutText: "Chez KOZAK, nous créons des demandes en mariage inoubliables à Paris avec élégance et transparence. Approuvés par la Tour Eiffel pour la photographie nocturne, notre équipe multilingue garantit une expérience personnalisée et sans stress.",
-                transparency: "Transparence Totale",
-                transparencyText: "Aucun frais caché. Tous les détails et prix des forfaits sont clairement indiqués sur notre site vérifié.",
-                eiffelTrust: "Approuvé par la Tour Eiffel",
-                eiffelTrustText: "Notre droit exclusif permet des photographies nocturnes époustouflantes de la Tour Eiffel.",
-                multilingual: "Support Multilingue",
-                multilingualText: "Nous parlons anglais, français, ukrainien, russe, et plus encore pour une expérience fluide.",
-                gallery: "Galerie",
-                faq: "FAQ",
-                faqs: [
-                    { q: "Comment réserver un forfait de proposition à Paris ?", a: "Contactez-nous via WhatsApp, email ou notre formulaire de contact. Nous vous fournirons un devis détaillé et pouvons organiser un appel ou une vidéoconférence pour discuter de votre vision." },
-                    { q: "Puis-je voir plus d'exemples de vos propositions à Paris ?", a: "Oui ! Contactez-nous via WhatsApp ou email, et nous partagerons des exemples supplémentaires de nos travaux et forfaits." },
-                    { q: "Vos forfaits de proposition sont-ils personnalisables ?", a: "Absolument, tous les forfaits sont entièrement personnalisables. Partagez vos idées, et nous adapterons l’expérience à vos préférences." },
-                    { q: "Quel est le meilleur moment pour une proposition à Paris ?", a: "Nous vous aiderons à choisir la date ou la saison idéale. Contactez-nous pour discuter de vos plans et obtenir des conseils d’experts." },
-                    { q: "Quel est le budget minimum pour une proposition à Paris ?", a: "Nos forfaits commencent à 600 €. Les coûts finaux varient en fonction de la personnalisation et des services choisis." }
-                ],
-                packages: [
-                    {
-                        title: "Lettres Lumineuses 'Marry Me'",
-                        desc: ["Garantie d'éclat de la Tour Eiffel (sous copyright)", "Grandes lettres lumineuses 'Marry Me'", "Tapis rouge, bougies et décor floral", "4 cierges magiques (3m de haut)"],
-                        price: "À partir de 800 €",
-                        alt: "Proposition à la Tour Eiffel avec Lettres Lumineuses 'Marry Me'"
-                    },
-                    {
-                        title: "Expérience Luxe sur Terrasse Privée",
-                        desc: ["Location de terrasse privée dans le 16e arrondissement (2 heures)", "Verre de champagne de bienvenue", "Garantie d'éclat de la Tour Eiffel (sous copyright)", "Décorations florales personnalisées"],
-                        price: "À partir de 1200 €",
-                        alt: "Proposition à la Tour Eiffel Expérience Luxe sur Terrasse Privée"
-                    },
-                    {
-                        title: "Arche en Cœur",
-                        desc: ["Garantie d'éclat de la Tour Eiffel (sous copyright)", "Arche en cœur avec décor floral", "Tapis rouge, bougies et fleurs", "2 cierges magiques (3m de haut)"],
-                        price: "À partir de 900 €",
-                        alt: "Proposition à la Tour Eiffel Arche en Cœur"
-                    },
-                    {
-                        title: "Fantaisie Florale",
-                        desc: ["2 tours avec 6 bouquets de fleurs réelles", "Tours de bougies et pétales de rose", "Photographie professionnelle de 30 min (50 photos HD retouchées)", "Installation entièrement personnalisable"],
-                        price: "À partir de 600 €",
-                        alt: "Proposition à la Tour Eiffel Fantaisie Florale"
-                    }
-                ],
-                contact: "Contact",
-                contactText: "Créons ensemble un moment inoubliable à Paris. Contactez-nous pour discuter de votre proposition de rêve.",
-                contactForm: {
-                    name: "Votre Nom",
-                    email: "Votre Email",
-                    message: "Parlez-nous de votre proposition de rêve",
-                    submit: "Envoyer le Message"
-                },
-                footer: "© 2025 KOZAK. Tous droits réservés.",
-                privacy: "Politique de Confidentialité",
-                terms: "Conditions d'Utilisation"
-            },
-            uk: {
-                title: "Романтичні Пропозиції в Парижі",
-                subtitle: "Сплануйте пропозицію своєї мрії з KOZAK",
-                tagline: "Ексклюзивні враження з Ейфелевою вежею, яким довіряють пари з усього світу",
-                cta: "Спланувати Пропозицію",
-                services: "Packages",
-                about: "Про нас",
-                aboutText: "У KOZAK ми створюємо незабутні пропозиції руки і серця в Парижі з елегантністю та прозорістю. Нам довіряє Ейфелева вежа для нічних фотосесій, а наша багатомовна команда забезпечує персоналізований і безстресовый досвід.",
-                transparency: "Повна Прозорість",
-                transparencyText: "Жодних прихованих зборів. Усі деталі та ціни пакетів чітко вказані на нашому верифікованому сайті.",
-                eiffelTrust: "Довіра Ейфелевої Вежі",
-                eiffelTrustText: "Наше ексклюзивне право дозволяє створювати приголомшливі нічні фотографії Ейфелевої вежі.",
-                multilingual: "Багатомовна Підтримка",
-                multilingualText: "Ми розмовляємо англійською, французькою, українською, російською та іншими мовами для комфортного досвіду.",
-                gallery: "Галерея",
-                faq: "FAQ",
-                faqs: [
-                    { q: "Як забронювати пакет пропозиції в Парижі?", a: "Зв’яжіться з нами через WhatsApp, email або форму зворотного зв’язку. Ми надамо детальну пропозицію та можемо організувати дзвінок або відеодзвінок для обговорення вашого бачення." },
-                    { q: "Чи можу я побачити більше прикладів ваших пропозицій у Парижі?", a: "Так! Звертайтесь через WhatsApp або email, і ми надішлемо додаткові приклади наших робіт і пакетів." },
-                    { q: "Чи можна налаштувати пакети пропозицій?", a: "Звісно, усі пакети повністю налаштовуються. Поділіться своїми ідеями, і ми адаптуємо досвід до ваших уподобань." },
-                    { q: "Коли найкращий час для пропозиції в Парижі?", a: "Ми допоможемо обрати ідеальну дату чи сезон. Зв’яжіться з нами, щоб обговорити ваші плани та отримати експертні поради." },
-                    { q: "Який мінімальний бюджет для пропозиції в Парижі?", a: "Наші пакети починаються від 600 €. Остаточна вартість залежить від налаштувань і вибраних послуг." }
-                ],
-                packages: [
-                    {
-                        title: "Світлові Літери 'Marry Me'",
-                        desc: ["Гарантія сяйва Ейфелевої вежі (під захистом авторських прав)", "Великі світлові літери 'Marry Me'", "Червона доріжка, свічки та квітковий декор", "4 бенгальські вогні (3 м заввишки)"],
-                        price: "Від 800 €",
-                        alt: "Пропозиція перед Ейфелевою вежею зі Світловими Літерами 'Marry Me'"
-                    },
-                    {
-                        title: "Розкішна Тераса",
-                        desc: ["Оренда приватної тераси в 16-му окрузі (2 години)", "Келих шампанського на привітання", "Гарантія сяйва Ейфелевої вежі (під захистом авторських прав)", "Індивідуальний квітковий декор"],
-                        price: "Від 1200 €",
-                        alt: "Пропозиція перед Ейфелевою вежею Розкішна Тераса"
-                    },
-                    {
-                        title: "Велика Арка у Формі Серця",
-                        desc: ["Гарантія сяйва Ейфелевої вежі (під захистом авторських прав)", "Велика арка у формі серця з квітковим декором", "Червона доріжка, свічки та квіти", "2 бенгальські вогні (3 м заввишки)"],
-                        price: "Від 900 €",
-                        alt: "Пропозиція перед Ейфелевою вежею Велика Арка у Формі Серця"
-                    },
-                    {
-                        title: "Квіткова Фантазія",
-                        desc: ["2 вежі з 6 справжніми букетами квітів", "Вежі зі свічками та пелюстки троянд", "Професійна фотосесія 30 хв (50 HD відретушованих фото)", "Повністю налаштовувана установка"],
-                        price: "Від 600 €",
-                        alt: "Пропозиція перед Ейфелевою вежею Квіткова Фантазія"
-                    }
-                ],
-                contact: "Контакти",
-                contactText: "Створімо разом незабутній момент у Парижі. Зв’яжіться з нами, щоб обговорити вашу пропозицію mрії.",
-                contactForm: {
-                    name: "Ваше Ім’я",
-                    email: "Ваш Email",
-                    message: "Розкажіть про вашу пропозицію mрії",
-                    submit: "Надіслати Повідомлення"
-                },
-                footer: "© 2025 KOZAK. Усі права захищено.",
-                privacy: "Політика Конфіденційності",
-                terms: "Умови Використання"
-            },
-            ru: {
-                title: "Романтические Предложения в Париже",
-                subtitle: "Спланируйте предложение своей мечты с KOZAK",
-                tagline: "Эксклюзивные впечатления у Эйфелевой башни, которым доверяют пары со всего мира",
-                cta: "Спланировать Предложение",
-                services: "Packages",
-                about: "О нас",
-                aboutText: "В KOZAK мы создаем незабываемые предложения руки и сердца в Париже с элегантностью и прозрачностью. Нам доверяет Эйфелева башня для ночных фотосессий, а наша многоязычная команда обеспечивает персонализированный и безстрессовый опыт.",
-                transparency: "Полная Прозрачность",
-                transparencyText: "Никаких скрытых сборов. Все детали и цены пакетов четко указаны на нашем верифицированном сайте.",
-                eiffelTrust: "Доверие Эйфелевой Башни",
-                eiffelTrustText: "Наше эксклюзивное право позволяет создавать потрясающие ночные фотографии Эйфелевой башни.",
-                multilingual: "Многоязычная Поддержка",
-                multilingualText: "Мы говорим на английском, французском, украинском, русском и других языках для комфортного опыта.",
-                gallery: "Галерея",
-                faq: "FAQ",
-                faqs: [
-                    { q: "Как забронировать пакет предложения в Париже?", a: "Свяжитесь с нами через WhatsApp, email или форму обратной связи. Мы предоставим подробное предложение и можем организовать звонок или видеозвонок для обсуждения вашего видения." },
-                    { q: "Могу ли я увидеть больше примеров ваших предложений в Париже?", a: "Да! Свяжитесь через WhatsApp или email, и мы отправим дополнительные примеры наших работ и пакетов." },
-                    { q: "Можно ли настроить пакеты предложений?", a: "Конечно, все пакеты полностью настраиваемы. Поделитесь своими идеями, и мы адаптируем опыт под ваши предпочтения." },
-                    { q: "Когда лучшее время для предложения в Париже?", a: "Мы поможем выбрать идеальную дату или сезон. Свяжитесь с нами, чтобы обсудить ваши планы и получить экспертные советы." },
-                    { q: "Каков минимальный бюджет для предложения в Париже?", a: "Наши пакеты начинаются от 600 €. Окончательная стоимость зависит от настроек и выбранных услуг." }
-                ],
-                packages: [
-                    {
-                        title: "Светящиеся Буквы 'Marry Me'",
-                        desc: ["Гарантия сияния Эйфелевой башни (под защитой авторских прав)", "Большие светящиеся буквы 'Marry Me'", "Красная дорожка, свечи и цветочный декор", "4 бенгальских огня (3 м высотой)"],
-                        price: "От 800 €",
-                        alt: "Предложение перед Эйфелевой башней со Светящимися Буквами 'Marry Me'"
-                    },
-                    {
-                        title: "Роскошная Терраса",
-                        desc: ["Аренда частной террасы в 16-м округе (2 часа)", "Приветственный бокал шампанского", "Гарантия сияния Эйфелевой башни (под защитой авторских прав)", "Индивидуальный цветочный декор"],
-                        price: "От 1200 €",
-                        alt: "Предложение перед Эйфелевой башней Роскошная Терраса"
-                    },
-                    {
-                        title: "Большая Арка в Форме Сердца",
-                        desc: ["Гарантия сияния Эйфелевой башни (под защитой авторских прав)", "Большая арка в форме сердца с цветочным декором", "Красная дорожка, свечи и цветы", "2 бенгальских огня (3 м высотой)"],
-                        price: "От 900 €",
-                        alt: "Предложение перед Эйфелевой башней Большая Арка в Форме Сердца"
-                    },
-                    {
-                        title: "Цветочная Фантазия",
-                        desc: ["2 башни с 6 настоящими букетами цветов", "Башни со свечами и лепестки роз", "Профессиональная фотосессия 30 мин (50 HD отретушированных фото)", "Полностью настраиваемая установка"],
-                        price: "От 600 €",
-                        alt: "Предложение перед Эйфелевой башней Цветочная Фантазия"
-                    }
-                ],
-                contact: "Контакты",
-                contactText: "Создадим вместе незабываемый момент в Париже. Свяжитесь с нами, чтобы обсудить ваше предложение мечты.",
-                contactForm: {
-                    name: "Ваше Имя",
-                    email: "Ваш Email",
-                    message: "Расскажите о вашем предложении мечты",
-                    submit: "Отправить Сообщение"
-                },
-                footer: "© 2025 KOZAK. Все права защищены.",
-                privacy: "Политика Конфиденциальности",
-                terms: "Условия Использования"
-            }
-        };
+  <div id="root">
+    <noscript>
+      <div style="padding:2rem;text-align:center;">JavaScript est requis pour voir ce site. Activez JavaScript et rechargez la page.</div>
+    </noscript>
+    <div id="fallback" style="padding:2rem;text-align:center;color:#444;">Chargement de l'application…</div>
+  </div>
 
-        function LanguageSwitcher({ language, setLanguage }) {
-            const languages = [
-                { code: 'en', label: 'English' },
-                { code: 'fr', label: 'Français' },
-                { code: 'uk', label: 'Українська' },
-                { code: 'ru', label: 'Русский' }
-            ];
+  <header class="fixed top-0 w-full bg-white shadow-md z-50">
+    <nav class="container mx-auto py-3 px-6 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <button onclick="document.getElementById('hero-section').scrollIntoView({behavior:'smooth'})" class="text-xl font-playfair font-bold">KOZAK</button>
+      </div>
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="#services" class="text-gray-700 hover:text-gray-900">Packages</a>
+        <a href="#about" class="text-gray-700 hover:text-gray-900">About</a>
+        <a href="#gallery" class="text-gray-700 hover:text-gray-900">Gallery</a>
+        <a href="#faq" class="text-gray-700 hover:text-gray-900">FAQ</a>
+        <a href="#contact" class="text-gray-700 hover:text-gray-900">Contact</a>
+      </div>
+      <div class="md:hidden">
+        <button onclick="document.getElementById('nav-mobile').classList.toggle('hidden')" aria-label="Open menu">☰</button>
+      </div>
+    </nav>
+    <div id="nav-mobile" class="hidden bg-white border-b">
+      <div class="p-4 flex flex-col space-y-2">
+        <a href="#services" onclick="document.getElementById('nav-mobile').classList.add('hidden')">Packages</a>
+        <a href="#about" onclick="document.getElementById('nav-mobile').classList.add('hidden')">About</a>
+        <a href="#gallery" onclick="document.getElementById('nav-mobile').classList.add('hidden')">Gallery</a>
+        <a href="#faq" onclick="document.getElementById('nav-mobile').classList.add('hidden')">FAQ</a>
+        <a href="#contact" onclick="document.getElementById('nav-mobile').classList.add('hidden')">Contact</a>
+      </div>
+    </div>
+  </header>
 
-            return (
-                <div className="language-switcher">
-                    {languages.map((lang) => (
-                        <a
-                            key={lang.code}
-                            href="#"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setLanguage(lang.code);
-                            }}
-                            className={`mr-6 last:mr-0 ${language === lang.code ? 'active' : ''}`}
-                        >
-                            {lang.label}
-                        </a>
-                    ))}
-                </div>
-            );
-        }
+  <main style="padding-top:110px">
+    <section id="hero-section" class="hero-bg h-96 flex items-center justify-center text-center text-white">
+      <div class="bg-black bg-opacity-50 p-8 rounded-lg">
+        <h1 class="text-3xl font-playfair mb-2">Romantic Proposals in Paris</h1>
+        <p>Plan your dream marriage proposal with KOZAK</p>
+      </div>
+    </section>
 
-        function Header({ t, language, setLanguage }) {
-            return (
-                <header className="fixed top-0 w-full bg-white shadow-md z-50">
-                    <nav className="container mx-auto py-4 px-6 flex justify-center items-center">
-                        <div className="flex items-center">
-                            <div className="mr-8">
-                                <LanguageSwitcher language={language} setLanguage={setLanguage} />
-                            </div>
-                            <h1 className="text-2xl font-bold text-gray-800 font-playfair mx-auto">KOZAK</h1>
-                            <div className="ml-8 flex space-x-6">
-                                <a href="#services" className="nav-link text-gray-600 hover:text-gray-800">{t.services}</a>
-                                <a href="#about" className="nav-link text-gray-600 hover:text-gray-800">{t.about}</a>
-                                <a href="#gallery" className="nav-link text-gray-600 hover:text-gray-800">{t.gallery}</a>
-                                <a href="#faq" className="nav-link text-gray-600 hover:text-gray-800">{t.faq}</a>
-                                <a href="#contact" className="nav-link text-gray-600 hover:text-gray-800">{t.contact}</a>
-                            </div>
-                        </div>
-                    </nav>
-                </header>
-            );
-        }
+    <section id="services" class="py-16 container mx-auto px-6">
+      <h2 class="text-2xl font-playfair mb-4">Packages</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">Sample package card</div>
+        <div class="bg-white p-6 rounded-lg shadow-md">Sample package card</div>
+        <div class="bg-white p-6 rounded-lg shadow-md">Sample package card</div>
+        <div class="bg-white p-6 rounded-lg shadow-md">Sample package card</div>
+      </div>
+    </section>
 
-        function Hero({ t }) {
-            const sectionRef = React.useRef(null);
-            const [isVisible, setIsVisible] = React.useState(false);
+    <section id="about" class="py-16 container mx-auto px-6">
+      <h2 class="text-2xl font-playfair mb-4">About</h2>
+      <p class="text-gray-700">À propos: KOZAK crée des demandes en mariage inoubliables à Paris.</p>
+    </section>
 
-            React.useEffect(() => {
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry.isIntersecting) {
-                            setIsVisible(true);
-                            observer.unobserve(entry.target);
-                        }
-                    },
-                    { threshold: 0.1 }
-                );
-                if (sectionRef.current) observer.observe(sectionRef.current);
-                // Trigger animation on load
-                setIsVisible(true);
-                return () => observer.disconnect();
-            }, []);
+    <section id="gallery" class="py-16 container mx-auto px-6">
+      <h2 class="text-2xl font-playfair mb-4">Gallery</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <img src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded-lg" alt="gallery">
+        <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded-lg" alt="gallery2">
+        <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded-lg" alt="gallery3">
+      </div>
+    </section>
 
-            return (
-                <section id="hero-section" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} hero-bg h-screen flex items-center justify-center text-center text-white relative`}>
-                    <div className="bg-black bg-opacity-50 p-10 rounded-lg">
-                        <h1 className="text-4xl md:text-5xl font-bold font-playfair mb-4">{t.title}</h1>
-                        <p className="text-xl md:text-2xl mb-6">{t.subtitle}</p>
-                        <p className="text-lg">{t.tagline}</p>
-                        <a href="#contact" className="mt-6 inline-block bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700">{t.cta}</a>
-                    </div>
-                </section>
-            );
-        }
+    <section id="faq" class="py-16 container mx-auto px-6">
+      <h2 class="text-2xl font-playfair mb-4">FAQ</h2>
+      <div class="space-y-4">
+        <div class="bg-white p-4 rounded-lg shadow">How do I book? — Contact us via WhatsApp or email.</div>
+        <div class="bg-white p-4 rounded-lg shadow">Are packages customizable? — Yes.</div>
+      </div>
+    </section>
 
-        function Services({ t }) {
-            const sectionRef = React.useRef(null);
-            const [isVisible, setIsVisible] = React.useState(false);
+    <section id="contact" class="py-16 container mx-auto px-6 text-center">
+      <h2 class="text-2xl font-playfair mb-4">Contact</h2>
+      <p class="mb-4">WhatsApp: <a href="https://wa.me/[your_whatsapp]" class="text-blue-600">Message</a> — Email: <a href="mailto:[your_email]" class="text-blue-600">Send</a></p>
+    </section>
+  </main>
 
-            React.useEffect(() => {
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry.isIntersecting) {
-                            setIsVisible(true);
-                            observer.unobserve(entry.target);
-                        }
-                    },
-                    { threshold: 0.1 }
-                );
-                if (sectionRef.current) observer.observe(sectionRef.current);
-                return () => observer.disconnect();
-            }, []);
-
-            return (
-                <section id="services" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16 section-bg`}>
-                    <div className="container mx-auto px-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {t.packages.map((pkg, index) => (
-                                <div key={index} className="package-card bg-white p-6 rounded-lg shadow-md">
-                                    <img src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt={pkg.alt} className="w-full h-48 object-cover rounded-t-lg mb-4" onError={(e) => { e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; console.log('Image load failed, switched to fallback'); }} />
-                                    <h3 className="text-xl font-semibold font-playfair mb-4">{pkg.title}</h3>
-                                    <ul className="text-gray-600 mb-4">
-                                        {pkg.desc.map((item, i) => (
-                                            <li key={i} className="mb-2">• {item}</li>
-                                        ))}
-                                    </ul>
-                                    <p className="text-lg font-bold text-pink-600 mb-4">{pkg.price}</p>
-                                    <a href="#" className="text-blue-600 hover:underline">See Details</a>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        function About({ t }) {
-            const sectionRef = React.useRef(null);
-            const [isVisible, setIsVisible] = React.useState(false);
-
-            React.useEffect(() => {
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry.isIntersecting) {
-                            setIsVisible(true);
-                            observer.unobserve(entry.target);
-                        }
-                    },
-                    { threshold: 0.1 }
-                );
-                if (sectionRef.current) observer.observe(sectionRef.current);
-                return () => observer.disconnect();
-            }, []);
-
-            return (
-                <section id="about" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16`}>
-                    <div className="container mx-auto px-6 text-center">
-                        <p className="text-lg text-gray-600 mb-8">{t.aboutText}</p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div>
-                                <h3 className="text-xl font-semibold font-playfair mb-2">{t.transparency}</h3>
-                                <p className="text-gray-600">{t.transparencyText}</p>
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-semibold font-playfair mb-2">{t.eiffelTrust}</h3>
-                                <p className="text-gray-600">{t.eiffelTrustText}</p>
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-semibold font-playfair mb-2">{t.multilingual}</h3>
-                                <p className="text-gray-600">{t.multilingualText}</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        function Gallery({ t }) {
-            const sectionRef = React.useRef(null);
-            const [isVisible, setIsVisible] = React.useState(false);
-
-            React.useEffect(() => {
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry.isIntersecting) {
-                            setIsVisible(true);
-                            observer.unobserve(entry.target);
-                        }
-                    },
-                    { threshold: 0.1 }
-                );
-                if (sectionRef.current) observer.observe(sectionRef.current);
-                return () => observer.disconnect();
-            }, []);
-
-            return (
-                <section id="gallery" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16 section-bg`}>
-                    <div className="container mx-auto px-6">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            {[...Array(6)].map((_, index) => (
-                                <div key={index} className="relative">
-                                    <img src={`https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`} alt={`${t.packages[0].alt} ${index + 1}`} className="w-full h-64 object-cover rounded-lg" onError={(e) => { e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; console.log('Image load failed, switched to fallback'); }} />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        function FAQ({ t }) {
-            const sectionRef = React.useRef(null);
-            const [isVisible, setIsVisible] = React.useState(false);
-
-            React.useEffect(() => {
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry.isIntersecting) {
-                            setIsVisible(true);
-                            observer.unobserve(entry.target);
-                        }
-                    },
-                    { threshold: 0.1 }
-                );
-                if (sectionRef.current) observer.observe(sectionRef.current);
-                return () => observer.disconnect();
-            }, []);
-
-            return (
-                <section id="faq" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16`}>
-                    <div className="container mx-auto px-6">
-                        <div className="space-y-6">
-                            {t.faqs.map((faq, index) => (
-                                <div key={index} className="faq-item bg-white p-6 rounded-lg shadow-md">
-                                    <h3 className="text-xl font-semibold font-playfair mb-2">{faq.q}</h3>
-                                    <p className="text-gray-600">{faq.a}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        function Contact({ t }) {
-            const sectionRef = React.useRef(null);
-            const [isVisible, setIsVisible] = React.useState(false);
-
-            React.useEffect(() => {
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry.isIntersecting) {
-                            setIsVisible(true);
-                            observer.unobserve(entry.target);
-                        }
-                    },
-                    { threshold: 0.1 }
-                );
-                if (sectionRef.current) observer.observe(sectionRef.current);
-                return () => observer.disconnect();
-            }, []);
-
-            return (
-                <section id="contact" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16 section-bg`}>
-                    <div className="container mx-auto px-6 text-center">
-                        <p className="text-lg text-gray-600 mb-8">{t.contactText}</p>
-                        <div className="flex flex-col items-center">
-                            <div className="flex justify-center space-x-4 mb-6">
-                                <a href="https://wa.me/[your_whatsapp]" className="text-blue-600 hover:underline">WhatsApp</a>
-                                <a href="mailto:[your_email]" className="text-blue-600 hover:underline">Email</a>
-                                <a href="https://www.instagram.com/paris.marryme?igsh=amp4cjlscjR4YjRl" className="text-blue-600 hover:underline">Instagram</a>
-                            </div>
-                            <form className="w-full max-w-md" action="/submit-form" method="POST">
-                                <input type="text" name="name" placeholder={t.contactForm.name} className="w-full p-3 mb-4 border rounded-lg" required />
-                                <input type="email" name="email" placeholder={t.contactForm.email} className="w-full p-3 mb-4 border rounded-lg" required />
-                                <textarea name="message" placeholder={t.contactForm.message} className="w-full p-3 mb-4 border rounded-lg h-32" required></textarea>
-                                <button type="submit" className="bg-pink-600 text-white py-2 px-6 rounded-lg hover:bg-pink-700">{t.contactForm.submit}</button>
-                            </form>
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        function Footer({ t }) {
-            return (
-                <footer className="py-6 bg-gray-800 text-white text-center">
-                    <p>{t.footer} | <a href="/privacy" className="hover:underline">{t.privacy}</a> | <a href="/terms" className="hover:underline">{t.terms}</a></p>
-                </footer>
-            );
-        }
-
-        function App() {
-            const [language, setLanguage] = React.useState('en');
-            const t = translations[language];
-
-            return (
-                <div>
-                    <Header t={t} language={language} setLanguage={setLanguage} />
-                    <Hero t={t} />
-                    <Services t={t} />
-                    <About t={t} />
-                    <Gallery t={t} />
-                    <FAQ t={t} />
-                    <Contact t={t} />
-                    <Footer t={t} />
-                </div>
-            );
-        }
-
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
+  <div id="fallback" style="position:fixed;right:8px;bottom:8px;padding:8px;background:#fff;border:1px solid #ddd;z-index:60;color:#333;font-size:13px;">Chargement de l'application…</div>
 </body>
 </html>
