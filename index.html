@@ -493,14 +493,14 @@
             const [mobileOpen, setMobileOpen] = React.useState(false);
             return (
                 <header className="fixed top-0 w-full bg-white shadow-md z-50">
-                    <nav className="container mx-auto py-4 px-6 flex justify-center items-center relative">
-                        <div className="flex items-center w-full">
-                            <div className="mr-4">
+                    <nav className="container mx-auto py-4 px-6 grid grid-cols-3 items-center relative">
+                        {/* Left: language + icons */}
+                        <div className="flex items-center space-x-4 justify-start">
+                            <div>
                                 <LanguageSwitcher language={language} setLanguage={setLanguage} />
                             </div>
-
                             {/* Desktop icons */}
-                            <div className="hidden sm:flex mr-4 items-center space-x-2">
+                            <div className="hidden sm:flex items-center space-x-2">
                                 <a href="mailto:[your_email]" aria-label="Email" title="Email" className="contact-icon inline-flex items-center bg-white border border-gray-200 text-gray-800 px-2 py-1 rounded-lg shadow hover:bg-gray-50">
                                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13A2.5 2.5 0 0 0 21 15.5v-7A2.5 2.5 0 0 0 18.5 6h-13A2.5 2.5 0 0 0 3 8.5z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -530,25 +530,30 @@
                                 </a>
                             </div>
 
-                            {/* Mobile menu button */}
-                            <div className="sm:hidden mr-2">
+                            {/* Mobile menu button (left side on small screens) */}
+                            <div className="sm:hidden">
                                 <button onClick={() => setMobileOpen(!mobileOpen)} aria-expanded={mobileOpen} aria-controls="mobile-contact-menu" className="p-2 rounded-md hover:bg-gray-100">
                                     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path d="M12 6v.01M12 12v.01M12 18v.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </button>
                             </div>
+                        </div>
 
-                            <a href="/" className="brand text-2xl font-bold text-gray-800 mx-auto">KOZAK</a>
-                            <div className="ml-8 flex space-x-6 hidden sm:flex">
-                                <a href="#services" className="nav-link text-gray-600 hover:text-gray-800">{t.services}</a>
-                                <a href="#about" className="nav-link text-gray-600 hover:text-gray-800">{t.about}</a>
-                                <a href="#gallery" className="nav-link text-gray-600 hover:text-gray-800">{t.gallery}</a>
-                                <a href="#reviews" className="nav-link text-gray-600 hover:text-gray-800">{t.reviews}</a>
-                                <a href="#locations" className="nav-link text-gray-600 hover:text-gray-800">{t.locations}</a>
-                                <a href="#faq" className="nav-link text-gray-600 hover:text-gray-800">{t.faq}</a>
-                                <a href="#contact" className="nav-link text-gray-600 hover:text-gray-800">{t.contact}</a>
-                            </div>
+                        {/* Center: brand */}
+                        <div className="flex justify-center">
+                            <a href="/" className="brand text-2xl font-bold text-gray-800">KOZAK</a>
+                        </div>
+
+                        {/* Right: navigation links */}
+                        <div className="flex items-center justify-end space-x-6 hidden sm:flex">
+                            <a href="#services" className="nav-link text-gray-600 hover:text-gray-800">{t.services}</a>
+                            <a href="#about" className="nav-link text-gray-600 hover:text-gray-800">{t.about}</a>
+                            <a href="#gallery" className="nav-link text-gray-600 hover:text-gray-800">{t.gallery}</a>
+                            <a href="#reviews" className="nav-link text-gray-600 hover:text-gray-800">{t.reviews}</a>
+                            <a href="#locations" className="nav-link text-gray-600 hover:text-gray-800">{t.locations}</a>
+                            <a href="#faq" className="nav-link text-gray-600 hover:text-gray-800">{t.faq}</a>
+                            <a href="#contact" className="nav-link text-gray-600 hover:text-gray-800">{t.contact}</a>
                         </div>
                     </nav>
                 </header>
