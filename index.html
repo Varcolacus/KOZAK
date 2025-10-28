@@ -181,6 +181,12 @@
                 multilingual: "Multilingual Support",
                 multilingualText: "We speak English, French, Ukrainian, Russian, and more for a seamless experience.",
                 gallery: "Gallery",
+                reviews: "Reviews",
+                reviewsList: [
+                    { name: "Anna & Mark", rating: 5, text: "An unforgettable evening — KOZAK handled everything perfectly. The photographer was discreet and the surprise was flawless.", date: "Jan 2024" },
+                    { name: "Luca", rating: 5, text: "Professional, punctual and so thoughtful. Highly recommend for anyone planning a Paris proposal.", date: "Mar 2024" },
+                    { name: "Sofia & Pierre", rating: 5, text: "They made our dream come true. Beautiful setup and amazing photos by the Eiffel Tower.", date: "May 2024" }
+                ],
                 locations: "Locations",
                 locationsList: [
                     { title: "Eiffel Tower & Trocadéro", desc: "Iconic views and evening sparkles; ideal for photo-backed proposals.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60", lat: 48.8584, lng: 2.2945 },
@@ -248,6 +254,12 @@
                 multilingual: "Support Multilingue",
                 multilingualText: "Nous parlons anglais, français, ukrainien, russe, et plus encore pour une expérience fluide.",
                 gallery: "Galerie",
+                reviews: "Avis",
+                reviewsList: [
+                    { name: "Anna & Marc", rating: 5, text: "Une soirée inoubliable — KOZAK a tout géré parfaitement. Le photographe était discret et la surprise parfaite.", date: "Janv. 2024" },
+                    { name: "Luca", rating: 5, text: "Professionnels, ponctuels et très attentionnés. Je recommande vivement pour une demande à Paris.", date: "Mars 2024" },
+                    { name: "Sofia & Pierre", rating: 5, text: "Ils ont réalisé notre rêve. Superbe installation et photos magnifiques près de la Tour Eiffel.", date: "Mai 2024" }
+                ],
                 locations: "Lieux",
                 locationsList: [
                     { title: "Tour Eiffel & Trocadéro", desc: "Vues emblématiques et scintillements du soir — parfait pour des photos inoubliables.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60", lat: 48.8584, lng: 2.2945 },
@@ -315,6 +327,12 @@
                 multilingual: "Багатомовна Підтримка",
                 multilingualText: "Ми розмовляємо англійською, французькою, українською, російською та іншими мовами для комфортного досвіду.",
                 gallery: "Галерея",
+                reviews: "Відгуки",
+                reviewsList: [
+                    { name: "Анна & Марк", rating: 5, text: "Незабутній вечір — KOZAK організували все бездоганно. Фотограф був непомітний, сюрприз пройшов ідеально.", date: "Січ 2024" },
+                    { name: "Лука", rating: 5, text: "Професійно, вчасно і дуже уважно. Рекомендую для пропозицій у Парижі.", date: "Бер 2024" },
+                    { name: "Софія & П'єр", rating: 5, text: "Вони здійснили нашу мрію. Чудове оформлення і прекрасні фото біля Ейфелевої вежі.", date: "Трав 2024" }
+                ],
                 locations: "Локации",
                 locationsList: [
                     { title: "Эйфелева башня & Трокадеро", desc: "Знаковые виды и вечерние огни — идеальны для фотографий и предложений.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60", lat: 48.8584, lng: 2.2945 },
@@ -388,6 +406,12 @@
                 multilingual: "Многоязычная Поддержка",
                 multilingualText: "Мы говорим на английском, французском, украинском, русском и других языках для комфортного опыта.",
                 gallery: "Галерея",
+                reviews: "Отзывы",
+                reviewsList: [
+                    { name: "Анна & Марк", rating: 5, text: "Незабываемый вечер — KOZAK организовали всё идеально. Фотограф работал ненавязчиво, сюрприз удался.", date: "Янв 2024" },
+                    { name: "Лука", rating: 5, text: "Профессионально, пунктуально и очень чутко. Рекомендую для предложений в Париже.", date: "Мар 2024" },
+                    { name: "София & Пьер", rating: 5, text: "Они воплотили нашу мечту. Прекрасная декорация и отличные фотографии у Эйфелевой башни.", date: "Май 2024" }
+                ],
                 faq: "FAQ",
                 faqs: [
                     { q: "Как забронировать пакет предложения в Париже?", a: "Свяжитесь с нами через WhatsApp, email или форму обратной связи. Мы предоставим подробное предложение и можем организовать звонок или видеозвонок для обсуждения вашего видения." },
@@ -517,6 +541,7 @@
                                 <a href="#services" className="nav-link text-gray-600 hover:text-gray-800">{t.services}</a>
                                 <a href="#about" className="nav-link text-gray-600 hover:text-gray-800">{t.about}</a>
                                 <a href="#gallery" className="nav-link text-gray-600 hover:text-gray-800">{t.gallery}</a>
+                                <a href="#reviews" className="nav-link text-gray-600 hover:text-gray-800">{t.reviews}</a>
                                 <a href="#locations" className="nav-link text-gray-600 hover:text-gray-800">{t.locations}</a>
                                 <a href="#faq" className="nav-link text-gray-600 hover:text-gray-800">{t.faq}</a>
                                 <a href="#contact" className="nav-link text-gray-600 hover:text-gray-800">{t.contact}</a>
@@ -771,6 +796,51 @@
             );
         }
 
+        function Reviews({ t }) {
+            const sectionRef = React.useRef(null);
+            const [isVisible, setIsVisible] = React.useState(false);
+
+            React.useEffect(() => {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting) {
+                            setIsVisible(true);
+                            observer.unobserve(entry.target);
+                        }
+                    },
+                    { threshold: 0.1 }
+                );
+                if (sectionRef.current) observer.observe(sectionRef.current);
+                return () => observer.disconnect();
+            }, []);
+
+            return (
+                <section id="reviews" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16`}>
+                    <div className="container mx-auto px-6">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {t.reviewsList.map((r, i) => (
+                                <div key={i} className="bg-white p-6 rounded-lg shadow-md">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div className="font-semibold">{r.name}</div>
+                                        <div className="text-sm text-gray-500">{r.date}</div>
+                                    </div>
+                                    <div className="mb-3 text-yellow-500">
+                                        {Array.from({ length: r.rating }).map((_, idx) => (
+                                            <svg key={idx} className="inline w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.2 3.674a1 1 0 00.95.69h3.862c.969 0 1.371 1.24.588 1.81l-3.124 2.274a1 1 0 00-.364 1.118l1.2 3.674c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.124 2.274c-.784.57-1.84-.197-1.54-1.118l1.2-3.674a1 1 0 00-.364-1.118L3.048 9.1c-.783-.57-.38-1.81.588-1.81h3.862a1 1 0 00.95-.69l1.2-3.674z"/></svg>
+                                        ))}
+                                    </div>
+                                    <p className="text-gray-700">{r.text}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="text-center mt-8">
+                            <a href="#reviews" className="inline-block bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700">{t.reviews}</a>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
         function FAQ({ t }) {
             const sectionRef = React.useRef(null);
             const [isVisible, setIsVisible] = React.useState(false);
@@ -889,6 +959,7 @@
                     <Services t={t} />
                     <About t={t} />
                     <Gallery t={t} />
+                    <Reviews t={t} />
                     <Locations t={t} />
                     <FAQ t={t} />
                     <Contact t={t} />
