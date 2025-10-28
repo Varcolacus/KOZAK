@@ -76,6 +76,9 @@
     <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&family=Noto+Serif&display=swap" rel="stylesheet">
+    <!-- Leaflet for interactive maps (OpenStreetMap tiles) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2H1f0v2YkYp3c1w+2kF0QKc3p1Kp3s9Z8+Y1r3o=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j8k1Qm2Vf3qJg3s1mG1x0w1Yf3ZbZ6Y6/3mZ0+M=" crossorigin=""></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -180,9 +183,9 @@
                 gallery: "Gallery",
                 locations: "Locations",
                 locationsList: [
-                    { title: "Eiffel Tower & Trocadéro", desc: "Iconic views and evening sparkles; ideal for photo-backed proposals.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60" },
-                    { title: "Seine River Cruise", desc: "Private boat options for an intimate proposal with Paris lights passing by.", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=60" },
-                    { title: "Montmartre Terrace", desc: "Charming elevated spots with panoramic city views and romantic ambiance.", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=60" }
+                    { title: "Eiffel Tower & Trocadéro", desc: "Iconic views and evening sparkles; ideal for photo-backed proposals.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60", lat: 48.8584, lng: 2.2945 },
+                    { title: "Seine River Cruise", desc: "Private boat options for an intimate proposal with Paris lights passing by.", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=60", lat: 48.8530, lng: 2.3499 },
+                    { title: "Montmartre Terrace", desc: "Charming elevated spots with panoramic city views and romantic ambiance.", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=60", lat: 48.8867, lng: 2.3431 }
                 ],
                 faq: "FAQ",
                 faqs: [
@@ -247,9 +250,9 @@
                 gallery: "Galerie",
                 locations: "Lieux",
                 locationsList: [
-                    { title: "Tour Eiffel & Trocadéro", desc: "Vues emblématiques et scintillements du soir — parfait pour des photos inoubliables.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60" },
-                    { title: "Croisière sur la Seine", desc: "Options de bateau privé pour une proposition intime au fil des lumières de Paris.", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=60" },
-                    { title: "Terrasse de Montmartre", desc: "Petits coins charmants avec vue panoramique et ambiance romantique.", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=60" }
+                    { title: "Tour Eiffel & Trocadéro", desc: "Vues emblématiques et scintillements du soir — parfait pour des photos inoubliables.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60", lat: 48.8584, lng: 2.2945 },
+                    { title: "Croisière sur la Seine", desc: "Options de bateau privé pour une proposition intime au fil des lumières de Paris.", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=60", lat: 48.8530, lng: 2.3499 },
+                    { title: "Terrasse de Montmartre", desc: "Petits coins charmants avec vue panoramique et ambiance romantique.", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=60", lat: 48.8867, lng: 2.3431 }
                 ],
                 faq: "FAQ",
                 faqs: [
@@ -314,15 +317,15 @@
                 gallery: "Галерея",
                 locations: "Локации",
                 locationsList: [
-                    { title: "Эйфелева башня & Трокадеро", desc: "Знаковые виды и вечерние огни — идеальны для фотографий и предложений.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60" },
-                    { title: "Круиз по Сене", desc: "Частные лодки для интимного предложения на фоне огней Парижа.", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=60" },
-                    { title: "Терраса Монмартр", desc: "Уютные точки с панорамным видом и романтической атмосферой.", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=60" }
+                    { title: "Эйфелева башня & Трокадеро", desc: "Знаковые виды и вечерние огни — идеальны для фотографий и предложений.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60", lat: 48.8584, lng: 2.2945 },
+                    { title: "Круиз по Сене", desc: "Частные лодки для интимного предложения на фоне огней Парижа.", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=60", lat: 48.8530, lng: 2.3499 },
+                    { title: "Терраса Монмартр", desc: "Уютные точки с панорамным видом и романтической атмосферой.", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=60", lat: 48.8867, lng: 2.3431 }
                 ],
                 locations: "Локації",
                 locationsList: [
-                    { title: "Ейфелева Вежа & Трокадеро", desc: "Іконічні краєвиди та вечірні іскри — ідеально для фото та пропозицій.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60" },
-                    { title: "Прогулянка по Сені", desc: "Приватні човни для інтимної пропозиції на тлі вогнів Парижа.", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=60" },
-                    { title: "Тераса Монмартр", desc: "Затишні місця з панорамним видом і романтичною атмосферою.", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=60" }
+                    { title: "Ейфелева Вежа & Трокадеро", desc: "Іконічні краєвиди та вечірні іскри — ідеально для фото та пропозицій.", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60", lat: 48.8584, lng: 2.2945 },
+                    { title: "Прогулянка по Сені", desc: "Приватні човни для інтимної пропозиції на тлі вогнів Парижа.", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=60", lat: 48.8530, lng: 2.3499 },
+                    { title: "Тераса Монмартр", desc: "Затишні місця з панорамним видом і романтичною атмосферою.", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=60", lat: 48.8867, lng: 2.3431 }
                 ],
                 faq: "FAQ",
                 faqs: [
@@ -674,6 +677,7 @@
         function Locations({ t }) {
             const sectionRef = React.useRef(null);
             const [isVisible, setIsVisible] = React.useState(false);
+            const mapRef = React.useRef(null);
 
             React.useEffect(() => {
                 const observer = new IntersectionObserver(
@@ -689,10 +693,60 @@
                 return () => observer.disconnect();
             }, []);
 
+            // Initialize Leaflet map when section becomes visible
+            React.useEffect(() => {
+                if (!isVisible) return;
+                if (mapRef.current) return; // already initialized
+                try {
+                    // Create the map
+                    mapRef.current = L.map('locations-map', { scrollWheelZoom: false });
+
+                    // Add OpenStreetMap tiles
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+                    }).addTo(mapRef.current);
+
+                    // Add markers
+                    const markers = t.locationsList.map((loc) => {
+                        if (typeof loc.lat === 'number' && typeof loc.lng === 'number') {
+                            const marker = L.marker([loc.lat, loc.lng]).addTo(mapRef.current);
+                            marker.bindPopup(`<strong>${loc.title}</strong><br/>${loc.desc}`);
+                            return marker;
+                        }
+                        return null;
+                    }).filter(Boolean);
+
+                    if (markers.length) {
+                        const group = L.featureGroup(markers);
+                        mapRef.current.fitBounds(group.getBounds(), { padding: [40, 40] });
+                    } else {
+                        // Default view over Paris
+                        mapRef.current.setView([48.8566, 2.3522], 12);
+                    }
+                } catch (err) {
+                    console.error('Leaflet map failed to initialize', err);
+                }
+
+                return () => {
+                    try {
+                        if (mapRef.current) {
+                            mapRef.current.remove();
+                            mapRef.current = null;
+                        }
+                    } catch (e) {
+                        console.warn('Error removing map instance', e);
+                    }
+                };
+            }, [isVisible, t.locationsList]);
+
             return (
                 <section id="locations" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16`}>
                     <div className="container mx-auto px-6">
                         <h2 className="text-2xl font-playfair font-semibold mb-6 text-center">{t.locations}</h2>
+
+                        {/* Map */}
+                        <div id="locations-map" className="w-full h-64 rounded-lg mb-6 shadow-sm" style={{ overflow: 'hidden' }}></div>
+
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {t.locationsList.map((loc, i) => (
                                 <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden">
