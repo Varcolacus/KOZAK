@@ -752,8 +752,6 @@
             return (
                 <section id="locations" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16`}>
                     <div className="container mx-auto px-6">
-                        <h2 className="text-2xl font-playfair font-semibold mb-6 text-center">{t.locations}</h2>
-
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {t.locationsList.map((loc, i) => (
                                 <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden">
