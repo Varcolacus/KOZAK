@@ -33,6 +33,10 @@
             } catch (e) {
                 console.error(e);
                 return "";
+                }
+            }
+        }
+        </script>
                                    <div className="mr-8">
                                        <LanguageSwitcher language={language} setLanguage={setLanguage} />
                                    </div>
@@ -109,7 +113,7 @@
         .package-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
         .faq-item { transition: background-color 0.3s ease; }
         .faq-item:hover { background-color: #f0e6dc; }
-        img { loading: "lazy"; }
+    /* Use the loading="lazy" attribute on <img> elements directly for lazy loading */
         .language-switcher { display: flex; align-items: center; }
         .language-switcher a,
         .nav-link {
