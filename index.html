@@ -100,6 +100,13 @@
     </script>
     <style>
         body { font-family: 'Roboto', sans-serif; }
+        /* Brand / header */
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem; /* 20% larger than 1.5rem */
+            font-weight: 700;
+            line-height: 1;
+        }
         .hero-bg {
             background-image: url('https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
@@ -478,7 +485,7 @@
                                 </button>
                             </div>
 
-                            <a href="/" className="text-2xl font-bold text-gray-800 mx-auto" style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem' }}>KOZAK</a>
+                            <a href="/" className="brand text-2xl font-bold text-gray-800 mx-auto">KOZAK</a>
                             <div className="ml-8 flex space-x-6 hidden sm:flex">
                                 <a href="#services" className="nav-link text-gray-600 hover:text-gray-800">{t.services}</a>
                                 <a href="#about" className="nav-link text-gray-600 hover:text-gray-800">{t.about}</a>
