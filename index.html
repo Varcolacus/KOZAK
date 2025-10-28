@@ -77,8 +77,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&family=Noto+Serif&display=swap" rel="stylesheet">
     <!-- Leaflet for interactive maps (OpenStreetMap tiles) -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2H1f0v2YkYp3c1w+2kF0QKc3p1Kp3s9Z8+Y1r3o=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j8k1Qm2Vf3qJg3s1mG1x0w1Yf3ZbZ6Y6/3mZ0+M=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -698,6 +698,16 @@
                 if (!isVisible) return;
                 if (mapRef.current) return; // already initialized
                 try {
+                    // If Leaflet isn't loaded, show a friendly fallback inside the map container
+                    if (typeof L === 'undefined') {
+                        const el = document.getElementById('locations-map');
+                        if (el) {
+                            el.innerHTML = '<div class="p-6 text-center text-gray-600">Map is temporarily unavailable. Please refresh the page.</div>';
+                        }
+                        console.error('Leaflet (L) is not defined — map script likely failed to load.');
+                        return;
+                    }
+
                     // Create the map
                     mapRef.current = L.map('locations-map', { scrollWheelZoom: false });
 
