@@ -886,9 +886,9 @@
                                 <div key={index} className="package-card bg-white p-6 rounded-lg shadow-md">
                                     <img src={pkg.img || "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"} alt={pkg.alt} className="w-full h-48 object-cover rounded-t-lg mb-4" onError={(e) => { e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; console.log('Image load failed, switched to fallback'); }} />
                                     <h3 className="text-xl font-semibold font-playfair mb-4">{pkg.title}</h3>
-                                    <ul className="text-gray-600 mb-4">
+                                    <ul className="text-gray-600 mb-4 list-disc list-inside">
                                         {pkg.desc.map((item, i) => (
-                                            <li key={i} className="mb-2">• {item}</li>
+                                            <li key={i} className="mb-2">{item}</li>
                                         ))}
                                     </ul>
                                     <p className="text-lg font-bold text-pink-600 mb-4">{pkg.price}</p>
