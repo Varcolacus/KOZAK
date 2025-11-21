@@ -1,52 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-                }
-            }
-        }
-        </script>
-                                   <div className="mr-8">
-                                       <LanguageSwitcher language={language} setLanguage={setLanguage} />
-                                   </div>
-                                   <div className="mr-4 flex items-center space-x-3">
-                                       <a href="mailto:[your_email]" className="inline-block bg-white border border-gray-200 text-gray-800 px-3 py-1 rounded-lg shadow hover:bg-gray-50 text-sm">Email</a>
-                                       <a href="https://wa.me/[your_whatsapp]" target="_blank" rel="noopener noreferrer" className="inline-block bg-green-500 text-white px-3 py-1 rounded-lg shadow hover:bg-green-600 text-sm">WhatsApp</a>
-                                       <a href="https://www.instagram.com/paris.marryme" target="_blank" rel="noopener noreferrer" className="inline-block bg-pink-500 text-white px-3 py-1 rounded-lg shadow hover:bg-pink-600 text-sm">Instagram</a>
-                                   </div>
-                                   <a href="/" className="text-2xl font-bold text-gray-800 font-playfair mx-auto">KOZAK</a>
-                                   <div className="ml-8 flex space-x-6">
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -495,92 +447,92 @@
                     {
                         title: "Пакет Мінімалістичний",
                         desc: ["Декор як на фото", "Маленькі літери 'Marry Me'", "Свічки", "Килим червоний", "Столик", "Шампанське (алкогольне/безалкогольне)", "Професійний фотограф", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці"],
-                        price: "390 &euro;",
+                        price: "390 euro;",
                         alt: "Мінімалістичний Пакет Пропозиція Париж",
                         img: "IMG-20251102-WA0010.jpg"
                     },
                     {
                         title: "Пакет літери MARRY ME (з лампочками)",
                         desc: ["Літери «marry me» (висотою 95 см)", "Свічки", "Квіткова композиція", "Килим", "Столик", "Шампанське (алкогольне/безалкогольне)", "2 шт феєрверка", "Професійний фотограф", "Букет троянд 21 шт", "Романтична музика на колонці"],
-                        price: "650 &euro;",
+                        price: "650 euro;",
                         alt: "Пакет Літери Marry Me з Лампочками"
                     },
                     {
                         title: "Пакет літери 'Marry Me' квіткові - Білі",
                         desc: ["Квіткові літери «marry me» висотою 85 см", "Свічки", "Килим", "Шампанське (алкогольне/безалкогольне)", "Професійний фотограф", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці"],
-                        price: "750 &euro;",
+                        price: "750 euro;",
                         alt: "Білі Квіткові Літери Marry Me"
                     },
                     {
                         title: "Пакет літери 'Marry Me' квіткові - Червоні",
                         desc: ["Квіткові літери «marry me» висотою 85 см", "Свічки", "Килим", "Шампанське (алкогольне/безалкогольне)", "Професійний фотограф", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці"],
-                        price: "750 &euro;",
+                        price: "750 euro;",
                         alt: "Червоні Квіткові Літери Marry Me"
                     },
                     {
                         title: "Пакет «романтична квіткова декорація»",
                         desc: ["Квіткова композиція (біла або червона)", "Свічки", "Підсвічники", "Килим", "Шампанське (алкогольне/безалкогольне)", "Професійний фотограф", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці"],
-                        price: "850 &euro;",
+                        price: "850 euro;",
                         alt: "Пакет Романтична Квіткова Декорація"
                     },
                     {
                         title: "Пакет «романтична рожева квіткова арка»",
                         desc: ["Квіткова композиція", "Свічки", "Підсвічники", "Килим", "Шампанське (алкогольне/безалкогольне)", "Професійний фотограф", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці"],
-                        price: "899 &euro;",
+                        price: "899 euro;",
                         alt: "Пакет Рожева Квіткова Арка"
                     },
                     {
                         title: "Пакет «Біле велике серце»",
                         desc: ["Квіткове серце", "Неонова вивіска «Will you marry me»", "Свічки", "Підсвічники", "Килим", "Шампанське", "Професійний фотограф", "Столик", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці", "Інсталяція та демонтаж декору"],
-                        price: "980 &euro;",
+                        price: "980 euro;",
                         alt: "Пакет Біле Велике Серце"
                     },
                     {
                         title: "Пакет «велике серце»",
                         desc: ["Квіткове серце", "Неонова вивіска «Will you marry me»", "Свічки", "Підсвічники", "Килим", "Шампанське", "Професійний фотограф", "Столик", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці", "Інсталяція та демонтаж декору"],
-                        price: "999 &euro;",
+                        price: "999 euro;",
                         alt: "Пакет Велике Серце"
                     },
                     {
                         title: "Пакет «велике серце + літери marry me з лампочками»",
                         desc: ["Квіткове серце", "Неонова вивіска «Will you marry me»", "Літери marry me", "Свічки", "Підсвічники", "Килим", "Шампанське", "Професійний фотограф", "Столик", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці", "Інсталяція та демонтаж декору"],
-                        price: "1 250 &euro;",
+                        price: "1 250 euro;",
                         alt: "Велике Серце з Літерами з Лампочками"
                     },
                     {
                         title: "Пакет «велике серце + літери marry me квіткові»",
                         desc: ["Квіткове серце", "Неонова вивіска «Will you marry me»", "Літери marry me квіткові", "Свічки", "Підсвічники", "Килим", "Шампанське", "Професійний фотограф", "Столик", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці", "Інсталяція та демонтаж декору"],
-                        price: "1 250 &euro;",
+                        price: "1 250 euro;",
                         alt: "Велике Серце з Квітковими Літерами"
                     },
                     {
                         title: "Пакет VIP (3 серця)",
                         desc: ["1 шт велике серце", "2 шт маленькі серця", "Квіткові композиції", "Свічки", "Підсвічники", "Килим", "Шампанське", "Столик", "Букет троянд 21 шт", "6 шт феєрверка", "Професійний фотограф", "Професійний відеооператор", "Романтична музика на колонці"],
-                        price: "1 950 &euro;",
+                        price: "1 950 euro;",
                         alt: "VIP Пакет 3 Серця"
                     },
                     {
                         title: "Пакет VIP Premium (3 серця)",
                         desc: ["1 шт велике серце", "2 шт маленькі серця", "Квіткові композиції", "Свічки", "Підсвічники", "Килим", "Шампанське", "Столик", "Букет троянд 21 шт", "6 шт феєрверка", "Професійний фотограф", "Професійний відеооператор", "Романтична музика на колонці"],
-                        price: "1 999 &euro;",
+                        price: "1 999 euro;",
                         alt: "VIP Premium Пакет 3 Серця"
                     },
                     {
                         title: "Пакет Неонове Серце і Літери",
                         desc: ["Квіткове серце", "Неонова вивіска", "Неонові літери «marry me»", "Свічки", "Підсвічники", "Килим", "Шампанське (алкогольне/безалкогольне)", "Професійний фотограф", "Букет троянд 21 шт", "4 шт феєрверка", "Романтична музика на колонці"],
-                        price: "1 500 &euro;",
+                        price: "1 500 euro;",
                         alt: "Пакет Неонове Серце і Літери"
                     },
                     {
                         title: "Пакет «Літери MARRY ME великі»",
                         desc: ["Літери marry me", "Свічки", "Підсвічники", "Килим", "Шампанське (алкогольне/безалкогольне)", "Професійний фотограф", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці"],
-                        price: "1 000 &euro;",
+                        price: "1 000 euro;",
                         alt: "Пакет Великі Літери Marry Me"
                     },
                     {
                         title: "Пакет Фул (3 серця + літери)",
                         desc: ["1 шт велике серце", "2 шт маленькі серця", "Літери з лампочками «marry me»", "Квіткові композиції", "Свічки", "Підсвічники", "Килим", "Шампанське", "Столик", "Букет троянд 101 шт", "6 шт феєрверка", "Професійний фотограф", "Професійний відеооператор", "Саксофоніст", "Романтична музика на колонці"],
-                        price: "2 500 &euro;",
+                        price: "2 500 euro;",
                         alt: "Повний Пакет з Серцями і Літерами"
                     }
                 ],
@@ -1239,12 +1191,6 @@
                                                                                                                         <span className="sr-only">Facebook</span>
                                                                                                                     </a>
                                                                                                                 </div>
-                            <form className="w-full max-w-md" action="/submit-form" method="POST">
-                                <input type="text" name="name" placeholder={t.contactForm.name} className="w-full p-3 mb-4 border rounded-lg" required />
-                                <input type="email" name="email" placeholder={t.contactForm.email} className="w-full p-3 mb-4 border rounded-lg" required />
-                                <textarea name="message" placeholder={t.contactForm.message} className="w-full p-3 mb-4 border rounded-lg h-32" required></textarea>
-                                <button type="submit" className="bg-pink-600 text-white py-2 px-6 rounded-lg hover:bg-pink-700">{t.contactForm.submit}</button>
-                            </form>
                         </div>
                     </div>
                 </section>
