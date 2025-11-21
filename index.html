@@ -204,10 +204,11 @@
                 ],
                 packages: [
                     {
-                        title: "Luminous Marry Me Letters",
-                        desc: ["Eiffel Tower sparkling guarantee (copyrighted)", "Large luminous 'Marry Me' letters", "Red carpet, candles, and floral decor", "4 sparklers (3m high)"],
-                        price: "From €800",
-                        alt: "Eiffel Tower Proposal with Luminous Marry Me Letters"
+                        title: "Minimalist Package",
+                        desc: ["Decor as shown in photo", "Small 'Marry Me' letters", "Candles", "Red carpet", "Small table", "Champagne (alcoholic/non-alcoholic)", "Professional photographer", "Bouquet of 21 roses", "2 sparklers", "Romantic music on speaker"],
+                        price: "€390",
+                        alt: "Minimalist Paris Proposal Package",
+                        img: "IMG-20251102-WA0010.jpg"
                     },
                     {
                         title: "Private Terrace Luxury",
@@ -278,10 +279,11 @@
                 ],
                 packages: [
                     {
-                        title: "Lettres Lumineuses 'Marry Me'",
-                        desc: ["Garantie d'éclat de la Tour Eiffel (sous copyright)", "Grandes lettres lumineuses 'Marry Me'", "Tapis rouge, bougies et décor floral", "4 cierges magiques (3m de haut)"],
-                        price: "À partir de 800 €",
-                        alt: "Proposition à la Tour Eiffel avec Lettres Lumineuses 'Marry Me'"
+                        title: "Forfait Minimaliste",
+                        desc: ["Décor comme sur la photo", "Petites lettres 'Marry Me'", "Bougies", "Tapis rouge", "Petite table", "Champagne (alcoolisé/sans alcool)", "Photographe professionnel", "Bouquet de 21 roses", "2 cierges magiques", "Musique romantique sur enceinte"],
+                        price: "390 €",
+                        alt: "Forfait Minimaliste Proposition Paris",
+                        img: "IMG-20251102-WA0010.jpg"
                     },
                     {
                         title: "Expérience Luxe sur Terrasse Privée",
@@ -358,10 +360,11 @@
                 ],
                 packages: [
                     {
-                        title: "Світлові Літери 'Marry Me'",
-                        desc: ["Гарантія сяйва Ейфелевої вежі (під захистом авторських прав)", "Великі світлові літери 'Marry Me'", "Червона доріжка, свічки та квітковий декор", "4 бенгальські вогні (3 м заввишки)"],
-                        price: "Від 800 €",
-                        alt: "Пропозиція перед Ейфелевою вежею зі Світловими Літерами 'Marry Me'"
+                        title: "Пакет Мінімалістичний",
+                        desc: ["Декор як на фото", "Маленькі літери 'Marry Me'", "Свічки", "Килим червоний", "Столик", "Шампанське (алкогольне/безалкогольне)", "Професійний фотограф", "Букет троянд 21 шт", "2 шт феєрверка", "Романтична музика на колонці"],
+                        price: "390 €",
+                        alt: "Мінімалістичний Пакет Пропозиція Париж",
+                        img: "IMG-20251102-WA0010.jpg"
                     },
                     {
                         title: "Розкішна Тераса",
@@ -426,10 +429,11 @@
                 ],
                 packages: [
                     {
-                        title: "Светящиеся Буквы 'Marry Me'",
-                        desc: ["Гарантия сияния Эйфелевой башни (под защитой авторских прав)", "Большие светящиеся буквы 'Marry Me'", "Красная дорожка, свечи и цветочный декор", "4 бенгальских огня (3 м высотой)"],
-                        price: "От 800 €",
-                        alt: "Предложение перед Эйфелевой башней со Светящимися Буквами 'Marry Me'"
+                        title: "Минималистичный Пакет",
+                        desc: ["Декор как на фото", "Маленькие буквы 'Marry Me'", "Свечи", "Красная дорожка", "Столик", "Шампанское (алкогольное/безалкогольное)", "Профессиональный фотограф", "Букет из 21 розы", "2 фейерверка", "Романтическая музыка на колонке"],
+                        price: "390 €",
+                        alt: "Минималистичный Пакет Предложение Париж",
+                        img: "IMG-20251102-WA0010.jpg"
                     },
                     {
                         title: "Роскошная Терраса",
@@ -616,7 +620,7 @@
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {t.packages.map((pkg, index) => (
                                 <div key={index} className="package-card bg-white p-6 rounded-lg shadow-md">
-                                    <img src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt={pkg.alt} className="w-full h-48 object-cover rounded-t-lg mb-4" onError={(e) => { e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; console.log('Image load failed, switched to fallback'); }} />
+                                    <img src={pkg.img || "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"} alt={pkg.alt} className="w-full h-48 object-cover rounded-t-lg mb-4" onError={(e) => { e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; console.log('Image load failed, switched to fallback'); }} />
                                     <h3 className="text-xl font-semibold font-playfair mb-4">{pkg.title}</h3>
                                     <ul className="text-gray-600 mb-4">
                                         {pkg.desc.map((item, i) => (
@@ -624,7 +628,7 @@
                                         ))}
                                     </ul>
                                     <p className="text-lg font-bold text-pink-600 mb-4">{pkg.price}</p>
-                                    <a href="#" className="text-blue-600 hover:underline">See Details</a>
+                                    <a href="#contact" className="text-blue-600 hover:underline">Contact Us</a>
                                 </div>
                             ))}
                         </div>
