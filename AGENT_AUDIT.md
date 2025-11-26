@@ -222,3 +222,48 @@ The KOZAK website project has a solid foundation with comprehensive multilingual
 The `kozak-website/` Vite project appears to be an alternative implementation that is incomplete and should either be completed or removed to avoid confusion.
 
 **Estimated effort to production-ready: 3-5 hours**
+
+---
+
+## 9. WhatsApp Icon Review (Phase 1 Audit)
+
+**Date:** November 26, 2025  
+**Focus Area:** Contact buttons in header, mobile menu, floating contact widget, and contact section
+
+### 9.1 Icon Locations Identified
+
+| Location | Line(s) | Size | Context |
+|----------|---------|------|---------|
+| Desktop Header | 665-670 | w-4 h-4 | Left side of navbar |
+| Mobile Menu | 740-744 | w-5 h-5 | Hamburger menu dropdown |
+| Floating Contact Widget | 1017-1019 | w-5 h-5 | Bottom-right popup menu |
+| Floating Main Button | 1036-1042 | w-6 h-6 | Pink circular FAB button |
+| Contact Section | 1176-1179 | w-5 h-5 | Below contact form |
+
+### 9.2 Issues Found (Before Fix)
+
+| Aspect | Previous State | Issues | Priority |
+|--------|----------------|--------|----------|
+| SVG Path | Malformed/incomplete path | Icon did not render as recognizable WhatsApp logo; appeared as abstract shape | High |
+| Styling | Basic fill="currentColor" | Missing hover scale effects for polish | Medium |
+| Accessibility | aria-label="WhatsApp" present | Missing role="img" on some SVGs | Low |
+| Consistency | All 5 icons used same malformed path | Consistent but incorrect design | High |
+
+### 9.3 Technical Details
+
+**Previous SVG Path (Problematic):**
+```
+M12 .5C5.648.5.5 5.648.5 12c0 2.159.611 4.164 1.77 5.888L0 24...
+```
+- This path was incomplete and did not form the recognizable WhatsApp phone-in-bubble icon
+- The path appeared to start as a circle but the phone handset portion was malformed
+
+**Resolution Applied:**
+- Replaced with official WhatsApp brand SVG path (Simple Icons standard)
+- Added `role="img"` for accessibility
+- Added `transition-transform hover:scale-105` for smooth hover effect
+- Ensured consistent sizing across all instances
+
+### 9.4 Summary
+
+The WhatsApp icons were functional (clickable, links worked) but visually unclean due to an incorrect/malformed SVG path. The icons have been replaced with the official WhatsApp SVG icon path which renders crisply at any size as a vector graphic. Hover effects were also enhanced for a more polished user experience.
