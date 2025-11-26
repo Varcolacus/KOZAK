@@ -1,0 +1,22 @@
+# KOZAK - Romantic Proposals in Paris
+# https://kozak-proposals.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://kozak-proposals.com/sitemap.xml
+
+# Disallow admin/test paths
+Disallow: /admin/
+Disallow: /test/
+Disallow: /*.json$
+Disallow: /api/
+
+# Allow important resources
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
