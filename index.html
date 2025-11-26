@@ -1572,6 +1572,16 @@
                                     ></textarea>
                                 </div>
                                 
+                                {/* Simple Pay Toggle Button */}
+                                <button type="button" id="pay-toggle" className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 mb-4" data-lang="payDeposit">Payer un acompte (100&euro;)</button>
+                                <div id="payment-section" className="hidden">
+                                    <div id="card-element" className="p-3 border rounded-md bg-white shadow-sm"></div>
+                                    <div id="card-errors" role="alert" className="text-red-600 text-sm hidden mt-1"></div>
+                                    <button type="submit" id="pay-btn" className="w-full bg-pink-500 text-white py-2 rounded-md hover:bg-pink-600 disabled:opacity-50">
+                                        <span id="btn-text" data-lang="payBook">Pay & Book</span> <span id="spinner" className="hidden ml-2">⏳</span>
+                                    </button>
+                                </div>
+                                
                                 {/* Stripe Payment Section */}
                                 {showPayment && (
                                     <div className="space-y-4 p-4 bg-gray-50 rounded-lg border">
@@ -1680,6 +1690,17 @@
         }
 
         ReactDOM.render(<App />, document.getElementById('root'));
+        
+        // Toggle payment section script
+        document.getElementById('pay-toggle').addEventListener('click', () => {
+            document.getElementById('payment-section').classList.toggle('hidden');
+            if (!document.getElementById('card-element').children.length) {  // Mount if not loaded
+                const stripe = Stripe('pk_test_4242424242424242');
+                const elements = stripe.elements();
+                const card = elements.create('card');
+                card.mount('#card-element');
+            }
+        });
     </script>
 </body>
 </html>
