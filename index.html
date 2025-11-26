@@ -493,13 +493,13 @@
                     }
                 ],
                 contact: "Контакти",
-                contactText: "Створімо разом незабутній момент у Парижі. Зв’яжіться з нами, щоб обговорити вашу пропозицію mрії.",
+                contactText: "Створімо разом незабутній момент у Парижі. Зв’яжіться з нами, щоб обговорити вашу пропозицію мрії.",
                 contactForm: {
                     name: "Ваше Ім’я",
                     email: "Ваш Email",
                     date: "Бажана Дата",
                     package: "Оберіть Пакет",
-                    message: "Розкажіть про вашу пропозицію mрії",
+                    message: "Розкажіть про вашу пропозицію мрії",
                     submit: "Забронювати Зараз",
                     success: "Запит на бронювання надіслано! Ми звʼяжемося з вами найближчим часом.",
                     error: "Сталася помилка. Спробуйте ще раз."
@@ -1188,8 +1188,11 @@
                         timestamp: new Date().toISOString()
                     });
 
-                    // Attempt Formspree submission if endpoint is configured
-                    if (!formspreeEndpoint.includes('YOUR_FORM_ID')) {
+                    // Check if Formspree endpoint is configured (not placeholder)
+                    const isFormspreeConfigured = !formspreeEndpoint.includes('YOUR_FORM_ID');
+                    
+                    if (isFormspreeConfigured) {
+                        // Production mode: submit to Formspree
                         const response = await fetch(formspreeEndpoint, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -1204,14 +1207,21 @@
                         
                         if (!response.ok) throw new Error('Submission failed');
                     }
+                    // Demo mode: console.log already captured the data above
                     
                     setSubmitStatus('success');
                     setFormState({ name: '', email: '', date: '', package: '', message: '' });
                 } catch (error) {
                     console.error('Form submission error:', error);
-                    // Still show success for demo purposes (console logging worked)
-                    setSubmitStatus('success');
-                    setFormState({ name: '', email: '', date: '', package: '', message: '' });
+                    // Show error in production mode, success in demo mode (console logging worked)
+                    const isFormspreeConfigured = !formspreeEndpoint.includes('YOUR_FORM_ID');
+                    if (isFormspreeConfigured) {
+                        setSubmitStatus('error');
+                    } else {
+                        // Demo mode: show success since console.log captured the data
+                        setSubmitStatus('success');
+                        setFormState({ name: '', email: '', date: '', package: '', message: '' });
+                    }
                 } finally {
                     setIsSubmitting(false);
                     // Reset status after 5 seconds
@@ -1338,7 +1348,7 @@
                                         onChange={handleInputChange}
                                         placeholder={t.contactForm.message} 
                                         aria-label={t.contactForm.message}
-                                        rows="4"
+                                        rows={4}
                                         className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" 
                                     ></textarea>
                                 </div>
