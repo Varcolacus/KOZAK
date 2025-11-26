@@ -32,6 +32,8 @@
     <!-- Leaflet for interactive maps (OpenStreetMap tiles) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Stripe.js for payment processing -->
+    <script src="https://js.stripe.com/v3/"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -248,7 +250,13 @@
                     message: "Tell us about your dream proposal",
                     submit: "Book Now",
                     success: "Booking request sent! We'll contact you soon.",
-                    error: "An error occurred. Please try again."
+                    error: "An error occurred. Please try again.",
+                    payDeposit: "Pay Deposit (€100)",
+                    cardDetails: "Card Details",
+                    cardError: "Please check your card details.",
+                    paymentProcessing: "Processing...",
+                    paymentSuccess: "Payment successful! We'll contact you soon.",
+                    paymentError: "Payment failed. Please try again."
                 },
                 footer: "© 2025 KOZAK. All rights reserved.",
                 privacy: "Privacy Policy",
@@ -378,7 +386,13 @@
                     message: "Parlez-nous de votre proposition de rêve",
                     submit: "Réserver Maintenant",
                     success: "Demande de réservation envoyée! Nous vous contacterons bientôt.",
-                    error: "Une erreur s'est produite. Veuillez réessayer."
+                    error: "Une erreur s'est produite. Veuillez réessayer.",
+                    payDeposit: "Payer un acompte (100€)",
+                    cardDetails: "Détails de la carte",
+                    cardError: "Veuillez vérifier vos informations de carte.",
+                    paymentProcessing: "Traitement...",
+                    paymentSuccess: "Paiement réussi ! Nous vous contacterons bientôt.",
+                    paymentError: "Le paiement a échoué. Veuillez réessayer."
                 },
                 footer: "© 2025 KOZAK. Tous droits réservés.",
                 privacy: "Politique de Confidentialité",
@@ -508,7 +522,13 @@
                     message: "Розкажіть про вашу пропозицію мрії",
                     submit: "Забронювати Зараз",
                     success: "Запит на бронювання надіслано! Ми звʼяжемося з вами найближчим часом.",
-                    error: "Сталася помилка. Спробуйте ще раз."
+                    error: "Сталася помилка. Спробуйте ще раз.",
+                    payDeposit: "Сплатити завдаток (€100)",
+                    cardDetails: "Дані картки",
+                    cardError: "Будь ласка, перевірте дані вашої картки.",
+                    paymentProcessing: "Обробка...",
+                    paymentSuccess: "Оплата успішна! Ми скоро зв'яжемося з вами.",
+                    paymentError: "Оплата не вдалася. Будь ласка, спробуйте ще раз."
                 },
                 footer: "© 2025 KOZAK. Усі права захищено.",
                 privacy: "Політика Конфіденційності",
@@ -632,7 +652,13 @@
                     message: "Расскажите о вашем предложении мечты",
                     submit: "Забронировать Сейчас",
                     success: "Запрос на бронирование отправлен! Мы свяжемся с вами в ближайшее время.",
-                    error: "Произошла ошибка. Пожалуйста, попробуйте снова."
+                    error: "Произошла ошибка. Пожалуйста, попробуйте снова.",
+                    payDeposit: "Оплатить задаток (€100)",
+                    cardDetails: "Данные карты",
+                    cardError: "Пожалуйста, проверьте данные вашей карты.",
+                    paymentProcessing: "Обработка...",
+                    paymentSuccess: "Оплата прошла успешно! Мы скоро свяжемся с вами.",
+                    paymentError: "Оплата не удалась. Пожалуйста, попробуйте снова."
                 },
                 footer: "© 2025 KOZAK. Все права защищены.",
                 privacy: "Политика Конфиденциальности",
@@ -1149,8 +1175,13 @@
             const sectionRef = React.useRef(null);
             const [isVisible, setIsVisible] = React.useState(false);
             const [formState, setFormState] = React.useState({ name: '', email: '', date: '', package: '', message: '' });
-            const [submitStatus, setSubmitStatus] = React.useState(null); // 'success', 'error', or null
+            const [submitStatus, setSubmitStatus] = React.useState(null); // 'success', 'error', 'payment_success', 'payment_error', or null
             const [isSubmitting, setIsSubmitting] = React.useState(false);
+            const [showPayment, setShowPayment] = React.useState(false);
+            const [cardError, setCardError] = React.useState('');
+            const cardElementRef = React.useRef(null);
+            const stripeRef = React.useRef(null);
+            const elementsRef = React.useRef(null);
 
             // Calculate minimum date (today) and maximum date (1 year from now)
             const today = new Date().toISOString().split('T')[0];
@@ -1170,6 +1201,59 @@
                 return () => observer.disconnect();
             }, []);
 
+            // Initialize Stripe Elements when payment form is shown
+            React.useEffect(() => {
+                if (showPayment && typeof Stripe !== 'undefined') {
+                    // Fetch publishable key from backend or use placeholder
+                    const initStripe = async () => {
+                        try {
+                            // Try to get key from backend
+                            const response = await fetch('/api/config');
+                            if (response.ok) {
+                                const config = await response.json();
+                                if (config.publishableKey) {
+                                    stripeRef.current = Stripe(config.publishableKey);
+                                }
+                            }
+                        } catch (err) {
+                            console.log('Stripe not configured. Payment demo mode.');
+                        }
+                        
+                        if (stripeRef.current) {
+                            elementsRef.current = stripeRef.current.elements();
+                            const cardElement = elementsRef.current.create('card', {
+                                style: {
+                                    base: {
+                                        fontSize: '16px',
+                                        color: '#424770',
+                                        '::placeholder': { color: '#aab7c4' }
+                                    },
+                                    invalid: { color: '#9e2146' }
+                                }
+                            });
+                            
+                            const cardContainer = document.getElementById('card-element');
+                            if (cardContainer) {
+                                cardElement.mount('#card-element');
+                                cardElementRef.current = cardElement;
+                                
+                                cardElement.on('change', (event) => {
+                                    setCardError(event.error ? event.error.message : '');
+                                });
+                            }
+                        }
+                    };
+                    initStripe();
+                }
+                
+                return () => {
+                    if (cardElementRef.current) {
+                        cardElementRef.current.unmount();
+                        cardElementRef.current = null;
+                    }
+                };
+            }, [showPayment]);
+
             const handleInputChange = (e) => {
                 const { name, value } = e.target;
                 setFormState(prev => ({ ...prev, [name]: value }));
@@ -1180,7 +1264,6 @@
                 setIsSubmitting(true);
                 
                 // Formspree integration - replace YOUR_FORM_ID with actual Formspree form ID
-                // For now, we'll use a mock submission with console logging
                 const formspreeEndpoint = 'https://formspree.io/f/YOUR_FORM_ID';
                 
                 try {
@@ -1198,7 +1281,6 @@
                     const isFormspreeConfigured = !formspreeEndpoint.includes('YOUR_FORM_ID');
                     
                     if (isFormspreeConfigured) {
-                        // Production mode: submit to Formspree
                         const response = await fetch(formspreeEndpoint, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -1213,25 +1295,90 @@
                         
                         if (!response.ok) throw new Error('Submission failed');
                     }
-                    // Demo mode: console.log already captured the data above
                     
                     setSubmitStatus('success');
                     setFormState({ name: '', email: '', date: '', package: '', message: '' });
                 } catch (error) {
                     console.error('Form submission error:', error);
-                    // Show error in production mode, success in demo mode (console logging worked)
                     const isFormspreeConfigured = !formspreeEndpoint.includes('YOUR_FORM_ID');
                     if (isFormspreeConfigured) {
                         setSubmitStatus('error');
                     } else {
-                        // Demo mode: show success since console.log captured the data
                         setSubmitStatus('success');
                         setFormState({ name: '', email: '', date: '', package: '', message: '' });
                     }
                 } finally {
                     setIsSubmitting(false);
-                    // Reset status after 5 seconds
                     setTimeout(() => setSubmitStatus(null), 5000);
+                }
+            };
+
+            const handlePayment = async (e) => {
+                e.preventDefault();
+                if (!stripeRef.current || !cardElementRef.current) {
+                    // Demo mode - simulate payment success
+                    console.log('Payment Demo - Form Data:', formState);
+                    setSubmitStatus('payment_success');
+                    setShowPayment(false);
+                    setFormState({ name: '', email: '', date: '', package: '', message: '' });
+                    setTimeout(() => {
+                        window.location.href = '/thank-you.html';
+                    }, 1500);
+                    return;
+                }
+                
+                setIsSubmitting(true);
+                setCardError('');
+                
+                try {
+                    // Create payment intent on backend
+                    const response = await fetch('/api/create-payment-intent', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            amount: 10000, // €100 in cents
+                            currency: 'eur',
+                            package: formState.package,
+                            email: formState.email,
+                            name: formState.name
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to create payment intent');
+                    }
+                    
+                    const { clientSecret } = await response.json();
+                    
+                    // Confirm the payment with Stripe
+                    const { error, paymentIntent } = await stripeRef.current.confirmCardPayment(clientSecret, {
+                        payment_method: {
+                            card: cardElementRef.current,
+                            billing_details: {
+                                name: formState.name,
+                                email: formState.email
+                            }
+                        }
+                    });
+                    
+                    if (error) {
+                        setCardError(error.message);
+                        setSubmitStatus('payment_error');
+                    } else if (paymentIntent.status === 'succeeded') {
+                        setSubmitStatus('payment_success');
+                        setShowPayment(false);
+                        setFormState({ name: '', email: '', date: '', package: '', message: '' });
+                        // Redirect to thank you page
+                        setTimeout(() => {
+                            window.location.href = '/thank-you.html';
+                        }, 1500);
+                    }
+                } catch (error) {
+                    console.error('Payment error:', error);
+                    setCardError(t.contactForm.paymentError);
+                    setSubmitStatus('payment_error');
+                } finally {
+                    setIsSubmitting(false);
                 }
             };
 
@@ -1270,7 +1417,7 @@
                             </div>
 
                             {/* Booking Form */}
-                            <form id="booking-form" onSubmit={handleSubmit} className="w-full max-w-md mt-6 space-y-4" aria-label="Booking form">
+                            <form id="booking-form" onSubmit={showPayment ? handlePayment : handleSubmit} className="w-full max-w-md mt-6 space-y-4" aria-label="Booking form">
                                 {submitStatus === 'success' && (
                                     <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded" role="alert">
                                         {t.contactForm.success}
@@ -1279,6 +1426,16 @@
                                 {submitStatus === 'error' && (
                                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
                                         {t.contactForm.error}
+                                    </div>
+                                )}
+                                {submitStatus === 'payment_success' && (
+                                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded" role="alert">
+                                        {t.contactForm.paymentSuccess}
+                                    </div>
+                                )}
+                                {submitStatus === 'payment_error' && (
+                                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                                        {t.contactForm.paymentError}
                                     </div>
                                 )}
                                 <div>
@@ -1358,13 +1515,52 @@
                                         className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" 
                                     ></textarea>
                                 </div>
-                                <button 
-                                    type="submit" 
-                                    disabled={isSubmitting}
-                                    className="w-full bg-pink-600 text-white py-3 px-6 rounded-lg hover:bg-pink-700 transition-colors disabled:bg-pink-400 disabled:cursor-not-allowed"
-                                >
-                                    {isSubmitting ? '...' : t.contactForm.submit}
-                                </button>
+                                
+                                {/* Stripe Payment Section */}
+                                {showPayment && (
+                                    <div className="space-y-4 p-4 bg-gray-50 rounded-lg border">
+                                        <label className="block text-left text-gray-700 font-medium">
+                                            {t.contactForm.cardDetails}
+                                        </label>
+                                        <div id="card-element" className="p-3 border rounded-lg bg-white"></div>
+                                        {cardError && (
+                                            <div className="text-red-500 text-sm">{cardError}</div>
+                                        )}
+                                    </div>
+                                )}
+                                
+                                <div className="flex flex-col space-y-3">
+                                    <button 
+                                        type="submit" 
+                                        disabled={isSubmitting}
+                                        className="w-full bg-pink-600 text-white py-3 px-6 rounded-lg hover:bg-pink-700 transition-colors disabled:bg-pink-400 disabled:cursor-not-allowed"
+                                    >
+                                        {isSubmitting ? (showPayment ? t.contactForm.paymentProcessing : '...') : (showPayment ? t.contactForm.payDeposit : t.contactForm.submit)}
+                                    </button>
+                                    
+                                    {!showPayment && formState.name && formState.email && formState.package && (
+                                        <button 
+                                            type="button"
+                                            onClick={() => setShowPayment(true)}
+                                            className="w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center space-x-2"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                            </svg>
+                                            <span>{t.contactForm.payDeposit}</span>
+                                        </button>
+                                    )}
+                                    
+                                    {showPayment && (
+                                        <button 
+                                            type="button"
+                                            onClick={() => setShowPayment(false)}
+                                            className="text-gray-500 hover:text-gray-700 text-sm"
+                                        >
+                                            ← Back
+                                        </button>
+                                    )}
+                                </div>
                             </form>
                         </div>
                     </div>
