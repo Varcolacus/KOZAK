@@ -31,9 +31,7 @@ body {
     background-color: #f0e6dc;
 }
 
-img {
-    loading: "lazy";
-}
+/* Note: Use loading="lazy" attribute on <img> elements in HTML, not CSS */
 
 .language-switcher {
     display: flex;
