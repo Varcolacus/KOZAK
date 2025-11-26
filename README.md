@@ -107,6 +107,47 @@ KOZAK/
 - Keyboard navigation support
 - Screen reader friendly
 
+## Locations
+
+The website features 3 romantic proposal locations in Paris with interactive map markers:
+
+### Location Details
+
+| Location | Description | Coordinates | Image |
+|----------|-------------|-------------|-------|
+| **Quai Debilly** | Riverside romance opposite the Eiffel Tower | `48.8584, 2.2928` | `assets/images/locations/quai-debilly.jpg` |
+| **Bir Hakeim Bridge** | Iconic arched bridge with panoramic Eiffel views | `48.8545, 2.2894` | `assets/images/locations/bir-hakeim.jpg` |
+| **Private Locations** | Exclusive rooftops or Seine cruises | `48.8588, 2.2945` | `assets/images/locations/private-location.jpg` |
+
+### Photo Sources
+- All location images sourced from [Unsplash](https://unsplash.com) (royalty-free)
+- Images optimized to <100KB for performance
+- Lazy-loading enabled for all location photos
+
+### Customizing Locations
+
+To update location descriptions in multiple languages, edit the `locationsList` array in `index.html`:
+
+```javascript
+// English (en)
+locationsList: [
+    { 
+        title: "Location Name", 
+        desc: "Description text", 
+        img: "assets/images/locations/photo.jpg", 
+        lat: 48.8584, 
+        lng: 2.2928 
+    }
+]
+```
+
+Translations are available in:
+- English (`en`)
+- French (`fr`)
+- Ukrainian (`uk`)
+
+The Leaflet map automatically updates markers and popups based on the selected language.
+
 ## Deployment
 
 ### GitHub Pages
