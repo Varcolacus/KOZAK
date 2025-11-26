@@ -61,18 +61,32 @@ The KOZAK website project has been successfully audited, fixed, improved, and po
 | Accessibility | Added `role="img"` to all WhatsApp SVG elements |
 | Consistency | All 5 WhatsApp icon instances updated with identical clean SVG |
 
+### Phase 6: Booking Form & i18n Integration ✅
+| Feature | Description |
+|---------|-------------|
+| Date Picker | Added date input with min (today) and max (1 year) constraints |
+| Package Dropdown | Dynamic dropdown populated from translation packages array |
+| Formspree Integration | Async form submission with Formspree endpoint (configurable) |
+| Console Fallback | Form data logged to console when Formspree not configured |
+| Loading State | Added isSubmitting state with disabled button during submission |
+| Success/Error Messages | Translated feedback messages in all 4 languages |
+| Browser Language Detection | Auto-detects user's browser language (en/fr/uk/ru) |
+| localStorage Persistence | Saves language preference to localStorage |
+| Document Lang Attribute | Updates `<html lang="">` when language changes |
+| New Translations | Added date, package, success, error fields for all languages |
+
 ---
 
 ## Files Changed
 
 | File | Action | Description |
 |------|--------|-------------|
-| `index.html` | Modified | Fixed translations, added mobile menu, form handler, section headings, accessibility |
+| `index.html` | Modified | Enhanced booking form with date/package fields, i18n persistence, Formspree integration |
 | `serve.py` | Modified | Fixed MIME types, added error handling |
 | `README.md` | Modified | Complete documentation rewrite |
 | `.gitignore` | Modified | Extended with common patterns |
 | `kozak-website/src/styles/main.css` | Modified | Fixed invalid CSS syntax |
-| `AGENT_AUDIT.md` | Created | Comprehensive project audit |
+| `AGENT_AUDIT.md` | Modified | Added Booking Form & i18n Review section |
 | `AGENT_SUMMARY.md` | Created | Project completion summary |
 | `privacy.html` | Created | Privacy Policy page |
 | `terms.html` | Created | Terms of Service page |
