@@ -39,6 +39,31 @@ Update placeholder values in `index.html`:
 - `[your_whatsapp]` → Your WhatsApp number (without +)
 - `[your_facebook]` → Your Facebook page name
 - `[your-domain].com` → Your actual domain
+- `YOUR_FORM_ID` → Your Formspree form ID (get one free at [formspree.io](https://formspree.io))
+
+## Features
+
+### Booking Form
+The contact section includes a fully-featured booking form with:
+- **Name & Email**: Required fields with validation
+- **Date Picker**: Select proposal date (today to 1 year ahead)
+- **Package Selection**: Dropdown populated from available packages
+- **Message**: Optional special requests field
+- **Formspree Integration**: Submissions sent to your email (configure YOUR_FORM_ID)
+- **Console Fallback**: In demo mode, submissions are logged to console
+
+### Multilingual Support
+The site supports 4 languages with automatic switching:
+- 🇬🇧 **English** (default)
+- 🇫🇷 **Français** (French)
+- 🇺🇦 **Українська** (Ukrainian)
+- 🇷🇺 **Русский** (Russian)
+
+**Features:**
+- Browser language auto-detection on first visit
+- Language preference saved to localStorage
+- All form labels, placeholders, and messages translated
+- Dynamic document `lang` attribute updates
 
 ## Project Structure
 
