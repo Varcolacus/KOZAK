@@ -267,3 +267,73 @@ M12 .5C5.648.5.5 5.648.5 12c0 2.159.611 4.164 1.77 5.888L0 24...
 ### 9.4 Summary
 
 The WhatsApp icons were functional (clickable, links worked) but visually unclean due to an incorrect/malformed SVG path. The icons have been replaced with the official WhatsApp SVG icon path which renders crisply at any size as a vector graphic. Hover effects were also enhanced for a more polished user experience.
+
+---
+
+## 10. Booking Form & i18n Review (Phase 2)
+
+**Date:** November 26, 2025  
+**Focus Area:** Booking form enhancements and multilingual toggle functionality
+
+### 10.1 Booking Form Audit
+
+| Category | Current State | Gaps | Priority |
+|----------|---------------|------|----------|
+| Form Fields | Basic name, email, message | Missing date picker, package selection | High |
+| Form Validation | HTML5 required attributes | No custom validation messages | Medium |
+| Form Submission | Simulated success (console) | No Formspree/backend integration | High |
+| UX | Responsive layout | No loading state, date constraints | Medium |
+| Accessibility | ARIA labels present | Missing aria-required attributes | Low |
+
+### 10.2 i18n Audit
+
+| Category | Current State | Gaps | Priority |
+|----------|---------------|------|----------|
+| Language Switcher | Dropdown with 4 languages (EN/FR/UK/RU) | Works correctly | Complete |
+| Translations | Comprehensive for all sections | Missing form field translations (date, package) | Medium |
+| Browser Detection | Not implemented | No auto-detection of user language | Medium |
+| Persistence | Not implemented | Language resets on page reload | Medium |
+| Document Lang Attr | Static `lang="en"` | Does not update with language change | Low |
+
+### 10.3 Changes Implemented
+
+#### Booking Form Enhancements
+1. **Date Picker**: Added date input with min (today) and max (1 year) constraints
+2. **Package Dropdown**: Dynamic dropdown populated from translation packages array
+3. **Formspree Integration**: Added async form submission with Formspree endpoint (configurable)
+4. **Console Fallback**: Form data logged to console when Formspree not configured
+5. **Loading State**: Added isSubmitting state with disabled button during submission
+6. **Success/Error Messages**: Translated feedback messages in all 4 languages
+7. **Accessibility**: Added aria-required="true" attributes to required fields
+
+#### i18n Enhancements
+1. **Browser Language Detection**: Auto-detects user's browser language (en/fr/uk/ru)
+2. **localStorage Persistence**: Saves language preference to localStorage
+3. **Document Lang Attribute**: Updates `<html lang="">` when language changes
+4. **New Translations**: Added date, package, success, error fields for all languages
+
+### 10.4 Translation Updates
+
+| Key | English | French | Ukrainian | Russian |
+|-----|---------|--------|-----------|---------|
+| contactForm.date | Preferred Date | Date Souhaitée | Бажана Дата | Желаемая Дата |
+| contactForm.package | Select Package | Sélectionner un Forfait | Оберіть Пакет | Выберите Пакет |
+| contactForm.submit | Book Now | Réserver Maintenant | Забронювати Зараз | Забронировать Сейчас |
+| contactForm.success | Booking request sent... | Demande de réservation envoyée... | Запит на бронювання надіслано... | Запрос на бронирование отправлен... |
+| contactForm.error | An error occurred... | Une erreur s'est produite... | Сталася помилка... | Произошла ошибка... |
+
+### 10.5 Testing Checklist
+
+- [x] Form renders with all 5 fields (name, email, date, package, message)
+- [x] Date picker restricts to future dates only
+- [x] Package dropdown populates from translations
+- [x] Form submission logs to console
+- [x] Success message displays after submission
+- [x] Language switching updates all form labels/placeholders
+- [x] Language persists in localStorage
+- [x] Browser language detection works on first visit
+- [x] Document lang attribute updates
+
+### 10.6 Summary
+
+The booking form has been enhanced with date picker and package selection dropdown, integrated with Formspree (mock to console for now). The multilingual toggle now supports browser language detection and localStorage persistence. All 4 languages (EN/FR/RU/UKR) have been updated with new form field translations.
