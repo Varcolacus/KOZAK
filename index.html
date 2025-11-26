@@ -86,6 +86,12 @@
             margin-left: 1.5rem;
             text-decoration: none;
             transition: color 0.3s ease;
+            /* Nav alignment fix for multilingual support (accents/Cyrillic) */
+            letter-spacing: 0.025em;
+            line-height: 1.2;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
         }
         .language-switcher a:hover,
         .nav-link:hover {

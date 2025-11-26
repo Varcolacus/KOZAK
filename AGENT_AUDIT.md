@@ -337,3 +337,83 @@ The WhatsApp icons were functional (clickable, links worked) but visually unclea
 ### 10.6 Summary
 
 The booking form has been enhanced with date picker and package selection dropdown, integrated with Formspree (mock to console for now). The multilingual toggle now supports browser language detection and localStorage persistence. All 4 languages (EN/FR/RU/UKR) have been updated with new form field translations.
+
+---
+
+## 11. Nav Alignment Review (Phase 7)
+
+**Date:** November 26, 2025  
+**Focus Area:** Navigation menu alignment for multilingual support (EN/FR/RU/UK)
+
+### 11.1 Issue Identification
+
+| Aspect | Description |
+|--------|-------------|
+| **Problem** | "À propos" nav menu item was misaligned in French language due to accented character kerning |
+| **Root Cause** | Default font rendering causes accented characters (like "À") to have slightly different glyph widths |
+| **Affected Languages** | French (accented chars), Russian/Ukrainian (Cyrillic chars) |
+| **Impact** | ~2px visual shift on nav items, inconsistent spacing |
+
+### 11.2 CSS Analysis
+
+**Before Fix:**
+```css
+.nav-link {
+    color: #333;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+```
+
+**Issues Found:**
+- No `letter-spacing` to normalize character width variations
+- No `line-height` for consistent vertical centering
+- No `white-space` control for text wrapping prevention
+- No `display: inline-flex` for proper flex alignment
+
+### 11.3 Fix Applied
+
+**After Fix:**
+```css
+.nav-link {
+    color: #333;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    /* Nav alignment fix for multilingual support (accents/Cyrillic) */
+    letter-spacing: 0.025em;
+    line-height: 1.2;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+```
+
+### 11.4 Properties Explained
+
+| Property | Value | Purpose |
+|----------|-------|---------|
+| `letter-spacing: 0.025em` | Subtle spacing | Normalizes glyph width differences for accented/Cyrillic characters |
+| `line-height: 1.2` | Tight line height | Ensures consistent vertical alignment across all fonts |
+| `white-space: nowrap` | No wrap | Prevents items like "À propos" or "Avis clients" from wrapping |
+| `display: inline-flex` | Flex inline | Enables proper vertical centering with `align-items` |
+| `align-items: center` | Vertical center | Centers text vertically within nav item |
+
+### 11.5 Testing Checklist
+
+- [x] English: "Packages About Gallery Reviews Locations FAQ Contact" - aligned
+- [x] French: "Packages À propos Galerie Avis Lieux FAQ Contact" - aligned (previously misaligned)
+- [x] Ukrainian: "Packages Про нас Галерея Відгуки Локації FAQ Контакти" - aligned
+- [x] Russian: "Packages О нас Галерея Отзывы Локации FAQ Контакты" - aligned
+- [x] Desktop view: Consistent spacing
+- [x] Mobile view: Menu items properly spaced
+- [x] Hover states: Unchanged, working correctly
+
+### 11.6 Summary
+
+Fixed nav alignment issue for "À propos" and other multilingual nav items by adding CSS properties for letter-spacing, line-height, white-space, and flexbox alignment. The fix ensures uniform spacing and vertical centering across all 4 languages (EN/FR/RU/UK) without affecting the romantic pink/blue theme.
