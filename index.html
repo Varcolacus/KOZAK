@@ -1055,6 +1055,82 @@
                 return zoomFallback ? zoomFallback.alt : '';
             };
 
+            const zoomOverlay = isZoomOpen ? (
+                <React.Fragment>
+                    <div
+                        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                        onClick={closeZoom}
+                        aria-hidden="true"
+                    ></div>
+                    <div
+                        className={`fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg overflow-hidden w-[92vw] max-w-3xl ${zoomOrientation === 'portrait' ? 'md:w-1/3' : 'md:w-1/2'}`}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={getZoomAlt() ? `Zoom: ${getZoomAlt()}` : 'Zoom image'}
+                    >
+                        <div className="flex items-center justify-between px-4 py-3 border-b">
+                            <div className="text-sm text-gray-600 truncate pr-3">
+                                {getZoomAlt() || ''}
+                            </div>
+                            <button
+                                type="button"
+                                onClick={closeZoom}
+                                className="text-gray-600 hover:text-gray-900 font-semibold"
+                                aria-label="Close"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                        <div className="relative p-3 bg-white">
+                            {zoomPackageIndex !== null && packageImages[zoomPackageIndex] && packageImages[zoomPackageIndex].count > 1 && (
+                                <React.Fragment>
+                                    <button
+                                        type="button"
+                                        onClick={() => handlePrevImage(zoomPackageIndex)}
+                                        className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition z-10"
+                                        style={{width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                        aria-label="Previous image"
+                                    >
+                                        ◀
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => handleNextImage(zoomPackageIndex)}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition z-10"
+                                        style={{width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                        aria-label="Next image"
+                                    >
+                                        ▶
+                                    </button>
+                                </React.Fragment>
+                            )}
+
+                            <img
+                                src={getZoomSrc()}
+                                alt={getZoomAlt()}
+                                className="w-full max-h-[75vh] object-contain"
+                                onLoad={(e) => {
+                                    try {
+                                        const w = e.target.naturalWidth;
+                                        const h = e.target.naturalHeight;
+                                        if (w && h) setZoomOrientation(h > w ? 'portrait' : 'landscape');
+                                    } catch (_) {}
+                                }}
+                                onError={(e) => {
+                                    e.target.src = 'https://placehold.co/1200x800/png?text=Image+Not+Loaded';
+                                }}
+                            />
+
+                            {zoomPackageIndex !== null && packageImages[zoomPackageIndex] && (
+                                <div className="mt-2 text-right text-xs text-gray-500">
+                                    {(activeImageIndex[zoomPackageIndex] || 0) + 1}/{packageImages[zoomPackageIndex].count}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </React.Fragment>
+            ) : null;
+
             React.useEffect(() => {
                 if (!isZoomOpen) return;
                 const onKeyDown = (e) => {
@@ -1071,81 +1147,7 @@
             return (
                 <section id="services" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16 section-bg`}>
                     <div className="container mx-auto px-6">
-                        {isZoomOpen && (
-                            <React.Fragment>
-                                <div
-                                    className="fixed inset-0 bg-black bg-opacity-50 z-40"
-                                    onClick={closeZoom}
-                                    aria-hidden="true"
-                                ></div>
-                                <div
-                                    className={`fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg overflow-hidden w-[92vw] max-w-3xl ${zoomOrientation === 'portrait' ? 'md:w-1/3' : 'md:w-1/2'}`}
-                                    role="dialog"
-                                    aria-modal="true"
-                                    aria-label={getZoomAlt() ? `Zoom: ${getZoomAlt()}` : 'Zoom image'}
-                                >
-                                    <div className="flex items-center justify-between px-4 py-3 border-b">
-                                        <div className="text-sm text-gray-600 truncate pr-3">
-                                            {getZoomAlt() || ''}
-                                        </div>
-                                        <button
-                                            type="button"
-                                            onClick={closeZoom}
-                                            className="text-gray-600 hover:text-gray-900 font-semibold"
-                                            aria-label="Close"
-                                        >
-                                            ✕
-                                        </button>
-                                    </div>
-                                    <div className="relative p-3 bg-white">
-                                        {zoomPackageIndex !== null && packageImages[zoomPackageIndex] && packageImages[zoomPackageIndex].count > 1 && (
-                                            <React.Fragment>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => handlePrevImage(zoomPackageIndex)}
-                                                    className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition z-10"
-                                                    style={{width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-                                                    aria-label="Previous image"
-                                                >
-                                                    ◀
-                                                </button>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => handleNextImage(zoomPackageIndex)}
-                                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition z-10"
-                                                    style={{width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-                                                    aria-label="Next image"
-                                                >
-                                                    ▶
-                                                </button>
-                                            </React.Fragment>
-                                        )}
-
-                                        <img
-                                            src={getZoomSrc()}
-                                            alt={getZoomAlt()}
-                                            className="w-full max-h-[75vh] object-contain"
-                                            onLoad={(e) => {
-                                                try {
-                                                    const w = e.target.naturalWidth;
-                                                    const h = e.target.naturalHeight;
-                                                    if (w && h) setZoomOrientation(h > w ? 'portrait' : 'landscape');
-                                                } catch (_) {}
-                                            }}
-                                            onError={(e) => {
-                                                e.target.src = 'https://placehold.co/1200x800/png?text=Image+Not+Loaded';
-                                            }}
-                                        />
-
-                                        {zoomPackageIndex !== null && packageImages[zoomPackageIndex] && (
-                                            <div className="mt-2 text-right text-xs text-gray-500">
-                                                {(activeImageIndex[zoomPackageIndex] || 0) + 1}/{packageImages[zoomPackageIndex].count}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </React.Fragment>
-                        )}
+                        {zoomOverlay && ReactDOM.createPortal(zoomOverlay, document.body)}
                         <h2 className="text-3xl font-bold font-playfair text-center mb-12">{t.services}</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {t.packages.map((pkg, index) => {
