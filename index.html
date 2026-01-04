@@ -1063,7 +1063,7 @@
                         aria-hidden="true"
                     ></div>
                     <div
-                        className={`fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg overflow-hidden w-[92vw] max-w-3xl ${zoomOrientation === 'portrait' ? 'md:w-1/3' : 'md:w-1/2'}`}
+                        className={`fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg overflow-hidden rounded-md w-[92vw] max-w-3xl ${zoomOrientation === 'portrait' ? 'md:w-1/3' : 'md:w-1/2'}`}
                         role="dialog"
                         aria-modal="true"
                         aria-label={getZoomAlt() ? `Zoom: ${getZoomAlt()}` : 'Zoom image'}
@@ -1116,12 +1116,6 @@
                                     e.target.src = 'https://placehold.co/1200x800/png?text=Image+Not+Loaded';
                                 }}
                             />
-
-                            {zoomPackageIndex !== null && packageImages[zoomPackageIndex] && (
-                                <div className="mt-2 text-right text-xs text-gray-500">
-                                    {(activeImageIndex[zoomPackageIndex] || 0) + 1}/{packageImages[zoomPackageIndex].count}
-                                </div>
-                            )}
                         </div>
                     </div>
                 </React.Fragment>
