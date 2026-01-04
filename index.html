@@ -956,7 +956,9 @@
             const sectionRef = React.useRef(null);
             const [isVisible, setIsVisible] = React.useState(false);
             const [activeImageIndex, setActiveImageIndex] = React.useState({});
-            const [zoomImage, setZoomImage] = React.useState(null); // { src, alt }
+            const [zoomPackageIndex, setZoomPackageIndex] = React.useState(null); // number | null
+            const [zoomFallback, setZoomFallback] = React.useState(null); // { src, alt } | null (for non-package images)
+            const [zoomOrientation, setZoomOrientation] = React.useState('landscape'); // 'portrait' | 'landscape'
 
             const packageImages = {
                 0: { folder: '01-first-package', count: 2 },
@@ -1016,26 +1018,60 @@
                 }));
             };
 
-            const openZoom = (src, alt) => {
-                if (!src) return;
-                setZoomImage({ src, alt: alt || '' });
+            const openZoomForPackage = (packageIndex) => {
+                if (packageIndex === null || packageIndex === undefined) return;
+                setZoomFallback(null);
+                setZoomPackageIndex(packageIndex);
             };
 
-            const closeZoom = () => setZoomImage(null);
+            const openZoomFallback = (src, alt) => {
+                if (!src) return;
+                setZoomPackageIndex(null);
+                setZoomFallback({ src, alt: alt || '' });
+            };
+
+            const closeZoom = () => {
+                setZoomPackageIndex(null);
+                setZoomFallback(null);
+            };
+
+            const isZoomOpen = zoomPackageIndex !== null || !!zoomFallback;
+
+            const getZoomSrc = () => {
+                if (zoomPackageIndex !== null) {
+                    const currentIdx = activeImageIndex[zoomPackageIndex] || 0;
+                    return getImagePath(zoomPackageIndex, currentIdx + 1);
+                }
+                return zoomFallback ? zoomFallback.src : null;
+            };
+
+            const getZoomAlt = () => {
+                if (zoomPackageIndex !== null) {
+                    const currentIdx = activeImageIndex[zoomPackageIndex] || 0;
+                    const pkg = (t && t.packages && t.packages[zoomPackageIndex]) ? t.packages[zoomPackageIndex] : null;
+                    const base = pkg && pkg.alt ? pkg.alt : 'Package image';
+                    return `${base} ${currentIdx + 1}`;
+                }
+                return zoomFallback ? zoomFallback.alt : '';
+            };
 
             React.useEffect(() => {
-                if (!zoomImage) return;
+                if (!isZoomOpen) return;
                 const onKeyDown = (e) => {
                     if (e.key === 'Escape') closeZoom();
+                    if (zoomPackageIndex !== null) {
+                        if (e.key === 'ArrowLeft') handlePrevImage(zoomPackageIndex);
+                        if (e.key === 'ArrowRight') handleNextImage(zoomPackageIndex);
+                    }
                 };
                 window.addEventListener('keydown', onKeyDown);
                 return () => window.removeEventListener('keydown', onKeyDown);
-            }, [zoomImage]);
+            }, [isZoomOpen, zoomPackageIndex, activeImageIndex]);
 
             return (
                 <section id="services" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16 section-bg`}>
                     <div className="container mx-auto px-6">
-                        {zoomImage && (
+                        {isZoomOpen && (
                             <React.Fragment>
                                 <div
                                     className="fixed inset-0 bg-black bg-opacity-50 z-40"
@@ -1043,14 +1079,14 @@
                                     aria-hidden="true"
                                 ></div>
                                 <div
-                                    className="fixed z-50 top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-lg shadow-lg overflow-hidden w-[92vw] md:w-1/3 max-w-xl"
+                                    className={`fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg overflow-hidden w-[92vw] max-w-3xl ${zoomOrientation === 'portrait' ? 'md:w-1/3' : 'md:w-1/2'}`}
                                     role="dialog"
                                     aria-modal="true"
-                                    aria-label={zoomImage.alt ? `Zoom: ${zoomImage.alt}` : 'Zoom image'}
+                                    aria-label={getZoomAlt() ? `Zoom: ${getZoomAlt()}` : 'Zoom image'}
                                 >
                                     <div className="flex items-center justify-between px-4 py-3 border-b">
                                         <div className="text-sm text-gray-600 truncate pr-3">
-                                            {zoomImage.alt || ''}
+                                            {getZoomAlt() || ''}
                                         </div>
                                         <button
                                             type="button"
@@ -1061,15 +1097,51 @@
                                             ✕
                                         </button>
                                     </div>
-                                    <div className="p-3 bg-white">
+                                    <div className="relative p-3 bg-white">
+                                        {zoomPackageIndex !== null && packageImages[zoomPackageIndex] && packageImages[zoomPackageIndex].count > 1 && (
+                                            <React.Fragment>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handlePrevImage(zoomPackageIndex)}
+                                                    className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition z-10"
+                                                    style={{width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                                    aria-label="Previous image"
+                                                >
+                                                    ◀
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleNextImage(zoomPackageIndex)}
+                                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition z-10"
+                                                    style={{width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                                    aria-label="Next image"
+                                                >
+                                                    ▶
+                                                </button>
+                                            </React.Fragment>
+                                        )}
+
                                         <img
-                                            src={zoomImage.src}
-                                            alt={zoomImage.alt}
-                                            className="w-full max-h-[80vh] object-contain"
+                                            src={getZoomSrc()}
+                                            alt={getZoomAlt()}
+                                            className="w-full max-h-[75vh] object-contain"
+                                            onLoad={(e) => {
+                                                try {
+                                                    const w = e.target.naturalWidth;
+                                                    const h = e.target.naturalHeight;
+                                                    if (w && h) setZoomOrientation(h > w ? 'portrait' : 'landscape');
+                                                } catch (_) {}
+                                            }}
                                             onError={(e) => {
                                                 e.target.src = 'https://placehold.co/1200x800/png?text=Image+Not+Loaded';
                                             }}
                                         />
+
+                                        {zoomPackageIndex !== null && packageImages[zoomPackageIndex] && (
+                                            <div className="mt-2 text-right text-xs text-gray-500">
+                                                {(activeImageIndex[zoomPackageIndex] || 0) + 1}/{packageImages[zoomPackageIndex].count}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </React.Fragment>
@@ -1089,7 +1161,7 @@
                                                 <button
                                                     type="button"
                                                     className="block w-full text-left"
-                                                    onClick={() => openZoom(getImagePath(index, currentImageIdx + 1), `${pkg.alt} ${currentImageIdx + 1}`)}
+                                                    onClick={() => openZoomForPackage(index)}
                                                     aria-label={`Zoom image: ${pkg.alt} ${currentImageIdx + 1}`}
                                                 >
                                                     <img 
@@ -1132,7 +1204,7 @@
                                             <button
                                                 type="button"
                                                 className="block w-full text-left"
-                                                onClick={() => openZoom(pkg.img || "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", pkg.alt)}
+                                                onClick={() => openZoomFallback(pkg.img || "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", pkg.alt)}
                                                 aria-label={`Zoom image: ${pkg.alt}`}
                                             >
                                                 <img 
