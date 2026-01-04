@@ -1029,16 +1029,24 @@
                                         {/* Carousel Container */}
                                         {pkgInfo && pkgInfo.count > 0 ? (
                                             <div className="relative">
-                                                {/* Image */}
-                                                <img 
-                                                    src={getImagePath(index, currentImageIdx + 1)} 
-                                                    alt={`${pkg.alt} ${currentImageIdx + 1}`} 
-                                                    loading="lazy"
-                                                    className="w-full h-48 object-cover" 
-                                                    onError={(e) => { 
-                                                        e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
-                                                    }} 
-                                                />
+                                                {/* Image (click to open full size) */}
+                                                <a
+                                                    href={getImagePath(index, currentImageIdx + 1)}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="block"
+                                                    aria-label={`Open image: ${pkg.alt} ${currentImageIdx + 1}`}
+                                                >
+                                                    <img 
+                                                        src={getImagePath(index, currentImageIdx + 1)} 
+                                                        alt={`${pkg.alt} ${currentImageIdx + 1}`} 
+                                                        loading="lazy"
+                                                        className="w-full h-48 object-cover cursor-zoom-in" 
+                                                        onError={(e) => { 
+                                                            e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
+                                                        }} 
+                                                    />
+                                                </a>
                                                 
                                                 {/* Navigation Arrows */}
                                                 {pkgInfo.count > 1 && (
@@ -1066,15 +1074,23 @@
                                                 </div>
                                             </div>
                                         ) : (
-                                            <img 
-                                                src={pkg.img || "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"} 
-                                                alt={pkg.alt} 
-                                                loading="lazy"
-                                                className="w-full h-48 object-cover" 
-                                                onError={(e) => { 
-                                                    e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
-                                                }} 
-                                            />
+                                            <a
+                                                href={pkg.img || "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="block"
+                                                aria-label={`Open image: ${pkg.alt}`}
+                                            >
+                                                <img 
+                                                    src={pkg.img || "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"} 
+                                                    alt={pkg.alt} 
+                                                    loading="lazy"
+                                                    className="w-full h-48 object-cover cursor-zoom-in" 
+                                                    onError={(e) => { 
+                                                        e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
+                                                    }} 
+                                                />
+                                            </a>
                                         )}
                                         
                                         {/* Content */}
