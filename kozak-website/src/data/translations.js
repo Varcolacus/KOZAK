@@ -125,7 +125,7 @@ const baseFaqsEn = [
 const translations = {
     en: {
         services: 'Packages',
-        about: 'About',
+        about: 'About us',
         gallery: 'Gallery',
         faq: 'FAQ',
         contact: 'Contact',
