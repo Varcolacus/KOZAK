@@ -1,38 +1,28 @@
 import React from 'react';
 
 const LanguageSwitcher = ({ language, setLanguage }) => {
+    const languages = [
+        { code: 'en', label: 'English' },
+        { code: 'fr', label: 'Français' },
+        { code: 'uk', label: 'Українська' },
+        { code: 'ru', label: 'Русский' },
+    ];
+
     return (
-        <div className="flex space-x-2">
-            <button
-                onClick={() => setLanguage('fr')}
-                className={`px-3 py-1 rounded ${
-                    language === 'fr'
-                        ? 'bg-pink-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
+        <div className="language-switcher inline-flex items-center">
+            <label htmlFor="site-language" className="sr-only">Language</label>
+            <select
+                id="site-language"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                className="border rounded px-2 py-1 bg-white text-sm"
             >
-                FR
-            </button>
-            <button
-                onClick={() => setLanguage('en')}
-                className={`px-3 py-1 rounded ${
-                    language === 'en'
-                        ? 'bg-pink-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-            >
-                EN
-            </button>
-            <button
-                onClick={() => setLanguage('ru')}
-                className={`px-3 py-1 rounded ${
-                    language === 'ru'
-                        ? 'bg-pink-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-            >
-                RU
-            </button>
+                {languages.map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                        {lang.label}
+                    </option>
+                ))}
+            </select>
         </div>
     );
 };

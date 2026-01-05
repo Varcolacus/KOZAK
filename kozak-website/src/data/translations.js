@@ -124,11 +124,13 @@ const baseFaqsEn = [
 
 const translations = {
     en: {
-        services: 'Services',
+        services: 'Packages',
         about: 'About',
         gallery: 'Gallery',
         faq: 'FAQ',
         contact: 'Contact',
+        reviews: 'Reviews',
+        locations: 'Locations',
 
         title: 'KOZAK',
         subtitle: 'Romantic Marriage Proposal Planning in Paris',
@@ -137,6 +139,37 @@ const translations = {
 
         packages: basePackagesEn,
         faqs: baseFaqsEn,
+
+        reviewsList: [
+            {
+                name: 'Anna & Mark',
+                date: 'Jan 2024',
+                text: 'An unforgettable evening — everything was coordinated perfectly and the surprise was flawless.',
+            },
+            {
+                name: 'Sophia',
+                date: 'Aug 2024',
+                text: 'Great communication and a beautiful setup. Highly recommended!',
+            },
+        ],
+
+        locationsList: [
+            {
+                title: 'Quai Debilly',
+                text: 'A classic Eiffel Tower view spot, great for photos and a smooth surprise moment.',
+                image: '/assets/images/locations/quai-debilly.jpg',
+            },
+            {
+                title: 'Bir-Hakeim',
+                text: 'Iconic bridge perspective with cinematic vibes — perfect for romantic proposals.',
+                image: '/assets/images/locations/bir-hakeim.jpg',
+            },
+            {
+                title: 'Private Location',
+                text: 'A more intimate option with privacy and full coordination.',
+                image: '/assets/images/locations/private-location.jpg',
+            },
+        ],
 
         aboutText:
             'We help you plan an unforgettable proposal in Paris, with clear communication and reliable coordination.',
@@ -160,11 +193,13 @@ const translations = {
         terms: 'Terms',
     },
     fr: {
-        services: 'Services',
+        services: 'Packages',
         about: 'À propos',
         gallery: 'Galerie',
         faq: 'FAQ',
         contact: 'Contact',
+        reviews: 'Avis',
+        locations: 'Lieux',
 
         title: 'KOZAK',
         subtitle: 'Organisation de demandes en mariage romantiques à Paris',
@@ -195,6 +230,37 @@ const translations = {
             },
         ],
 
+        reviewsList: [
+            {
+                name: 'Anna & Mark',
+                date: 'Jan 2024',
+                text: 'Une soirée inoubliable — tout était parfaitement coordonné, surprise réussie !',
+            },
+            {
+                name: 'Sophia',
+                date: 'Août 2024',
+                text: 'Très bonne communication et une installation magnifique. Merci !',
+            },
+        ],
+
+        locationsList: [
+            {
+                title: 'Quai Debilly',
+                text: 'Un spot classique avec vue Tour Eiffel, parfait pour des photos et une surprise fluide.',
+                image: '/assets/images/locations/quai-debilly.jpg',
+            },
+            {
+                title: 'Bir-Hakeim',
+                text: 'Perspective iconique et ambiance cinéma — idéal pour une demande romantique.',
+                image: '/assets/images/locations/bir-hakeim.jpg',
+            },
+            {
+                title: 'Lieu privé',
+                text: 'Option plus intime avec davantage de confidentialité et coordination complète.',
+                image: '/assets/images/locations/private-location.jpg',
+            },
+        ],
+
         aboutText:
             'Nous vous aidons à organiser une demande inoubliable à Paris, avec une coordination fiable et une communication claire.',
         transparency: 'Transparence',
@@ -218,11 +284,13 @@ const translations = {
         terms: 'Conditions',
     },
     ru: {
-        services: 'Услуги',
+        services: 'Пакеты',
         about: 'О нас',
         gallery: 'Галерея',
         faq: 'FAQ',
         contact: 'Контакты',
+        reviews: 'Отзывы',
+        locations: 'Локации',
 
         title: 'KOZAK',
         subtitle: 'Организация романтических предложений в Париже',
@@ -253,6 +321,37 @@ const translations = {
             },
         ],
 
+        reviewsList: [
+            {
+                name: 'Anna & Mark',
+                date: 'Jan 2024',
+                text: 'Незабываемый вечер — всё было организовано идеально, сюрприз удался!',
+            },
+            {
+                name: 'Sophia',
+                date: 'Aug 2024',
+                text: 'Отличная коммуникация и красивая подготовка. Рекомендуем!',
+            },
+        ],
+
+        locationsList: [
+            {
+                title: 'Quai Debilly',
+                text: 'Классический вид на Эйфелеву башню — отлично для фото и сюрприза.',
+                image: '/assets/images/locations/quai-debilly.jpg',
+            },
+            {
+                title: 'Bir-Hakeim',
+                text: 'Знаковый мост с кинематографичной атмосферой — идеально для предложения.',
+                image: '/assets/images/locations/bir-hakeim.jpg',
+            },
+            {
+                title: 'Private Location',
+                text: 'Более приватный вариант с полной координацией.',
+                image: '/assets/images/locations/private-location.jpg',
+            },
+        ],
+
         aboutText:
             'Мы помогаем организовать незабываемое предложение в Париже: чёткая коммуникация и надёжная координация.',
         transparency: 'Прозрачность',
@@ -274,6 +373,96 @@ const translations = {
         footer: '© 2026 KOZAK. Все права защищены.',
         privacy: 'Конфиденциальность',
         terms: 'Условия',
+    },
+    uk: {
+        services: 'Пакети',
+        about: 'Про нас',
+        gallery: 'Галерея',
+        faq: 'FAQ',
+        contact: 'Контакт',
+        reviews: 'Відгуки',
+        locations: 'Локації',
+
+        title: 'KOZAK',
+        subtitle: 'Організація романтичних пропозицій у Парижі',
+        tagline: 'Зробіть пропозицію мрії у місті кохання',
+        cta: 'Спланувати пропозицію',
+
+        packages: basePackagesEn.map((p, idx) => ({
+            ...p,
+            title: `Пакет ${idx + 1}`,
+            alt: `Пакет пропозиції ${idx + 1}`,
+        })),
+        faqs: [
+            {
+                q: 'За скільки часу краще бронювати?',
+                a: 'Найкраще за 1–2 тижні, але інколи можемо організувати швидше.',
+            },
+            {
+                q: 'Допоможете обрати місце та час?',
+                a: 'Так — запропонуємо локації та найкращий таймінг під ваші побажання.',
+            },
+            {
+                q: 'Чи є варіанти з фотографом?',
+                a: 'Так, залежно від пакета та доступності.',
+            },
+            {
+                q: 'Що якщо буде дощ?',
+                a: 'Ми підготуємо план Б і за можливості скоригуємо час.',
+            },
+        ],
+
+        reviewsList: [
+            {
+                name: 'Anna & Mark',
+                date: 'Jan 2024',
+                text: 'Незабутній вечір — усе було організовано ідеально!',
+            },
+            {
+                name: 'Sophia',
+                date: 'Aug 2024',
+                text: 'Чудова комунікація та дуже красива підготовка. Рекомендуємо!',
+            },
+        ],
+
+        locationsList: [
+            {
+                title: 'Quai Debilly',
+                text: 'Класичний вид на Ейфелеву вежу — ідеально для фото та сюрпризу.',
+                image: '/assets/images/locations/quai-debilly.jpg',
+            },
+            {
+                title: 'Bir-Hakeim',
+                text: 'Знаковий міст із атмосферою кіно — чудово для романтичної пропозиції.',
+                image: '/assets/images/locations/bir-hakeim.jpg',
+            },
+            {
+                title: 'Приватна локація',
+                text: 'Більш приватний варіант із повною координацією.',
+                image: '/assets/images/locations/private-location.jpg',
+            },
+        ],
+
+        aboutText:
+            'Ми допомагаємо організувати незабутню пропозицію у Парижі: чітка комунікація та надійна координація.',
+        transparency: 'Прозорість',
+        transparencyText: 'Зрозумілі умови та координація від початку до кінця.',
+        eiffelTrust: 'Локальний досвід',
+        eiffelTrustText: 'Ми знаємо найкращі місця та допоможемо зробити момент ідеальним.',
+        multilingual: 'Підтримка мов',
+        multilingualText: 'Можемо координувати кількома мовами для вашої зручності.',
+
+        contactText: 'Напишіть дату, стиль і бюджет — ми запропонуємо найкращий план.',
+        contactForm: {
+            name: "Ім'я",
+            email: 'Email',
+            message: 'Повідомлення',
+            submit: 'Надіслати',
+        },
+
+        footer: '© 2026 KOZAK. Усі права захищено.',
+        privacy: 'Конфіденційність',
+        terms: 'Умови',
     },
 };
 
