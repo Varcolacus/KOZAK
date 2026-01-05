@@ -3,6 +3,7 @@ import { assetUrl } from '../utils/assetUrl';
 
 const Services = ({ t }) => {
     const [activeImageIndex, setActiveImageIndex] = useState({});
+    const [lightbox, setLightbox] = useState({ open: false, packageIndex: 0, imageIndex: 0 });
 
     // Map of package indices to their image folders and image counts
     const packageImages = {
@@ -49,11 +50,55 @@ const Services = ({ t }) => {
         }));
     };
 
+    const openLightbox = (packageIndex, imageIndex) => {
+        setLightbox({ open: true, packageIndex, imageIndex });
+    };
+
+    const closeLightbox = () => {
+        setLightbox((prev) => ({ ...prev, open: false }));
+    };
+
+    const lightboxPkgInfo = packageImages[lightbox.packageIndex];
+    const lightboxCount = lightboxPkgInfo?.count || 0;
+    const lightboxSrc = lightboxCount
+        ? getImagePath(lightbox.packageIndex, lightbox.imageIndex + 1)
+        : null;
+
+    const lightboxPrev = () => {
+        if (!lightboxCount) return;
+        setLightbox((prev) => ({
+            ...prev,
+            imageIndex: (prev.imageIndex - 1 + lightboxCount) % lightboxCount,
+        }));
+    };
+
+    const lightboxNext = () => {
+        if (!lightboxCount) return;
+        setLightbox((prev) => ({
+            ...prev,
+            imageIndex: (prev.imageIndex + 1) % lightboxCount,
+        }));
+    };
+
+    React.useEffect(() => {
+        if (!lightbox.open) return;
+
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightboxPrev();
+            if (e.key === 'ArrowRight') lightboxNext();
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [lightbox.open, lightboxCount]);
+
     return (
         <section id="services" className="py-16 section-bg">
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.services}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {t.packages.map((pkg, index) => {
                         const pkgInfo = packageImages[index];
                         const currentImageIdx = activeImageIndex[index] || 0;
@@ -67,7 +112,8 @@ const Services = ({ t }) => {
                                         <img 
                                             src={getImagePath(index, currentImageIdx + 1)} 
                                             alt={`${pkg.alt} ${currentImageIdx + 1}`} 
-                                            className="w-full h-48 object-cover" 
+                                            className="w-full h-64 object-cover cursor-pointer" 
+                                            onClick={() => openLightbox(index, currentImageIdx)}
                                             onError={(e) => { 
                                                 e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
                                             }} 
@@ -100,7 +146,7 @@ const Services = ({ t }) => {
                                     <img 
                                         src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                                         alt={pkg.alt} 
-                                        className="w-full h-48 object-cover" 
+                                        className="w-full h-64 object-cover" 
                                         onError={(e) => { 
                                             e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
                                         }} 
@@ -123,6 +169,99 @@ const Services = ({ t }) => {
                     })}
                 </div>
             </div>
+
+            {lightbox.open && (
+                <div
+                    className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center px-4"
+                    role="dialog"
+                    aria-modal="true"
+                    onClick={closeLightbox}
+                >
+                    <div
+                        className="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 h-5/6 max-h-screen flex flex-col overflow-hidden"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="flex items-center justify-between px-4 py-3 border-b">
+                            <div className="text-sm text-gray-700">
+                                {lightboxCount ? `${lightbox.imageIndex + 1}/${lightboxCount}` : ''}
+                            </div>
+                            <button
+                                type="button"
+                                className="text-gray-700 hover:text-gray-900"
+                                onClick={closeLightbox}
+                                aria-label="Close"
+                            >
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="relative flex-1 min-h-0 bg-white px-16 py-6 overflow-auto">
+                            {lightboxSrc ? (
+                                <img
+                                    src={lightboxSrc}
+                                    alt="Package photo"
+                                    className="max-w-full max-h-full mx-auto object-contain"
+                                />
+                            ) : null}
+
+                            <button
+                                type="button"
+                                onClick={lightboxPrev}
+                                disabled={lightboxCount <= 1}
+                                className={`absolute left-4 top-1/2 -translate-y-1/2 rounded-full w-12 h-12 flex items-center justify-center shadow ${
+                                    lightboxCount > 1
+                                        ? 'bg-black bg-opacity-70 hover:bg-opacity-90 text-white'
+                                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                }`}
+                                aria-label="Previous"
+                            >
+                                ‹
+                            </button>
+                            <button
+                                type="button"
+                                onClick={lightboxNext}
+                                disabled={lightboxCount <= 1}
+                                className={`absolute right-4 top-1/2 -translate-y-1/2 rounded-full w-12 h-12 flex items-center justify-center shadow ${
+                                    lightboxCount > 1
+                                        ? 'bg-black bg-opacity-70 hover:bg-opacity-90 text-white'
+                                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                }`}
+                                aria-label="Next"
+                            >
+                                ›
+                            </button>
+                        </div>
+
+                        {lightboxCount > 1 && (
+                            <div className="border-t px-4 py-3">
+                                <div className="flex gap-2 overflow-x-auto">
+                                    {Array.from({ length: lightboxCount }, (_, i) => {
+                                        const src = getImagePath(lightbox.packageIndex, i + 1);
+                                        const isActive = i === lightbox.imageIndex;
+                                        return (
+                                            <button
+                                                key={i}
+                                                type="button"
+                                                onClick={() => setLightbox((prev) => ({ ...prev, imageIndex: i }))}
+                                                className={`flex-none rounded-md overflow-hidden border ${
+                                                    isActive ? 'border-pink-600' : 'border-gray-200'
+                                                }`}
+                                                aria-label={`Photo ${i + 1}`}
+                                            >
+                                                <img
+                                                    src={src}
+                                                    alt={`Thumbnail ${i + 1}`}
+                                                    className="w-16 h-16 object-cover"
+                                                />
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
