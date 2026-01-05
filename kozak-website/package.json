@@ -1,6 +1,7 @@
 {
   "name": "kozak-website",
   "version": "1.0.0",
+  "type": "module",
   "description": "A website for planning romantic marriage proposals in Paris with KOZAK.",
   "main": "src/index.jsx",
   "scripts": {

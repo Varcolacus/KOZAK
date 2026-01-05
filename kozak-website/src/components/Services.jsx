@@ -27,7 +27,7 @@ const Services = ({ t }) => {
     const getImagePath = (packageIndex, imageNum) => {
         const pkgInfo = packageImages[packageIndex];
         if (!pkgInfo) return null;
-        return `assets/images/packages/${pkgInfo.folder}/IMG-${imageNum}.jpg`;
+        return `/assets/images/packages/${pkgInfo.folder}/IMG-${imageNum}.jpg`;
     };
 
     const handlePrevImage = (packageIndex) => {
