@@ -51,7 +51,7 @@ const Services = ({ t }) => {
     return (
         <section id="services" className="py-16 section-bg">
             <div className="container mx-auto px-6">
-                <h2 className="text-3xl font-bold text-center mb-8">{t.services}</h2>
+                <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.services}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {t.packages.map((pkg, index) => {
                         const pkgInfo = packageImages[index];

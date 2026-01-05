@@ -4,6 +4,7 @@ const About = ({ t }) => {
     return (
         <section id="about" className="py-16">
             <div className="container mx-auto px-6 text-center">
+                <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.about}</h2>
                 <p className="text-lg text-gray-600 mb-8">{t.aboutText}</p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div>

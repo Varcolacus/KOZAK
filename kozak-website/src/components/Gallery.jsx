@@ -21,6 +21,7 @@ function Gallery({ t }) {
     return (
         <section id="gallery" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16 section-bg`}>
             <div className="container mx-auto px-6">
+                <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.gallery}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {[...Array(6)].map((_, index) => (
                         <div key={index} className="relative">
