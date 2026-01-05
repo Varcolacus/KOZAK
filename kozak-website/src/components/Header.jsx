@@ -97,14 +97,14 @@ const Header = ({ t, language, setLanguage }) => {
                 </div>
 
                 {/* Right: navigation links */}
-                <div className="flex items-center justify-end space-x-6 hidden sm:flex">
-                    <a href="#services" className="nav-link text-gray-600 hover:text-gray-800">{t.services}</a>
-                    <a href="#about" className="nav-link text-gray-600 hover:text-gray-800">{t.about}</a>
-                    <a href="#gallery" className="nav-link text-gray-600 hover:text-gray-800">{t.gallery}</a>
-                    <a href="#reviews" className="nav-link text-gray-600 hover:text-gray-800">{t.reviews}</a>
-                    <a href="#locations" className="nav-link text-gray-600 hover:text-gray-800">{t.locations}</a>
-                    <a href="#faq" className="nav-link text-gray-600 hover:text-gray-800">{t.faq}</a>
-                    <a href="#contact" className="nav-link text-gray-600 hover:text-gray-800">{t.contact}</a>
+                <div className="flex items-center justify-end space-x-4 hidden sm:flex">
+                    <a href="#services" className="nav-link text-gray-600 hover:text-gray-800 whitespace-nowrap">{t.services}</a>
+                    <a href="#about" className="nav-link text-gray-600 hover:text-gray-800 whitespace-nowrap">{t.about}</a>
+                    <a href="#gallery" className="nav-link text-gray-600 hover:text-gray-800 whitespace-nowrap">{t.gallery}</a>
+                    <a href="#reviews" className="nav-link text-gray-600 hover:text-gray-800 whitespace-nowrap">{t.reviews}</a>
+                    <a href="#locations" className="nav-link text-gray-600 hover:text-gray-800 whitespace-nowrap">{t.locations}</a>
+                    <a href="#faq" className="nav-link text-gray-600 hover:text-gray-800 whitespace-nowrap">{t.faq}</a>
+                    <a href="#contact" className="nav-link text-gray-600 hover:text-gray-800 whitespace-nowrap">{t.contact}</a>
                 </div>
             </nav>
 
