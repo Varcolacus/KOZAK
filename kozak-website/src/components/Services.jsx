@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { assetUrl } from '../utils/assetUrl';
 
 const Services = ({ t }) => {
     const [activeImageIndex, setActiveImageIndex] = useState({});
@@ -27,7 +28,7 @@ const Services = ({ t }) => {
     const getImagePath = (packageIndex, imageNum) => {
         const pkgInfo = packageImages[packageIndex];
         if (!pkgInfo) return null;
-        return `/assets/images/packages/${pkgInfo.folder}/IMG-${imageNum}.jpg`;
+        return assetUrl(`assets/images/packages/${pkgInfo.folder}/IMG-${imageNum}.jpg`);
     };
 
     const handlePrevImage = (packageIndex) => {

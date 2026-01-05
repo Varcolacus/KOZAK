@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { assetUrl } from '../utils/assetUrl';
 
 const Hero = ({ t }) => {
     const videoRef = useRef(null);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     
     const videos = [
-        '/assets/videos/2509249934464396961.MP4',
-        '/assets/videos/7722248337195238409.MP4',
-        '/assets/videos/IMG_3325.MP4'
+        assetUrl('assets/videos/2509249934464396961.MP4'),
+        assetUrl('assets/videos/7722248337195238409.MP4'),
+        assetUrl('assets/videos/IMG_3325.MP4')
     ];
 
     useEffect(() => {

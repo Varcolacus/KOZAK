@@ -1,4 +1,5 @@
 import React from 'react';
+import { assetUrl } from '../utils/assetUrl';
 
 const Locations = ({ t }) => {
     const locations = t.locationsList || [];
@@ -10,7 +11,11 @@ const Locations = ({ t }) => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {locations.map((loc, idx) => (
                         <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden">
-                            <img src={loc.image} alt={loc.title} className="w-full h-48 object-cover" />
+                            <img
+                                src={assetUrl(String(loc.image || '').replace(/^\//, ''))}
+                                alt={loc.title}
+                                className="w-full h-48 object-cover"
+                            />
                             <div className="p-6">
                                 <h3 className="text-xl font-semibold font-playfair mb-2">{loc.title}</h3>
                                 <p className="text-gray-600">{loc.text}</p>

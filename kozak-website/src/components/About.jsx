@@ -1,13 +1,14 @@
 import React from 'react';
+import { assetUrl } from '../utils/assetUrl';
 
 const About = ({ t }) => {
     const aboutUsImages = [
-        '/assets/images/gallery/about-us/IMG-20251102-WA0003.jpg',
-        '/assets/images/gallery/about-us/IMG-20251102-WA0004.jpg',
-        '/assets/images/gallery/about-us/IMG-20251102-WA0005.jpg',
-        '/assets/images/gallery/about-us/IMG-20251102-WA0006.jpg',
-        '/assets/images/gallery/about-us/IMG-20251102-WA0007.jpg',
-        '/assets/images/gallery/about-us/IMG-20251102-WA0008.jpg',
+        assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0003.jpg'),
+        assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0004.jpg'),
+        assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0005.jpg'),
+        assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0006.jpg'),
+        assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0007.jpg'),
+        assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0008.jpg'),
     ];
 
     const [startIndex, setStartIndex] = React.useState(0);
