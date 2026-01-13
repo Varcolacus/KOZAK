@@ -103,22 +103,67 @@ const basePackagesEn = [
         alt: 'Big white heart proposal package',
     },
     {
-        title: 'Package 7',
-        desc: ['Luxury setup', 'Live coordination'],
-        price: '€ —',
-        alt: 'Proposal package 7',
+        title: 'Big heart + “MARRY ME” letters (with lights)',
+        desc: [
+            'Decor as in the photo',
+            'Floral heart',
+            'Neon sign “Will you marry me”',
+            '“MARRY ME” letters',
+            'Candles',
+            'Candle holders',
+            'Carpet',
+            'Champagne',
+            'Professional photographer',
+            'Table',
+            'Bouquet of 21 roses',
+            '2 fireworks',
+            'Romantic music on a speaker',
+            'Decor setup and dismantling',
+        ],
+        price: '1250 €',
+        alt: 'Big heart + MARRY ME letters proposal package',
     },
     {
-        title: 'Package 8',
-        desc: ['Eiffel Tower view option', 'Timing support'],
-        price: '€ —',
-        alt: 'Proposal package 8',
+        title: 'Big heart + floral “MARRY ME” letters',
+        desc: [
+            'Decor as in the photo',
+            'Floral heart',
+            'Neon sign “Will you marry me”',
+            'Floral “MARRY ME” letters',
+            'Candles',
+            'Candle holders',
+            'Carpet',
+            'Champagne',
+            'Professional photographer',
+            'Table',
+            'Bouquet of 21 roses',
+            '2 fireworks',
+            'Romantic music on a speaker',
+            'Decor setup and dismantling',
+        ],
+        price: '1250 €',
+        alt: 'Big heart + floral MARRY ME letters proposal package',
     },
     {
-        title: 'Package 9',
-        desc: ['Photoshoot included', 'Route planning'],
-        price: '€ —',
-        alt: 'Proposal package 9',
+        title: 'VIP package (3 hearts)',
+        desc: [
+            'Decor as in the photo',
+            '1 big heart',
+            '2 small hearts',
+            'Floral arrangements',
+            'Candles',
+            'Candle holders',
+            'Carpet',
+            'Champagne',
+            'Table',
+            'Bouquet of 21 roses',
+            '6 fireworks',
+            'Professional photographer',
+            'Professional videographer',
+            'Romantic music on a speaker',
+        ],
+        price: '1950 €',
+        alt: 'VIP 3 hearts proposal package',
     },
     {
         title: 'Package 10',
@@ -381,6 +426,81 @@ const translations = {
                 };
             }
 
+            if (idx === 6) {
+                return {
+                    ...p,
+                    title: 'Forfait “grand cœur + lettres MARRY ME lumineuses”',
+                    desc: [
+                        'Décor comme sur la photo',
+                        'Cœur floral',
+                        'Néon « Will you marry me »',
+                        'Lettres « MARRY ME »',
+                        'Bougies',
+                        'Bougeoirs',
+                        'Tapis',
+                        'Champagne',
+                        'Photographe professionnel',
+                        'Petite table',
+                        'Bouquet de 21 roses',
+                        '2 feux d’artifice',
+                        'Musique romantique sur enceinte',
+                        'Installation et démontage du décor',
+                    ],
+                    price: '1250 €',
+                    alt: 'Forfait grand cœur + lettres MARRY ME',
+                };
+            }
+
+            if (idx === 7) {
+                return {
+                    ...p,
+                    title: 'Forfait “grand cœur + lettres MARRY ME florales”',
+                    desc: [
+                        'Décor comme sur la photo',
+                        'Cœur floral',
+                        'Néon « Will you marry me »',
+                        'Lettres florales « MARRY ME »',
+                        'Bougies',
+                        'Bougeoirs',
+                        'Tapis',
+                        'Champagne',
+                        'Photographe professionnel',
+                        'Petite table',
+                        'Bouquet de 21 roses',
+                        '2 feux d’artifice',
+                        'Musique romantique sur enceinte',
+                        'Installation et démontage du décor',
+                    ],
+                    price: '1250 €',
+                    alt: 'Forfait grand cœur + lettres MARRY ME florales',
+                };
+            }
+
+            if (idx === 8) {
+                return {
+                    ...p,
+                    title: 'Forfait VIP (3 cœurs)',
+                    desc: [
+                        'Décor comme sur la photo',
+                        '1 grand cœur',
+                        '2 petits cœurs',
+                        'Compositions florales',
+                        'Bougies',
+                        'Bougeoirs',
+                        'Tapis',
+                        'Champagne',
+                        'Petite table',
+                        'Bouquet de 21 roses',
+                        '6 feux d’artifice',
+                        'Photographe professionnel',
+                        'Vidéaste professionnel',
+                        'Musique romantique sur enceinte',
+                    ],
+                    price: '1950 €',
+                    alt: 'Forfait VIP 3 cœurs',
+                };
+            }
+
             return {
                 ...p,
                 title: `Forfait ${idx + 1}`,
@@ -581,6 +701,81 @@ const translations = {
                 };
             }
 
+            if (idx === 6) {
+                return {
+                    ...p,
+                    title: 'Пакет «большое сердце + буквы MARRY ME с лампочками»',
+                    desc: [
+                        'Декор как на фото',
+                        'Цветочное сердце',
+                        'Неоновая вывеска «Will you marry me»',
+                        'Буквы MARRY ME',
+                        'Свечи',
+                        'Подсвечники',
+                        'Ковёр',
+                        'Шампанское',
+                        'Профессиональный фотограф',
+                        'Столик',
+                        'Букет из 21 розы',
+                        '2 шт фейерверков',
+                        'Романтическая музыка на колонке',
+                        'Установка и демонтаж декора',
+                    ],
+                    price: '1250 €',
+                    alt: 'Пакет большое сердце + буквы MARRY ME',
+                };
+            }
+
+            if (idx === 7) {
+                return {
+                    ...p,
+                    title: 'Пакет «большое сердце + цветочные буквы MARRY ME»',
+                    desc: [
+                        'Декор как на фото',
+                        'Цветочное сердце',
+                        'Неоновая вывеска «Will you marry me»',
+                        'Цветочные буквы MARRY ME',
+                        'Свечи',
+                        'Подсвечники',
+                        'Ковёр',
+                        'Шампанское',
+                        'Профессиональный фотограф',
+                        'Столик',
+                        'Букет из 21 розы',
+                        '2 шт фейерверков',
+                        'Романтическая музыка на колонке',
+                        'Установка и демонтаж декора',
+                    ],
+                    price: '1250 €',
+                    alt: 'Пакет большое сердце + цветочные буквы MARRY ME',
+                };
+            }
+
+            if (idx === 8) {
+                return {
+                    ...p,
+                    title: 'VIP пакет (3 сердца)',
+                    desc: [
+                        'Декор как на фото',
+                        '1 большое сердце',
+                        '2 маленьких сердца',
+                        'Цветочные композиции',
+                        'Свечи',
+                        'Подсвечники',
+                        'Ковёр',
+                        'Шампанское',
+                        'Столик',
+                        'Букет из 21 розы',
+                        '6 шт фейерверков',
+                        'Профессиональный фотограф',
+                        'Профессиональный видеограф',
+                        'Романтическая музыка на колонке',
+                    ],
+                    price: '1950 €',
+                    alt: 'VIP пакет 3 сердца',
+                };
+            }
+
             return {
                 ...p,
                 title: `Пакет ${idx + 1}`,
@@ -778,6 +973,81 @@ const translations = {
                     ],
                     price: '980 €',
                     alt: 'Пакет Біле велике серце',
+                };
+            }
+
+            if (idx === 6) {
+                return {
+                    ...p,
+                    title: 'Пакет «велике серце + літери MARRY ME з лампочками»',
+                    desc: [
+                        'Декор як на фото',
+                        'Квіткове серце',
+                        'Неонова вивіска «Will you marry me»',
+                        'Літери MARRY ME',
+                        'Свічки',
+                        'Підсвічники',
+                        'Килим',
+                        'Шампанське',
+                        'Професійний фотограф',
+                        'Столик',
+                        'Букет троянд (21 шт)',
+                        '2 шт феєрверків',
+                        'Романтична музика на колонці',
+                        'Інсталяція та демонтаж декору',
+                    ],
+                    price: '1250 €',
+                    alt: 'Пакет велике серце + літери MARRY ME',
+                };
+            }
+
+            if (idx === 7) {
+                return {
+                    ...p,
+                    title: 'Пакет «велике серце + літери MARRY ME квіткові»',
+                    desc: [
+                        'Декор як на фото',
+                        'Квіткове серце',
+                        'Неонова вивіска «Will you marry me»',
+                        'Квіткові літери MARRY ME',
+                        'Свічки',
+                        'Підсвічники',
+                        'Килим',
+                        'Шампанське',
+                        'Професійний фотограф',
+                        'Столик',
+                        'Букет троянд (21 шт)',
+                        '2 шт феєрверків',
+                        'Романтична музика на колонці',
+                        'Інсталяція та демонтаж декору',
+                    ],
+                    price: '1250 €',
+                    alt: 'Пакет велике серце + квіткові літери MARRY ME',
+                };
+            }
+
+            if (idx === 8) {
+                return {
+                    ...p,
+                    title: 'Пакет VIP (3 серця)',
+                    desc: [
+                        'Декор як на фото',
+                        '1 шт велике серце',
+                        '2 шт маленькі серця',
+                        'Квіткові композиції',
+                        'Свічки',
+                        'Підсвічники',
+                        'Килим',
+                        'Шампанське',
+                        'Столик',
+                        'Букет троянд (21 шт)',
+                        '6 шт феєрверків',
+                        'Професійний фотограф',
+                        'Професійний відеограф',
+                        'Романтична музика на колонці',
+                    ],
+                    price: '1950 €',
+                    alt: 'Пакет VIP 3 серця',
                 };
             }
 
