@@ -49,7 +49,7 @@ const basePackagesEn = [
         alt: 'Floral MARRY ME letters proposal package',
     },
     {
-        title: 'Package 4',
+        title: 'Romantic floral decoration',
         desc: [
             'Decor as in the photo',
             'Floral arrangement (white or red)',
@@ -66,7 +66,7 @@ const basePackagesEn = [
         alt: 'Romantic floral decor proposal package',
     },
     {
-        title: 'Package 5',
+        title: 'Romantic pink floral arch',
         desc: [
             'Decor as in the photo',
             'Floral arrangement',
@@ -83,7 +83,7 @@ const basePackagesEn = [
         alt: 'Romantic pink floral arch proposal package',
     },
     {
-        title: 'Package 6',
+        title: 'Big white heart',
         desc: [
             'Decor as in the photo',
             'Floral heart',
