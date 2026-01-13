@@ -50,21 +50,57 @@ const basePackagesEn = [
     },
     {
         title: 'Package 4',
-        desc: ['Photographer add-on', 'Romantic setup'],
-        price: '€ —',
-        alt: 'Proposal package 4',
+        desc: [
+            'Decor as in the photo',
+            'Floral arrangement (white or red)',
+            'Candles',
+            'Candle holders',
+            'Carpet',
+            'Champagne (alcoholic / non-alcoholic)',
+            'Professional photographer',
+            'Bouquet of 21 roses',
+            '2 fireworks',
+            'Romantic music on a speaker',
+        ],
+        price: '850 €',
+        alt: 'Romantic floral decor proposal package',
     },
     {
         title: 'Package 5',
-        desc: ['Private location option', 'Full coordination'],
-        price: '€ —',
-        alt: 'Proposal package 5',
+        desc: [
+            'Decor as in the photo',
+            'Floral arrangement',
+            'Candles',
+            'Candle holders',
+            'Carpet',
+            'Champagne (alcoholic / non-alcoholic)',
+            'Professional photographer',
+            'Bouquet of 21 roses',
+            '2 fireworks',
+            'Romantic music on a speaker',
+        ],
+        price: '899 €',
+        alt: 'Romantic pink floral arch proposal package',
     },
     {
         title: 'Package 6',
-        desc: ['Premium planning', 'Vendor coordination'],
-        price: '€ —',
-        alt: 'Proposal package 6',
+        desc: [
+            'Decor as in the photo',
+            'Floral heart',
+            'Neon sign “Will you marry me”',
+            'Candles',
+            'Candle holders',
+            'Carpet',
+            'Champagne',
+            'Professional photographer',
+            'Table',
+            'Bouquet of 21 roses',
+            '2 fireworks',
+            'Romantic music on a speaker',
+            'Decor setup and dismantling',
+        ],
+        price: '980 €',
+        alt: 'Big white heart proposal package',
     },
     {
         title: 'Package 7',
@@ -279,6 +315,72 @@ const translations = {
                 };
             }
 
+            if (idx === 3) {
+                return {
+                    ...p,
+                    title: 'Forfait “décoration florale romantique”',
+                    desc: [
+                        'Décor comme sur la photo',
+                        'Composition florale (blanche ou rouge)',
+                        'Bougies',
+                        'Bougeoirs',
+                        'Tapis',
+                        'Champagne (avec/sans alcool)',
+                        'Photographe professionnel',
+                        'Bouquet de 21 roses',
+                        '2 feux d’artifice',
+                        'Musique romantique sur enceinte',
+                    ],
+                    price: '850 €',
+                    alt: 'Forfait décoration florale romantique',
+                };
+            }
+
+            if (idx === 4) {
+                return {
+                    ...p,
+                    title: 'Forfait “arche florale rose romantique”',
+                    desc: [
+                        'Décor comme sur la photo',
+                        'Composition florale',
+                        'Bougies',
+                        'Bougeoirs',
+                        'Tapis',
+                        'Champagne (avec/sans alcool)',
+                        'Photographe professionnel',
+                        'Bouquet de 21 roses',
+                        '2 feux d’artifice',
+                        'Musique romantique sur enceinte',
+                    ],
+                    price: '899 €',
+                    alt: 'Forfait arche florale rose romantique',
+                };
+            }
+
+            if (idx === 5) {
+                return {
+                    ...p,
+                    title: 'Forfait “grand cœur blanc”',
+                    desc: [
+                        'Décor comme sur la photo',
+                        'Cœur floral',
+                        'Néon « Will you marry me »',
+                        'Bougies',
+                        'Bougeoirs',
+                        'Tapis',
+                        'Champagne',
+                        'Photographe professionnel',
+                        'Petite table',
+                        'Bouquet de 21 roses',
+                        '2 feux d’artifice',
+                        'Musique romantique sur enceinte',
+                        'Installation et démontage du décor',
+                    ],
+                    price: '980 €',
+                    alt: 'Forfait grand cœur blanc',
+                };
+            }
+
             return {
                 ...p,
                 title: `Forfait ${idx + 1}`,
@@ -413,6 +515,72 @@ const translations = {
                 };
             }
 
+            if (idx === 3) {
+                return {
+                    ...p,
+                    title: 'Пакет «романтический цветочный декор»',
+                    desc: [
+                        'Декор как на фото',
+                        'Цветочная композиция (белая или красная)',
+                        'Свечи',
+                        'Подсвечники',
+                        'Ковёр',
+                        'Шампанское (алкогольное/безалкогольное)',
+                        'Профессиональный фотограф',
+                        'Букет из 21 розы',
+                        '2 шт фейерверков',
+                        'Романтическая музыка на колонке',
+                    ],
+                    price: '850 €',
+                    alt: 'Пакет романтический цветочный декор',
+                };
+            }
+
+            if (idx === 4) {
+                return {
+                    ...p,
+                    title: 'Пакет «романтическая розовая цветочная арка»',
+                    desc: [
+                        'Декор как на фото',
+                        'Цветочная композиция',
+                        'Свечи',
+                        'Подсвечники',
+                        'Ковёр',
+                        'Шампанское (алкогольное/безалкогольное)',
+                        'Профессиональный фотограф',
+                        'Букет из 21 розы',
+                        '2 шт фейерверков',
+                        'Романтическая музыка на колонке',
+                    ],
+                    price: '899 €',
+                    alt: 'Пакет розовая цветочная арка',
+                };
+            }
+
+            if (idx === 5) {
+                return {
+                    ...p,
+                    title: 'Пакет «большое белое сердце»',
+                    desc: [
+                        'Декор как на фото',
+                        'Цветочное сердце',
+                        'Неоновая вывеска «Will you marry me»',
+                        'Свечи',
+                        'Подсвечники',
+                        'Ковёр',
+                        'Шампанское',
+                        'Профессиональный фотограф',
+                        'Столик',
+                        'Букет из 21 розы',
+                        '2 шт фейерверков',
+                        'Романтическая музыка на колонке',
+                        'Установка и демонтаж декора',
+                    ],
+                    price: '980 €',
+                    alt: 'Пакет большое белое сердце',
+                };
+            }
+
             return {
                 ...p,
                 title: `Пакет ${idx + 1}`,
@@ -544,6 +712,72 @@ const translations = {
                     ],
                     price: '750 €',
                     alt: 'Пакет квіткові літери MARRY ME',
+                };
+            }
+
+            if (idx === 3) {
+                return {
+                    ...p,
+                    title: 'Пакет «романтична квіткова декорація»',
+                    desc: [
+                        'Декор як на фото',
+                        'Квіткова композиція (біла або червона)',
+                        'Свічки',
+                        'Підсвічники',
+                        'Килим',
+                        'Шампанське (алкогольне/безалкогольне)',
+                        'Професійний фотограф',
+                        'Букет троянд (21 шт)',
+                        '2 шт феєрверків',
+                        'Романтична музика на колонці',
+                    ],
+                    price: '850 €',
+                    alt: 'Пакет романтична квіткова декорація',
+                };
+            }
+
+            if (idx === 4) {
+                return {
+                    ...p,
+                    title: 'Пакет «романтична рожева квіткова арка»',
+                    desc: [
+                        'Декор як на фото',
+                        'Квіткова композиція',
+                        'Свічки',
+                        'Підсвічники',
+                        'Килим',
+                        'Шампанське (алкогольне/безалкогольне)',
+                        'Професійний фотограф',
+                        'Букет троянд (21 шт)',
+                        '2 шт феєрверків',
+                        'Романтична музика на колонці',
+                    ],
+                    price: '899 €',
+                    alt: 'Пакет рожева квіткова арка',
+                };
+            }
+
+            if (idx === 5) {
+                return {
+                    ...p,
+                    title: 'Пакет «Біле велике серце»',
+                    desc: [
+                        'Декор як на фото',
+                        'Квіткове серце',
+                        'Неонова вивіска «Will you marry me»',
+                        'Свічки',
+                        'Підсвічники',
+                        'Килим',
+                        'Шампанське',
+                        'Професійний фотограф',
+                        'Столик',
+                        'Букет троянд (21 шт)',
+                        '2 шт феєрверків',
+                        'Романтична музика на колонці',
+                        'Інсталяція та демонтаж декору',
+                    ],
+                    price: '980 €',
+                    alt: 'Пакет Біле велике серце',
                 };
             }
 
