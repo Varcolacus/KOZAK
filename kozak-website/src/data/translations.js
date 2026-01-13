@@ -187,7 +187,7 @@ const basePackagesEn = [
         alt: 'VIP 3 hearts proposal package',
     },
     {
-        title: 'Neon heart + “marry me” neon letters',
+        title: 'Neon Heart + MARRY ME (neon)',
         desc: [
             'Decor as in the photo',
             'Floral heart',
@@ -203,7 +203,7 @@ const basePackagesEn = [
             'Romantic music on a speaker',
         ],
         price: '1500 €',
-        alt: 'Neon heart + marry me neon letters proposal package',
+        alt: 'Neon heart + MARRY ME neon proposal package',
     },
     {
         title: 'Large MARRY ME letters',
@@ -568,7 +568,7 @@ const translations = {
             if (idx === 10) {
                 return {
                     ...p,
-                    title: 'Forfait “cœur + néons”',
+                    title: 'Forfait “cœur néon + MARRY ME (néon)”',
                     desc: [
                         'Décor comme sur la photo',
                         'Cœur floral',
@@ -584,7 +584,7 @@ const translations = {
                         'Musique romantique sur enceinte',
                     ],
                     price: '1500 €',
-                    alt: 'Forfait cœur + néons',
+                    alt: 'Forfait cœur néon + MARRY ME (néon)',
                 };
             }
 
@@ -912,7 +912,7 @@ const translations = {
             if (idx === 10) {
                 return {
                     ...p,
-                    title: 'Пакет «сердце + неон»',
+                    title: 'Пакет «неоновое сердце + MARRY ME (неон)»',
                     desc: [
                         'Декор как на фото',
                         'Цветочное сердце',
@@ -928,7 +928,7 @@ const translations = {
                         'Романтическая музыка на колонке',
                     ],
                     price: '1500 €',
-                    alt: 'Пакет сердце + неон',
+                    alt: 'Пакет неоновое сердце + MARRY ME (неон)',
                 };
             }
 
@@ -1256,7 +1256,7 @@ const translations = {
             if (idx === 10) {
                 return {
                     ...p,
-                    title: 'Пакет «серце + неон»',
+                    title: 'Пакет «неонове серце + MARRY ME (неон)»',
                     desc: [
                         'Декор як на фото',
                         'Квіткове серце',
@@ -1272,7 +1272,7 @@ const translations = {
                         'Романтична музика на колонці',
                     ],
                     price: '1500 €',
-                    alt: 'Пакет серце + неон',
+                    alt: 'Пакет неонове серце + MARRY ME (неон)',
                 };
             }
 
