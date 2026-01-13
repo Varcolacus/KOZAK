@@ -1,9 +1,20 @@
 const basePackagesEn = [
     {
-        title: 'Package 1',
-        desc: ['Planning & coordination', 'Photo/video guidance'],
-        price: '€ —',
-        alt: 'Proposal package 1',
+        title: 'MARRY ME letters package (with lights)',
+        desc: [
+            '“MARRY ME” letters (95 cm tall)',
+            'Candles',
+            'Floral arrangement',
+            'Carpet',
+            'Table',
+            'Champagne (alcoholic / non-alcoholic)',
+            '2 fireworks',
+            'Professional photographer',
+            'Bouquet of 21 roses',
+            'Romantic music on a speaker',
+        ],
+        price: '650 €',
+        alt: 'MARRY ME letters proposal package',
     },
     {
         title: 'Package 2',
@@ -206,11 +217,34 @@ const translations = {
         tagline: "Réalisez votre demande de rêve dans la Ville de l'Amour",
         cta: 'Planifier votre demande',
 
-        packages: basePackagesEn.map((p, idx) => ({
-            ...p,
-            title: `Forfait ${idx + 1}`,
-            alt: `Forfait demande en mariage ${idx + 1}`,
-        })),
+        packages: basePackagesEn.map((p, idx) => {
+            if (idx === 0) {
+                return {
+                    ...p,
+                    title: 'Forfait lettres MARRY ME (avec lumières)',
+                    desc: [
+                        'Lettres « MARRY ME » (hauteur 95 cm)',
+                        'Bougies',
+                        'Composition florale',
+                        'Tapis',
+                        'Petite table',
+                        'Champagne (avec/sans alcool)',
+                        '2 feux d’artifice',
+                        'Photographe professionnel',
+                        'Bouquet de 21 roses',
+                        'Musique romantique sur enceinte',
+                    ],
+                    price: '650 €',
+                    alt: 'Forfait lettres MARRY ME',
+                };
+            }
+
+            return {
+                ...p,
+                title: `Forfait ${idx + 1}`,
+                alt: `Forfait demande en mariage ${idx + 1}`,
+            };
+        }),
         faqs: [
             {
                 q: 'Combien de temps à l’avance réserver ?',
@@ -297,11 +331,34 @@ const translations = {
         tagline: 'Сделайте предложение мечты в городе любви',
         cta: 'Спланировать предложение',
 
-        packages: basePackagesEn.map((p, idx) => ({
-            ...p,
-            title: `Пакет ${idx + 1}`,
-            alt: `Пакет предложения ${idx + 1}`,
-        })),
+        packages: basePackagesEn.map((p, idx) => {
+            if (idx === 0) {
+                return {
+                    ...p,
+                    title: 'Пакет буквы MARRY ME (с лампочками)',
+                    desc: [
+                        'Буквы «MARRY ME» (высота 95 см)',
+                        'Свечи',
+                        'Цветочная композиция',
+                        'Ковёр',
+                        'Столик',
+                        'Шампанское (алкогольное/безалкогольное)',
+                        '2 шт фейерверков',
+                        'Профессиональный фотограф',
+                        'Букет из 21 розы',
+                        'Романтическая музыка на колонке',
+                    ],
+                    price: '650 €',
+                    alt: 'Пакет буквы MARRY ME',
+                };
+            }
+
+            return {
+                ...p,
+                title: `Пакет ${idx + 1}`,
+                alt: `Пакет предложения ${idx + 1}`,
+            };
+        }),
         faqs: [
             {
                 q: 'За сколько времени лучше бронировать?',
