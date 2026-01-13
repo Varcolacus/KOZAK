@@ -1,8 +1,24 @@
 import React from 'react';
+import { assetUrl } from '../utils/assetUrl';
 
 function Gallery({ t }) {
     const sectionRef = React.useRef(null);
     const [isVisible, setIsVisible] = React.useState(false);
+
+    const galleryImages = React.useMemo(
+        () => [
+            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0003.jpg'),
+            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0007.jpg'),
+            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0004.jpg'),
+            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0008.jpg'),
+            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0005.jpg'),
+            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0006.jpg'),
+        ],
+        []
+    );
+
+    const [startIndex, setStartIndex] = React.useState(0);
+    const [itemsPerRow, setItemsPerRow] = React.useState(3);
 
     React.useEffect(() => {
         const observer = new IntersectionObserver(
@@ -18,16 +34,84 @@ function Gallery({ t }) {
         return () => observer.disconnect();
     }, []);
 
+    React.useEffect(() => {
+        const update = () => {
+            const width = window.innerWidth;
+            if (width >= 768) return setItemsPerRow(3);
+            if (width >= 640) return setItemsPerRow(2);
+            return setItemsPerRow(1);
+        };
+
+        update();
+        window.addEventListener('resize', update);
+        return () => window.removeEventListener('resize', update);
+    }, []);
+
+    const visibleImages = React.useMemo(() => {
+        const len = galleryImages.length;
+        if (!len) return [];
+
+        const maxVisible = itemsPerRow * 2;
+        const count = Math.min(maxVisible, len);
+        return Array.from({ length: count }, (_, i) => {
+            const idx = (startIndex + i) % len;
+            return { src: galleryImages[idx], idx };
+        });
+    }, [galleryImages, itemsPerRow, startIndex]);
+
+    const step = Math.max(1, itemsPerRow);
+    const canNavigate = galleryImages.length > itemsPerRow * 2;
+
+    const handlePrev = () => {
+        const len = galleryImages.length;
+        setStartIndex((prev) => (prev - step + len) % len);
+    };
+
+    const handleNext = () => {
+        const len = galleryImages.length;
+        setStartIndex((prev) => (prev + step) % len);
+    };
+
     return (
         <section id="gallery" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16 section-bg`}>
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.gallery}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {[...Array(6)].map((_, index) => (
-                        <div key={index} className="relative">
-                            <img src={`https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`} alt={`${t.packages[0].alt} ${index + 1}`} className="w-full h-64 object-cover rounded-lg" onError={(e) => { e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; console.log('Image load failed, switched to fallback'); }} />
-                        </div>
-                    ))}
+                <div className="relative">
+                    <button
+                        type="button"
+                        onClick={handlePrev}
+                        aria-label="Previous photos"
+                        className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-10 h-10 shadow hover:bg-gray-50 flex items-center justify-center ${canNavigate ? '' : 'opacity-40 cursor-default'}`}
+                        disabled={!canNavigate}
+                    >
+                        <span aria-hidden="true">‹</span>
+                    </button>
+
+                    <div className="mx-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {visibleImages.map(({ src, idx }) => (
+                            <div key={`${src}-${idx}`} className="relative">
+                                <img
+                                    src={src}
+                                    alt={`${t.gallery} ${idx + 1}`}
+                                    loading="lazy"
+                                    className="w-full h-64 object-cover rounded-lg"
+                                    onError={(e) => {
+                                        e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded';
+                                    }}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={handleNext}
+                        aria-label="Next photos"
+                        className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-10 h-10 shadow hover:bg-gray-50 flex items-center justify-center ${canNavigate ? '' : 'opacity-40 cursor-default'}`}
+                        disabled={!canNavigate}
+                    >
+                        <span aria-hidden="true">›</span>
+                    </button>
                 </div>
             </div>
         </section>
