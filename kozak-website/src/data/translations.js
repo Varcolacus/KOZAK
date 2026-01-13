@@ -223,7 +223,7 @@ const basePackagesEn = [
         alt: 'Large MARRY ME letters proposal package',
     },
     {
-        title: 'Package 13',
+        title: 'Full option (White) — 3 hearts + MARRY ME letters',
         desc: [
             'Decor as in the photo',
             '1 big heart',
@@ -246,7 +246,7 @@ const basePackagesEn = [
         alt: 'Full option proposal package (white)',
     },
     {
-        title: 'Package 14',
+        title: 'Full option (Red) — 3 hearts + MARRY ME letters',
         desc: [
             'Decor as in the photo',
             '1 big heart',
