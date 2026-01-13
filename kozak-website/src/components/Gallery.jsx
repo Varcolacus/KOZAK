@@ -1,21 +1,12 @@
 import React from 'react';
 import { assetUrl } from '../utils/assetUrl';
+import { GALLERY_IMAGES } from '../data/galleryImages';
 
 function Gallery({ t }) {
     const sectionRef = React.useRef(null);
     const [isVisible, setIsVisible] = React.useState(false);
 
-    const galleryImages = React.useMemo(
-        () => [
-            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0003.jpg'),
-            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0007.jpg'),
-            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0004.jpg'),
-            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0008.jpg'),
-            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0005.jpg'),
-            assetUrl('assets/images/gallery/about-us/IMG-20251102-WA0006.jpg'),
-        ],
-        []
-    );
+    const galleryImages = React.useMemo(() => GALLERY_IMAGES.map((p) => assetUrl(p)), []);
 
     const [startIndex, setStartIndex] = React.useState(0);
     const [itemsPerRow, setItemsPerRow] = React.useState(3);

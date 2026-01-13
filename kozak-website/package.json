@@ -5,7 +5,9 @@
   "description": "A website for planning romantic marriage proposals in Paris with KOZAK.",
   "main": "src/index.jsx",
   "scripts": {
+    "prestart": "node scripts/generate-gallery-manifest.mjs",
     "start": "vite",
+    "prebuild": "node scripts/generate-gallery-manifest.mjs",
     "build": "vite build",
     "serve": "vite preview"
   },
