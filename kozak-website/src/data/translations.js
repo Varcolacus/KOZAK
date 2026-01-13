@@ -1,5 +1,22 @@
 const basePackagesEn = [
     {
+        title: 'Minimalist package',
+        desc: [
+            'Decor as in the photo',
+            'Small “Marry Me” letters',
+            'Candles',
+            'Red carpet',
+            'Table',
+            'Champagne (alcoholic / non-alcoholic)',
+            'Professional photographer',
+            'Bouquet of 21 roses',
+            '2 fireworks',
+            'Romantic music on a speaker',
+        ],
+        price: '390 €',
+        alt: 'Minimalist proposal package',
+    },
+    {
         title: 'MARRY ME letters package (with lights)',
         desc: [
             '“MARRY ME” letters (95 cm tall)',
@@ -395,6 +412,27 @@ const translations = {
             if (idx === 0) {
                 return {
                     ...p,
+                    title: 'Forfait “minimaliste”',
+                    desc: [
+                        'Décor comme sur la photo',
+                        'Petites lettres « Marry Me »',
+                        'Bougies',
+                        'Tapis rouge',
+                        'Petite table',
+                        'Champagne (avec/sans alcool)',
+                        'Photographe professionnel',
+                        'Bouquet de 21 roses',
+                        '2 feux d’artifice',
+                        'Musique romantique sur enceinte',
+                    ],
+                    price: '390 €',
+                    alt: 'Forfait minimaliste',
+                };
+            }
+
+            if (idx === 1) {
+                return {
+                    ...p,
                     title: 'Forfait lettres MARRY ME (avec lumières)',
                     desc: [
                         'Lettres « MARRY ME » (hauteur 95 cm)',
@@ -413,7 +451,7 @@ const translations = {
                 };
             }
 
-            if (idx === 1 || idx === 2) {
+            if (idx === 2 || idx === 3) {
                 return {
                     ...p,
                     title: 'Forfait lettres florales MARRY ME',
@@ -433,7 +471,7 @@ const translations = {
                 };
             }
 
-            if (idx === 3) {
+            if (idx === 4) {
                 return {
                     ...p,
                     title: 'Forfait “décoration florale romantique”',
@@ -454,7 +492,7 @@ const translations = {
                 };
             }
 
-            if (idx === 4) {
+            if (idx === 5) {
                 return {
                     ...p,
                     title: 'Forfait “arche florale rose romantique”',
@@ -475,7 +513,7 @@ const translations = {
                 };
             }
 
-            if (idx === 5) {
+            if (idx === 6) {
                 return {
                     ...p,
                     title: 'Forfait “grand cœur blanc”',
@@ -499,7 +537,7 @@ const translations = {
                 };
             }
 
-            if (idx === 6) {
+            if (idx === 7) {
                 return {
                     ...p,
                     title: 'Forfait “grand cœur + lettres MARRY ME lumineuses”',
@@ -524,7 +562,7 @@ const translations = {
                 };
             }
 
-            if (idx === 7) {
+            if (idx === 8) {
                 return {
                     ...p,
                     title: 'Forfait “grand cœur + lettres MARRY ME florales”',
@@ -549,7 +587,7 @@ const translations = {
                 };
             }
 
-            if (idx === 8) {
+            if (idx === 9) {
                 return {
                     ...p,
                     title: 'Forfait VIP (3 cœurs)',
@@ -574,7 +612,7 @@ const translations = {
                 };
             }
 
-            if (idx === 9) {
+            if (idx === 10) {
                 return {
                     ...p,
                     title: 'Forfait VIP (3 cœurs)',
@@ -599,7 +637,7 @@ const translations = {
                 };
             }
 
-            if (idx === 10) {
+            if (idx === 11) {
                 return {
                     ...p,
                     title: 'Forfait “cœur néon + MARRY ME (néon)”',
@@ -622,7 +660,7 @@ const translations = {
                 };
             }
 
-            if (idx === 11) {
+            if (idx === 12) {
                 return {
                     ...p,
                     title: 'Forfait “grandes lettres MARRY ME”',
@@ -643,7 +681,7 @@ const translations = {
                 };
             }
 
-            if (idx === 12) {
+            if (idx === 13) {
                 return {
                     ...p,
                     title: 'Option Full (blanc) — 3 cœurs + lettres MARRY ME',
@@ -670,7 +708,7 @@ const translations = {
                 };
             }
 
-            if (idx === 13) {
+            if (idx === 14) {
                 return {
                     ...p,
                     title: 'Option Full (rouge) — 3 cœurs + lettres MARRY ME',
@@ -793,6 +831,26 @@ const translations = {
             if (idx === 0) {
                 return {
                     ...p,
+                    title: 'Пакет «Минималистичный»',
+                    desc: [
+                        'Декор как на фото',
+                        'Маленькие буквы «Marry Me»',
+                        'Свечи',
+                        'Красный ковёр',
+                        'Столик',
+                        'Профессиональный фотограф',
+                        'Букет из 21 розы',
+                        '2 шт фейерверков',
+                        'Романтическая музыка на колонке',
+                    ],
+                    price: '390 €',
+                    alt: 'Пакет минималистичный',
+                };
+            }
+
+            if (idx === 1) {
+                return {
+                    ...p,
                     title: 'Пакет буквы MARRY ME (с лампочками)',
                     desc: [
                         'Буквы «MARRY ME» (высота 95 см)',
@@ -811,7 +869,7 @@ const translations = {
                 };
             }
 
-            if (idx === 1 || idx === 2) {
+            if (idx === 2 || idx === 3) {
                 return {
                     ...p,
                     title: 'Пакет цветочные буквы MARRY ME',
@@ -831,7 +889,7 @@ const translations = {
                 };
             }
 
-            if (idx === 3) {
+            if (idx === 4) {
                 return {
                     ...p,
                     title: 'Пакет «романтический цветочный декор»',
@@ -852,7 +910,7 @@ const translations = {
                 };
             }
 
-            if (idx === 4) {
+            if (idx === 5) {
                 return {
                     ...p,
                     title: 'Пакет «романтическая розовая цветочная арка»',
@@ -873,7 +931,7 @@ const translations = {
                 };
             }
 
-            if (idx === 5) {
+            if (idx === 6) {
                 return {
                     ...p,
                     title: 'Пакет «большое белое сердце»',
@@ -897,7 +955,7 @@ const translations = {
                 };
             }
 
-            if (idx === 6) {
+            if (idx === 7) {
                 return {
                     ...p,
                     title: 'Пакет «большое сердце + буквы MARRY ME с лампочками»',
@@ -922,7 +980,7 @@ const translations = {
                 };
             }
 
-            if (idx === 7) {
+            if (idx === 8) {
                 return {
                     ...p,
                     title: 'Пакет «большое сердце + цветочные буквы MARRY ME»',
@@ -947,7 +1005,7 @@ const translations = {
                 };
             }
 
-            if (idx === 8) {
+            if (idx === 9) {
                 return {
                     ...p,
                     title: 'VIP пакет (3 сердца)',
@@ -972,7 +1030,7 @@ const translations = {
                 };
             }
 
-            if (idx === 9) {
+            if (idx === 10) {
                 return {
                     ...p,
                     title: 'VIP пакет (3 сердца)',
@@ -997,7 +1055,7 @@ const translations = {
                 };
             }
 
-            if (idx === 10) {
+            if (idx === 11) {
                 return {
                     ...p,
                     title: 'Пакет «неоновое сердце + MARRY ME (неон)»',
@@ -1020,7 +1078,7 @@ const translations = {
                 };
             }
 
-            if (idx === 11) {
+            if (idx === 12) {
                 return {
                     ...p,
                     title: 'Пакет «большие буквы MARRY ME»',
@@ -1041,7 +1099,7 @@ const translations = {
                 };
             }
 
-            if (idx === 12) {
+            if (idx === 13) {
                 return {
                     ...p,
                     title: 'Пакет Full (белый) — 3 сердца + буквы MARRY ME',
@@ -1068,7 +1126,7 @@ const translations = {
                 };
             }
 
-            if (idx === 13) {
+            if (idx === 14) {
                 return {
                     ...p,
                     title: 'Пакет Full (красный) — 3 сердца + буквы MARRY ME',
@@ -1191,6 +1249,27 @@ const translations = {
             if (idx === 0) {
                 return {
                     ...p,
+                    title: 'Пакет «Мінімалістичний»',
+                    desc: [
+                        'Декор як на фото',
+                        'Маленькі літери «Marry Me»',
+                        'Свічки',
+                        'Килим червоний',
+                        'Столик',
+                        'Шампанське (алкогольне/безалкогольне)',
+                        'Професійний фотограф',
+                        'Букет троянд (21 шт)',
+                        '2 шт феєрверків',
+                        'Романтична музика на колонці',
+                    ],
+                    price: '390 €',
+                    alt: 'Пакет Мінімалістичний',
+                };
+            }
+
+            if (idx === 1) {
+                return {
+                    ...p,
                     title: 'Пакет літери MARRY ME (з лампочками)',
                     desc: [
                         'Літери «MARRY ME» (висотою 95 см)',
@@ -1209,7 +1288,7 @@ const translations = {
                 };
             }
 
-            if (idx === 1 || idx === 2) {
+            if (idx === 2 || idx === 3) {
                 return {
                     ...p,
                     title: 'Пакет літери «Marry Me» квіткові',
@@ -1229,7 +1308,7 @@ const translations = {
                 };
             }
 
-            if (idx === 3) {
+            if (idx === 4) {
                 return {
                     ...p,
                     title: 'Пакет «романтична квіткова декорація»',
@@ -1250,7 +1329,7 @@ const translations = {
                 };
             }
 
-            if (idx === 4) {
+            if (idx === 5) {
                 return {
                     ...p,
                     title: 'Пакет «романтична рожева квіткова арка»',
@@ -1271,7 +1350,7 @@ const translations = {
                 };
             }
 
-            if (idx === 5) {
+            if (idx === 6) {
                 return {
                     ...p,
                     title: 'Пакет «Біле велике серце»',
@@ -1295,7 +1374,7 @@ const translations = {
                 };
             }
 
-            if (idx === 6) {
+            if (idx === 7) {
                 return {
                     ...p,
                     title: 'Пакет «велике серце + літери MARRY ME з лампочками»',
@@ -1320,7 +1399,7 @@ const translations = {
                 };
             }
 
-            if (idx === 7) {
+            if (idx === 8) {
                 return {
                     ...p,
                     title: 'Пакет «велике серце + літери MARRY ME квіткові»',
@@ -1345,7 +1424,7 @@ const translations = {
                 };
             }
 
-            if (idx === 8) {
+            if (idx === 9) {
                 return {
                     ...p,
                     title: 'Пакет VIP (3 серця)',
@@ -1370,7 +1449,7 @@ const translations = {
                 };
             }
 
-            if (idx === 9) {
+            if (idx === 10) {
                 return {
                     ...p,
                     title: 'Пакет VIP (3 серця)',
@@ -1395,7 +1474,7 @@ const translations = {
                 };
             }
 
-            if (idx === 10) {
+            if (idx === 11) {
                 return {
                     ...p,
                     title: 'Пакет «неонове серце + MARRY ME (неон)»',
@@ -1418,7 +1497,7 @@ const translations = {
                 };
             }
 
-            if (idx === 11) {
+            if (idx === 12) {
                 return {
                     ...p,
                     title: 'Пакет «Літери MARRY ME великі»',
@@ -1439,7 +1518,7 @@ const translations = {
                 };
             }
 
-            if (idx === 12) {
+            if (idx === 13) {
                 return {
                     ...p,
                     title: 'Пакет Full (білий) — 3 серця + літери MARRY ME',
@@ -1466,7 +1545,7 @@ const translations = {
                 };
             }
 
-            if (idx === 13) {
+            if (idx === 14) {
                 return {
                     ...p,
                     title: 'Пакет Full (червоний) — 3 серця + літери MARRY ME',
