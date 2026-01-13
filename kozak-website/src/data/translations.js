@@ -17,16 +17,36 @@ const basePackagesEn = [
         alt: 'MARRY ME letters proposal package',
     },
     {
-        title: 'Package 2',
-        desc: ['Location scouting', 'Timing & logistics'],
-        price: '€ —',
-        alt: 'Proposal package 2',
+        title: 'Floral “MARRY ME” letters package',
+        desc: [
+            'Decor as in the photo',
+            'Floral “MARRY ME” letters (85 cm tall)',
+            'Candles',
+            'Carpet',
+            'Champagne (alcoholic / non-alcoholic)',
+            'Professional photographer',
+            'Bouquet of 21 roses',
+            '2 fireworks',
+            'Romantic music on a speaker',
+        ],
+        price: '750 €',
+        alt: 'Floral MARRY ME letters proposal package',
     },
     {
-        title: 'Package 3',
-        desc: ['Decor options', 'Coordination on-site'],
-        price: '€ —',
-        alt: 'Proposal package 3',
+        title: 'Floral “MARRY ME” letters package',
+        desc: [
+            'Decor as in the photo',
+            'Floral “MARRY ME” letters (85 cm tall)',
+            'Candles',
+            'Carpet',
+            'Champagne (alcoholic / non-alcoholic)',
+            'Professional photographer',
+            'Bouquet of 21 roses',
+            '2 fireworks',
+            'Romantic music on a speaker',
+        ],
+        price: '750 €',
+        alt: 'Floral MARRY ME letters proposal package',
     },
     {
         title: 'Package 4',
@@ -239,6 +259,26 @@ const translations = {
                 };
             }
 
+            if (idx === 1 || idx === 2) {
+                return {
+                    ...p,
+                    title: 'Forfait lettres florales MARRY ME',
+                    desc: [
+                        'Décor comme sur la photo',
+                        'Lettres florales « MARRY ME » (hauteur 85 cm)',
+                        'Bougies',
+                        'Tapis',
+                        'Champagne (avec/sans alcool)',
+                        'Photographe professionnel',
+                        'Bouquet de 21 roses',
+                        '2 feux d’artifice',
+                        'Musique romantique sur enceinte',
+                    ],
+                    price: '750 €',
+                    alt: 'Forfait lettres florales MARRY ME',
+                };
+            }
+
             return {
                 ...p,
                 title: `Forfait ${idx + 1}`,
@@ -353,6 +393,26 @@ const translations = {
                 };
             }
 
+            if (idx === 1 || idx === 2) {
+                return {
+                    ...p,
+                    title: 'Пакет цветочные буквы MARRY ME',
+                    desc: [
+                        'Декор как на фото',
+                        'Цветочные буквы «MARRY ME» (высота 85 см)',
+                        'Свечи',
+                        'Ковёр',
+                        'Шампанское (алкогольное/безалкогольное)',
+                        'Профессиональный фотограф',
+                        'Букет из 21 розы',
+                        '2 шт фейерверков',
+                        'Романтическая музыка на колонке',
+                    ],
+                    price: '750 €',
+                    alt: 'Пакет цветочные буквы MARRY ME',
+                };
+            }
+
             return {
                 ...p,
                 title: `Пакет ${idx + 1}`,
@@ -464,6 +524,26 @@ const translations = {
                     ],
                     price: '650 €',
                     alt: 'Пакет літери MARRY ME',
+                };
+            }
+
+            if (idx === 1 || idx === 2) {
+                return {
+                    ...p,
+                    title: 'Пакет літери «Marry Me» квіткові',
+                    desc: [
+                        'Декор як на фото',
+                        'Квіткові літери «MARRY ME» (висотою 85 см)',
+                        'Свічки',
+                        'Килим',
+                        'Шампанське (алкогольне/безалкогольне)',
+                        'Професійний фотограф',
+                        'Букет троянд (21 шт)',
+                        '2 шт феєрверків',
+                        'Романтична музика на колонці',
+                    ],
+                    price: '750 €',
+                    alt: 'Пакет квіткові літери MARRY ME',
                 };
             }
 
