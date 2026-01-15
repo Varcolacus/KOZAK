@@ -48,7 +48,7 @@ const About = ({ t }) => {
 
     return (
         <section id="about" className="py-16">
-            <div className="container mx-auto px-6 text-center">
+            <div className="container mx-auto px-4 sm:px-6 text-center">
                 <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.about}</h2>
                 <p className="text-lg text-gray-600 mb-8">{t.aboutText}</p>
 
@@ -57,16 +57,16 @@ const About = ({ t }) => {
                         type="button"
                         onClick={handlePrev}
                         aria-label="Previous photos"
-                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-10 h-10 shadow hover:bg-gray-50 flex items-center justify-center"
+                        className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-9 h-9 sm:w-10 sm:h-10 shadow hover:bg-gray-50 flex items-center justify-center"
                     >
                         <span aria-hidden="true">‹</span>
                     </button>
 
-                    <div className="mx-10 flex items-stretch gap-3 justify-center">
+                    <div className="mx-0 sm:mx-10 flex items-stretch gap-3 justify-center">
                         {visibleImages.map(({ src, idx }) => (
                             <div
                                 key={`${src}-${idx}`}
-                                className="w-72 h-96 md:w-80 md:h-112 lg:w-96 lg:h-128 bg-white rounded-lg shadow overflow-hidden flex items-center justify-center"
+                                className="w-full max-w-xs h-72 sm:w-72 sm:max-w-none sm:h-96 md:w-80 md:h-112 lg:w-96 lg:h-128 bg-white rounded-lg shadow overflow-hidden flex items-center justify-center"
                             >
                                 <img
                                     src={src}
@@ -85,7 +85,7 @@ const About = ({ t }) => {
                         type="button"
                         onClick={handleNext}
                         aria-label="Next photos"
-                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-10 h-10 shadow hover:bg-gray-50 flex items-center justify-center"
+                        className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-9 h-9 sm:w-10 sm:h-10 shadow hover:bg-gray-50 flex items-center justify-center"
                     >
                         <span aria-hidden="true">›</span>
                     </button>

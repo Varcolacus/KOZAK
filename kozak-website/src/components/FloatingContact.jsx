@@ -4,7 +4,7 @@ const FloatingContact = () => {
     const [open, setOpen] = React.useState(false);
 
     return (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
             {open && (
                 <div className="flex flex-col items-end space-y-3 mb-3">
                     <a
@@ -47,7 +47,7 @@ const FloatingContact = () => {
             <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                className="bg-pink-600 hover:bg-pink-700 text-white p-4 rounded-full shadow-lg flex items-center justify-center"
+                className="bg-pink-600 hover:bg-pink-700 text-white p-3 sm:p-4 rounded-full shadow-lg flex items-center justify-center"
                 aria-label="Contact"
                 aria-expanded={open}
             >

@@ -65,20 +65,20 @@ function Gallery({ t }) {
 
     return (
         <section id="gallery" ref={sectionRef} className={`section ${isVisible ? 'visible' : ''} py-16 section-bg`}>
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-4 sm:px-6">
                 <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.gallery}</h2>
                 <div className="relative">
                     <button
                         type="button"
                         onClick={handlePrev}
                         aria-label="Previous photos"
-                        className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-10 h-10 shadow hover:bg-gray-50 flex items-center justify-center ${canNavigate ? '' : 'opacity-40 cursor-default'}`}
+                        className={`absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-9 h-9 sm:w-10 sm:h-10 shadow hover:bg-gray-50 flex items-center justify-center ${canNavigate ? '' : 'opacity-40 cursor-default'}`}
                         disabled={!canNavigate}
                     >
                         <span aria-hidden="true">‹</span>
                     </button>
 
-                    <div className="px-12 sm:px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center">
+                    <div className="px-4 sm:px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center">
                         {visibleImages.map(({ src, idx }) => (
                             <div
                                 key={`${src}-${idx}`}
@@ -101,7 +101,7 @@ function Gallery({ t }) {
                         type="button"
                         onClick={handleNext}
                         aria-label="Next photos"
-                        className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-10 h-10 shadow hover:bg-gray-50 flex items-center justify-center ${canNavigate ? '' : 'opacity-40 cursor-default'}`}
+                        className={`absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 rounded-full w-9 h-9 sm:w-10 sm:h-10 shadow hover:bg-gray-50 flex items-center justify-center ${canNavigate ? '' : 'opacity-40 cursor-default'}`}
                         disabled={!canNavigate}
                     >
                         <span aria-hidden="true">›</span>

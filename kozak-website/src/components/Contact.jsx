@@ -7,7 +7,7 @@ const Contact = ({ t }) => {
                 <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.contact}</h2>
                 <p className="text-lg text-gray-600 mb-8">{t.contactText}</p>
                 <div className="flex flex-col items-center">
-                    <div className="flex justify-center space-x-4 mb-6">
+                    <div className="flex flex-wrap justify-center gap-4 mb-6">
                         <a href="https://wa.me/[your_whatsapp]" className="text-blue-600 hover:underline">WhatsApp</a>
                         <a href="mailto:[your_email]" className="text-blue-600 hover:underline">Email</a>
                         <a href="https://www.instagram.com/paris.marryme?igsh=amp4cjlscjR4YjRl" className="text-blue-600 hover:underline">Instagram</a>
