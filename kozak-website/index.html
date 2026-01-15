@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOZAK | Romantic Marriage Proposal Planning in Paris</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script>
+        (function () {
+            try {
+                const host = window.location.hostname;
+                if (host === 'www.kozakproposalparis.com') {
+                    const targetHost = 'kozakproposalparis.com';
+                    const targetUrl =
+                        window.location.protocol +
+                        '//' +
+                        targetHost +
+                        window.location.pathname +
+                        window.location.search +
+                        window.location.hash;
+                    window.location.replace(targetUrl);
+                }
+            } catch (_) {
+                // no-op
+            }
+        })();
+    </script>
 </head>
 <body>
     <div id="root"></div>
