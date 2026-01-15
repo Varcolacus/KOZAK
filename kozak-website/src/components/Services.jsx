@@ -195,7 +195,7 @@ const Services = ({ t }) => {
                             </button>
                         </div>
 
-                        <div className="relative flex-1 min-h-0 bg-white px-16 py-6 overflow-auto">
+                        <div className="relative flex-1 min-h-0 bg-white px-4 sm:px-16 py-4 sm:py-6 overflow-auto">
                             {lightboxSrc ? (
                                 <img
                                     src={lightboxSrc}

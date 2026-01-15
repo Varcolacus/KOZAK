@@ -78,11 +78,11 @@ function Gallery({ t }) {
                         <span aria-hidden="true">‹</span>
                     </button>
 
-                    <div className="mx-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center">
+                    <div className="px-12 sm:px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 justify-items-center">
                         {visibleImages.map(({ src, idx }) => (
                             <div
                                 key={`${src}-${idx}`}
-                                className="w-72 h-96 md:w-80 md:h-112 lg:w-96 lg:h-128 bg-white rounded-lg shadow overflow-hidden flex items-center justify-center"
+                                className="w-full max-w-xs h-72 sm:w-72 sm:max-w-none sm:h-96 md:w-80 md:h-112 lg:w-96 lg:h-128 bg-white rounded-lg shadow overflow-hidden flex items-center justify-center"
                             >
                                 <img
                                     src={src}

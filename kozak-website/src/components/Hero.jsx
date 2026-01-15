@@ -40,7 +40,7 @@ const Hero = ({ t }) => {
     }, [currentVideoIndex]);
 
     return (
-        <section id="hero-section" className="hero-bg h-screen flex items-center justify-center text-center text-white relative overflow-hidden">
+        <section id="hero-section" className="hero-bg min-h-screen pt-20 flex items-center justify-center text-center text-white relative overflow-hidden">
             <video
                 ref={videoRef}
                 className="absolute top-0 left-0 w-full h-full object-cover"
@@ -51,11 +51,11 @@ const Hero = ({ t }) => {
                 <source src={videos[currentVideoIndex]} type="video/mp4" />
             </video>
             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"></div>
-            <div className="relative z-10 bg-black bg-opacity-50 p-10 rounded-lg">
-                <h1 className="text-4xl md:text-5xl font-bold font-playfair mb-4">{t.title}</h1>
-                <p className="text-xl md:text-2xl mb-6">{t.subtitle}</p>
-                <p className="text-lg">{t.tagline}</p>
-                <a href="#contact" className="mt-6 inline-block bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700">{t.cta}</a>
+            <div className="relative z-10 bg-black bg-opacity-50 p-6 sm:p-10 rounded-lg mx-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-playfair mb-3 sm:mb-4">{t.title}</h1>
+                <p className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6">{t.subtitle}</p>
+                <p className="text-base sm:text-lg">{t.tagline}</p>
+                <a href="#contact" className="mt-5 sm:mt-6 inline-block bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700">{t.cta}</a>
             </div>
         </section>
     );

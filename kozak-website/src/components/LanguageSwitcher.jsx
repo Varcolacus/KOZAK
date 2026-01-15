@@ -15,7 +15,7 @@ const LanguageSwitcher = ({ language, setLanguage }) => {
                 id="site-language"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="border rounded px-2 py-1 bg-white text-sm"
+                className="border rounded px-2 py-1 bg-white text-sm w-24 sm:w-auto"
             >
                 {languages.map((lang) => (
                     <option key={lang.code} value={lang.code}>

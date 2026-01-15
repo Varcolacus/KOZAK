@@ -6,9 +6,9 @@ const Header = ({ t, language, setLanguage }) => {
 
     return (
         <header className="fixed top-0 w-full bg-white shadow-md z-50">
-            <nav className="container mx-auto py-4 px-6 grid grid-cols-3 items-center relative">
+            <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between sm:grid sm:grid-cols-3 sm:items-center relative">
                 {/* Left: language + icons */}
-                <div className="flex items-center space-x-4 justify-start">
+                <div className="flex items-center space-x-2 sm:space-x-4 justify-start">
                     <div>
                         <LanguageSwitcher language={language} setLanguage={setLanguage} />
                     </div>
@@ -111,7 +111,7 @@ const Header = ({ t, language, setLanguage }) => {
             {/* Mobile Navigation Drawer */}
             {mobileOpen && (
                 <div id="mobile-contact-menu" className="sm:hidden bg-white border-t shadow-lg">
-                    <div className="container mx-auto px-6 py-4">
+                    <div className="container mx-auto px-4 py-4">
                         <div className="flex flex-col space-y-3">
                             <a href="#services" onClick={() => setMobileOpen(false)} className="text-gray-700 hover:text-pink-600 py-2">{t.services}</a>
                             <a href="#about" onClick={() => setMobileOpen(false)} className="text-gray-700 hover:text-pink-600 py-2">{t.about}</a>
