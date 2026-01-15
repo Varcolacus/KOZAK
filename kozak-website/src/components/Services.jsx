@@ -96,7 +96,7 @@ const Services = ({ t }) => {
 
     return (
         <section id="services" className="py-16 section-bg">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-4 sm:px-6">
                 <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.services}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {t.packages.map((pkg, index) => {
@@ -208,7 +208,7 @@ const Services = ({ t }) => {
                                 type="button"
                                 onClick={lightboxPrev}
                                 disabled={lightboxCount <= 1}
-                                className={`absolute left-4 top-1/2 -translate-y-1/2 rounded-full w-12 h-12 flex items-center justify-center shadow ${
+                                className={`absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center shadow ${
                                     lightboxCount > 1
                                         ? 'bg-black bg-opacity-70 hover:bg-opacity-90 text-white'
                                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'
@@ -221,7 +221,7 @@ const Services = ({ t }) => {
                                 type="button"
                                 onClick={lightboxNext}
                                 disabled={lightboxCount <= 1}
-                                className={`absolute right-4 top-1/2 -translate-y-1/2 rounded-full w-12 h-12 flex items-center justify-center shadow ${
+                                className={`absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center shadow ${
                                     lightboxCount > 1
                                         ? 'bg-black bg-opacity-70 hover:bg-opacity-90 text-white'
                                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'
