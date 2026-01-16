@@ -112,7 +112,7 @@ const Services = ({ t }) => {
                                         <img 
                                             src={getImagePath(index, currentImageIdx + 1)} 
                                             alt={`${pkg.alt} ${currentImageIdx + 1}`} 
-                                            className="w-full h-64 object-cover cursor-pointer" 
+                                            className="w-full h-64 object-contain bg-gray-100 cursor-pointer" 
                                             onClick={() => openLightbox(index, currentImageIdx)}
                                             onError={(e) => { 
                                                 e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
@@ -146,7 +146,7 @@ const Services = ({ t }) => {
                                     <img 
                                         src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                                         alt={pkg.alt} 
-                                        className="w-full h-64 object-cover" 
+                                        className="w-full h-64 object-contain bg-gray-100" 
                                         onError={(e) => { 
                                             e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
                                         }} 

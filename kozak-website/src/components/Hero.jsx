@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { assetUrl } from '../utils/assetUrl';
 
 const Hero = ({ t }) => {
-    const videoRef = useRef(null);
+    const mainVideoRef = useRef(null);
+    const bgVideoRef = useRef(null);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     
     const videos = [
@@ -12,38 +13,54 @@ const Hero = ({ t }) => {
     ];
 
     useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
+        const mainVideo = mainVideoRef.current;
+        if (!mainVideo) return;
 
         const handleVideoEnd = () => {
             // Passer à la vidéo suivante et boucler sur la première après la dernière
             setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
         };
 
-        video.addEventListener('ended', handleVideoEnd);
+        mainVideo.addEventListener('ended', handleVideoEnd);
         
         return () => {
-            video.removeEventListener('ended', handleVideoEnd);
+            mainVideo.removeEventListener('ended', handleVideoEnd);
         };
     }, [videos.length]);
 
     useEffect(() => {
-        const video = videoRef.current;
-        if (video) {
-            video.load();
-            // Tentative de lecture automatique
-            const playPromise = video.play();
+        const mainVideo = mainVideoRef.current;
+        const bgVideo = bgVideoRef.current;
+
+        const loadAndPlay = (videoEl) => {
+            if (!videoEl) return;
+
+            videoEl.load();
+
+            const playPromise = videoEl.play();
             if (playPromise !== undefined) {
                 playPromise.catch(err => console.log('Autoplay prevented:', err));
             }
-        }
+        };
+
+        loadAndPlay(bgVideo);
+        loadAndPlay(mainVideo);
     }, [currentVideoIndex]);
 
     return (
         <section id="hero-section" className="hero-bg min-h-screen pt-20 flex items-center justify-center text-center text-white relative overflow-hidden">
             <video
-                ref={videoRef}
-                className="absolute top-0 left-0 w-full h-full object-contain bg-black"
+                ref={bgVideoRef}
+                className="absolute top-0 left-0 w-full h-full object-cover filter blur-md transform scale-110"
+                autoPlay
+                muted
+                playsInline
+            >
+                <source src={videos[currentVideoIndex]} type="video/mp4" />
+            </video>
+            <video
+                ref={mainVideoRef}
+                className="absolute top-0 left-0 w-full h-full object-contain"
                 autoPlay
                 muted
                 playsInline

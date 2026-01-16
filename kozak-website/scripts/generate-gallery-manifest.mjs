@@ -27,14 +27,9 @@ function toPublicPath(filePath) {
     return relToPublic;
 }
 
-const pinnedAboutUs = [
-    'assets/images/gallery/about-us/IMG-20251102-WA0003.jpg',
-    'assets/images/gallery/about-us/IMG-20251102-WA0007.jpg',
-    'assets/images/gallery/about-us/IMG-20251102-WA0004.jpg',
-    'assets/images/gallery/about-us/IMG-20251102-WA0008.jpg',
-    'assets/images/gallery/about-us/IMG-20251102-WA0005.jpg',
-    'assets/images/gallery/about-us/IMG-20251102-WA0006.jpg',
-];
+// We keep the About section images in their own carousel and do NOT include them
+// in the main Gallery section.
+const EXCLUDED_SUBPATHS = ['/gallery/about-us/'];
 
 const SHUFFLE_SEED = 'kozak-gallery-v1';
 
@@ -73,10 +68,9 @@ function shuffleDeterministic(list, seed) {
 }
 
 function categoryRank(p) {
-    if (p.includes('/gallery/about-us/')) return 0;
-    if (p.includes('/locations/')) return 1;
-    if (p.includes('/packages/')) return 2;
-    return 3;
+    if (p.includes('/locations/')) return 0;
+    if (p.includes('/packages/')) return 1;
+    return 2;
 }
 
 function packageSortKey(p) {
@@ -109,10 +103,12 @@ if (!fs.existsSync(imagesRoot)) {
 }
 
 const allFiles = walk(imagesRoot);
-const allPublicPaths = allFiles.map(toPublicPath).filter((p) => p.startsWith('assets/images/'));
+const allPublicPaths = allFiles
+    .map(toPublicPath)
+    .filter((p) => p.startsWith('assets/images/'))
+    .filter((p) => !EXCLUDED_SUBPATHS.some((sub) => p.includes(sub)));
 
-const pinnedSet = new Set(pinnedAboutUs);
-const combinedUnique = Array.from(new Set([...pinnedAboutUs, ...allPublicPaths]));
+const combinedUnique = Array.from(new Set(allPublicPaths));
 combinedUnique.sort(sortPaths);
 
 // Option C: random order but stable across builds.
