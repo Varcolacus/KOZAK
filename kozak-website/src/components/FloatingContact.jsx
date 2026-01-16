@@ -8,7 +8,7 @@ const FloatingContact = () => {
             {open && (
                 <div className="flex flex-col items-end space-y-3 mb-3">
                     <a
-                        href="https://wa.me/[your_whatsapp]"
+                        href="https://wa.me/380961146599"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110"
