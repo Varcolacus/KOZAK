@@ -344,6 +344,9 @@ const translations = {
 
         bookPackage: 'Book this package',
 
+        contactPrefillPackage: "Hello! I'm interested in the package: {package}",
+        contactPrefillGeneric: "Hello! I'm interested in a package.",
+
         packages: basePackagesEn,
         faqs: baseFaqsEn,
 
@@ -420,6 +423,9 @@ const translations = {
         seeLess: 'Voir moins',
 
         bookPackage: 'Réserver ce forfait',
+
+        contactPrefillPackage: 'Bonjour ! Je suis intéressé(e) par le forfait : {package}',
+        contactPrefillGeneric: 'Bonjour ! Je suis intéressé(e) par un forfait.',
 
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {
@@ -848,6 +854,9 @@ const translations = {
 
         bookPackage: 'Забронировать пакет',
 
+        contactPrefillPackage: 'Здравствуйте! Меня интересует пакет: {package}',
+        contactPrefillGeneric: 'Здравствуйте! Меня интересует пакет.',
+
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {
                 return {
@@ -1273,6 +1282,9 @@ const translations = {
         seeLess: 'Показати менше',
 
         bookPackage: 'Забронювати пакет',
+
+        contactPrefillPackage: 'Вітаю! Мене цікавить пакет: {package}',
+        contactPrefillGeneric: 'Вітаю! Мене цікавить пакет.',
 
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {

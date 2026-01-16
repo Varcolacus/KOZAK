@@ -92,9 +92,13 @@ const Services = ({ t }) => {
 
     const goToContactWithPackage = (pkg) => {
         const packageTitle = (pkg?.title || '').toString();
+
+        const templateWithPackage = (t?.contactPrefillPackage || "Hello! I'm interested in the package: {package}").toString();
+        const templateGeneric = (t?.contactPrefillGeneric || "Hello! I'm interested in a package.").toString();
+
         const prefillText = packageTitle
-            ? `Hello! I'm interested in the package: ${packageTitle}`
-            : `Hello! I'm interested in a package.`;
+            ? templateWithPackage.replace('{package}', packageTitle)
+            : templateGeneric;
 
         window.dispatchEvent(
             new CustomEvent('kozak:contactPrefill', {

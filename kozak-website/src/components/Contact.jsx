@@ -15,9 +15,12 @@ const Contact = ({ t }) => {
             const packageTitle = (details.packageTitle || '').toString().trim();
             const incomingMessage = (details.message || '').toString().trim();
 
+            const templateWithPackage = (t?.contactPrefillPackage || "Hello! I'm interested in the package: {package}").toString();
+            const templateGeneric = (t?.contactPrefillGeneric || "Hello! I'm interested in a package.").toString();
+
             const defaultPrefill = packageTitle
-                ? `Hello! I'm interested in the package: ${packageTitle}`
-                : "Hello! I'm interested in a package.";
+                ? templateWithPackage.replace('{package}', packageTitle)
+                : templateGeneric;
 
             const prefillLine = incomingMessage || defaultPrefill;
 
