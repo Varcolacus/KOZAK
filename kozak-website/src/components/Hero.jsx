@@ -51,23 +51,25 @@ const Hero = ({ t }) => {
         <section id="hero-section" className="hero-bg min-h-screen pt-20 flex items-center justify-center text-center text-white relative overflow-hidden">
             <video
                 ref={bgVideoRef}
-                className="absolute top-0 left-0 w-full h-full object-cover filter blur-md transform scale-110"
+                className="absolute inset-0 w-full h-full object-cover transform scale-100 md:scale-110 md:filter md:blur-md"
                 autoPlay
                 muted
                 playsInline
+                preload="auto"
             >
                 <source src={videos[currentVideoIndex]} type="video/mp4" />
             </video>
             <video
                 ref={mainVideoRef}
-                className="absolute top-0 left-0 w-full h-full object-contain"
+                className="hidden md:block absolute inset-0 w-full h-full object-contain"
                 autoPlay
                 muted
                 playsInline
+                preload="auto"
             >
                 <source src={videos[currentVideoIndex]} type="video/mp4" />
             </video>
-            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"></div>
+            <div className="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
             <div className="relative z-10 bg-black bg-opacity-50 p-6 sm:p-10 rounded-lg mx-4">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-playfair mb-3 sm:mb-4">{t.title}</h1>
                 <p className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6">{t.subtitle}</p>
