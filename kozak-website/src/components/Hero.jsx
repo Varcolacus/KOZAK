@@ -43,7 +43,7 @@ const Hero = ({ t }) => {
         <section id="hero-section" className="hero-bg min-h-screen pt-20 flex items-center justify-center text-center text-white relative overflow-hidden">
             <video
                 ref={videoRef}
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                className="absolute top-0 left-0 w-full h-full object-contain bg-black"
                 autoPlay
                 muted
                 playsInline
