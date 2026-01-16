@@ -29,7 +29,7 @@ const FloatingContact = () => {
                         </svg>
                     </a>
                     <a
-                        href="https://www.instagram.com/paris.marryme"
+                        href="https://www.instagram.com/proposal.in.paris.kozak?igsh=MWswajdwbmhmdDl2bw=="
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full shadow-lg flex items-center justify-center"

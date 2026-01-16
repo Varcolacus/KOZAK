@@ -167,5 +167,5 @@ MIT License - See LICENSE file for details.
 
 ## Contact
 
-- Instagram: [@paris.marryme](https://instagram.com/paris.marryme)
+- Instagram: [@proposal.in.paris.kozak](https://www.instagram.com/proposal.in.paris.kozak?igsh=MWswajdwbmhmdDl2bw==)
 - Website: [kozak-proposals.com](https://kozak-proposals.com)

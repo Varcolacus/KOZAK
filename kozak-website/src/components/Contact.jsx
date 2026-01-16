@@ -10,7 +10,7 @@ const Contact = ({ t }) => {
                     <div className="flex flex-wrap justify-center gap-4 mb-6">
                         <a href="https://wa.me/380961146599" className="text-blue-600 hover:underline">WhatsApp</a>
                         <a href="mailto:[your_email]" className="text-blue-600 hover:underline">Email</a>
-                        <a href="https://www.instagram.com/paris.marryme?igsh=amp4cjlscjR4YjRl" className="text-blue-600 hover:underline">Instagram</a>
+                        <a href="https://www.instagram.com/proposal.in.paris.kozak?igsh=MWswajdwbmhmdDl2bw==" className="text-blue-600 hover:underline">Instagram</a>
                     </div>
                     <form className="w-full max-w-md" action="/submit-form" method="POST">
                         <input type="text" name="name" placeholder={t.contactForm.name} className="w-full p-3 mb-4 border rounded-lg" required />
