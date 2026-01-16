@@ -108,7 +108,7 @@ const Services = ({ t }) => {
         <section id="services" className="py-16 section-bg">
             <div className="container mx-auto px-4 sm:px-6">
                 <h2 className="text-3xl font-bold text-center mb-8 font-playfair">{t.services}</h2>
-                <div className="grid grid-cols-1 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {t.packages.map((pkg, index) => {
                         const pkgInfo = packageImages[index];
                         const currentImageIdx = activeImageIndex[index] || 0;
@@ -122,12 +122,12 @@ const Services = ({ t }) => {
                             <div
                                 key={index}
                                 className={`package-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col ${
-                                    isExpanded ? '' : 'h-540 sm:h-600'
+                                    isExpanded ? '' : 'package-card--collapsed'
                                 }`}
                             >
                                 {/* Carousel Container */}
                                 {pkgInfo && pkgInfo.count > 0 ? (
-                                    <div className="relative flex-none h-360 sm:h-400">
+                                    <div className="relative flex-none package-card__media">
                                         {/* Image */}
                                         <img 
                                             src={getImagePath(index, currentImageIdx + 1)} 
@@ -166,7 +166,7 @@ const Services = ({ t }) => {
                                     <img 
                                         src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                                         alt={pkg.alt} 
-                                        className="w-full h-360 sm:h-400 object-cover object-center bg-gray-100 flex-none"
+                                        className="w-full package-card__media object-cover object-center bg-gray-100 flex-none"
                                         onError={(e) => { 
                                             e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
                                         }} 
