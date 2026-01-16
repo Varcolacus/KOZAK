@@ -339,6 +339,9 @@ const translations = {
         tagline: 'Make your dream proposal come true in the City of Love',
         cta: 'Plan Your Proposal',
 
+        seeMore: 'See more',
+        seeLess: 'See less',
+
         packages: basePackagesEn,
         faqs: baseFaqsEn,
 
@@ -407,6 +410,9 @@ const translations = {
         subtitle: 'Organisation de demandes en mariage romantiques à Paris',
         tagline: "Réalisez votre demande de rêve dans la Ville de l'Amour",
         cta: 'Planifier votre demande',
+
+        seeMore: 'Voir plus',
+        seeLess: 'Voir moins',
 
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {
@@ -827,6 +833,9 @@ const translations = {
         tagline: 'Сделайте предложение мечты в городе любви',
         cta: 'Спланировать предложение',
 
+        seeMore: 'Показать больше',
+        seeLess: 'Показать меньше',
+
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {
                 return {
@@ -1244,6 +1253,9 @@ const translations = {
         subtitle: 'Організація романтичних пропозицій у Парижі',
         tagline: 'Зробіть пропозицію мрії у місті кохання',
         cta: 'Спланувати пропозицію',
+
+        seeMore: 'Показати більше',
+        seeLess: 'Показати менше',
 
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {

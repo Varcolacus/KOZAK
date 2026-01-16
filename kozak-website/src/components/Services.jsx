@@ -4,6 +4,9 @@ import { assetUrl } from '../utils/assetUrl';
 const Services = ({ t }) => {
     const [activeImageIndex, setActiveImageIndex] = useState({});
     const [lightbox, setLightbox] = useState({ open: false, packageIndex: 0, imageIndex: 0 });
+    const [expandedPackages, setExpandedPackages] = useState({});
+
+    const COLLAPSED_DESC_ITEMS = 6;
 
     // Map of package indices to their image folders and image counts
     const packageImages = {
@@ -54,6 +57,13 @@ const Services = ({ t }) => {
         setLightbox({ open: true, packageIndex, imageIndex });
     };
 
+    const toggleExpanded = (packageIndex) => {
+        setExpandedPackages((prev) => ({
+            ...prev,
+            [packageIndex]: !prev[packageIndex],
+        }));
+    };
+
     const closeLightbox = () => {
         setLightbox((prev) => ({ ...prev, open: false }));
     };
@@ -102,17 +112,27 @@ const Services = ({ t }) => {
                     {t.packages.map((pkg, index) => {
                         const pkgInfo = packageImages[index];
                         const currentImageIdx = activeImageIndex[index] || 0;
+                        const isExpanded = !!expandedPackages[index];
+                        const isLongDesc = Array.isArray(pkg.desc) && pkg.desc.length > COLLAPSED_DESC_ITEMS;
+                        const visibleDesc = isExpanded || !isLongDesc
+                            ? pkg.desc
+                            : pkg.desc.slice(0, COLLAPSED_DESC_ITEMS);
                         
                         return (
-                            <div key={index} className="package-card bg-white rounded-lg shadow-md overflow-hidden">
+                            <div
+                                key={index}
+                                className={`package-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col ${
+                                    isExpanded ? '' : 'h-[520px] sm:h-[560px]'
+                                }`}
+                            >
                                 {/* Carousel Container */}
                                 {pkgInfo && pkgInfo.count > 0 ? (
-                                    <div className="relative">
+                                    <div className={`relative flex-none ${isExpanded ? 'h-64 sm:h-72' : 'h-1/2'}`}>
                                         {/* Image */}
                                         <img 
                                             src={getImagePath(index, currentImageIdx + 1)} 
                                             alt={`${pkg.alt} ${currentImageIdx + 1}`} 
-                                            className="w-full h-64 object-cover object-center bg-gray-100 cursor-pointer" 
+                                            className="w-full h-full object-cover object-center bg-gray-100 cursor-pointer" 
                                             onClick={() => openLightbox(index, currentImageIdx)}
                                             onError={(e) => { 
                                                 e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
@@ -146,7 +166,9 @@ const Services = ({ t }) => {
                                     <img 
                                         src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                                         alt={pkg.alt} 
-                                        className="w-full h-64 object-cover object-center bg-gray-100" 
+                                        className={`w-full object-cover object-center bg-gray-100 flex-none ${
+                                            isExpanded ? 'h-64 sm:h-72' : 'h-1/2'
+                                        }`}
                                         onError={(e) => { 
                                             e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
                                         }} 
@@ -154,15 +176,25 @@ const Services = ({ t }) => {
                                 )}
                                 
                                 {/* Content */}
-                                <div className="p-6">
+                                <div className="p-6 flex-1 min-h-0 flex flex-col">
                                     <h3 className="text-xl font-semibold font-playfair mb-4">{pkg.title}</h3>
                                     <ul className="text-gray-600 mb-4 text-sm">
-                                        {pkg.desc.map((item, i) => (
+                                        {visibleDesc.map((item, i) => (
                                             <li key={i} className="mb-2">• {item}</li>
                                         ))}
                                     </ul>
                                     <p className="text-lg font-bold text-pink-600 mb-4">{pkg.price}</p>
-                                    <a href="#" className="text-blue-600 hover:underline">See Details</a>
+                                    {isLongDesc ? (
+                                        <button
+                                            type="button"
+                                            className="text-blue-600 hover:underline mt-auto"
+                                            onClick={() => toggleExpanded(index)}
+                                        >
+                                            {isExpanded ? (t.seeLess || 'See less') : (t.seeMore || 'See more')}
+                                        </button>
+                                    ) : (
+                                        <div className="mt-auto" />
+                                    )}
                                 </div>
                             </div>
                         );
