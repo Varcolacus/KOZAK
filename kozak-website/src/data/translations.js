@@ -391,6 +391,9 @@ const translations = {
             email: 'Email',
             message: 'Message',
             submit: 'Send',
+            sending: 'Sending...',
+            sent: 'Thanks! Your message was sent by email and WhatsApp opened.',
+            error: 'WhatsApp opened, but email sending failed. Please try again or email us.',
         },
 
         footer: '© 2026 KOZAK. All rights reserved.',
@@ -813,6 +816,9 @@ const translations = {
             email: 'Email',
             message: 'Message',
             submit: 'Envoyer',
+            sending: 'Envoi en cours...',
+            sent: 'Merci ! Votre message a été envoyé par email et WhatsApp s’est ouvert.',
+            error: 'WhatsApp s’est ouvert, mais l’envoi email a échoué. Réessayez ou envoyez-nous un email.',
         },
 
         footer: '© 2026 KOZAK. Tous droits réservés.',
@@ -1234,6 +1240,9 @@ const translations = {
             email: 'Email',
             message: 'Сообщение',
             submit: 'Отправить',
+            sending: 'Отправка...',
+            sent: 'Спасибо! Сообщение отправлено на email, и WhatsApp открылся.',
+            error: 'WhatsApp открылся, но отправка на email не удалась. Попробуйте ещё раз или напишите нам на email.',
         },
 
         footer: '© 2026 KOZAK. Все права защищены.',
@@ -1655,6 +1664,9 @@ const translations = {
             email: 'Email',
             message: 'Повідомлення',
             submit: 'Надіслати',
+            sending: 'Надсилаємо...',
+            sent: 'Дякуємо! Повідомлення надіслано на email, і WhatsApp відкрився.',
+            error: 'WhatsApp відкрився, але надсилання на email не вдалося. Спробуйте ще раз або напишіть нам на email.',
         },
 
         footer: '© 2026 KOZAK. Усі права захищено.',

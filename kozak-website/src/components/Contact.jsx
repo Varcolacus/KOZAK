@@ -3,12 +3,14 @@ import React from 'react';
 const Contact = ({ t }) => {
     const contactEmail = (import.meta.env.VITE_CONTACT_EMAIL || 'bogdanakozak570@gmail.com').trim();
     const emailHref = contactEmail ? `mailto:${contactEmail}` : '';
+    const formspreeFormId = (import.meta.env.VITE_FORMSPREE_FORM_ID || '').trim();
     const whatsappNumber = '380961146599';
     const [form, setForm] = React.useState({ name: '', email: '', message: '' });
-    const [submitted, setSubmitted] = React.useState(false);
+    const [status, setStatus] = React.useState('idle'); // idle | sending | sent | error
 
     const onSubmit = (e) => {
         e.preventDefault();
+
         const text = [
             `New inquiry from KOZAK website`,
             `Name: ${form.name}`,
@@ -16,10 +18,40 @@ const Contact = ({ t }) => {
             `Message: ${form.message}`,
         ].join('\n');
 
+        // Open WhatsApp immediately (synchronous) to reduce popup-blocking risk.
         const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
         window.open(waUrl, '_blank', 'noopener,noreferrer');
-        setSubmitted(true);
-        setForm({ name: '', email: '', message: '' });
+
+        // Send email in the background via Formspree.
+        if (!formspreeFormId) {
+            // No form endpoint configured: we can only open WhatsApp and offer the mailto link.
+            setStatus('sent');
+            setForm({ name: '', email: '', message: '' });
+            return;
+        }
+
+        setStatus('sending');
+
+        const payload = new FormData();
+        payload.append('name', form.name);
+        payload.append('email', form.email);
+        payload.append('message', form.message);
+        payload.append('_subject', 'New inquiry from KOZAK website');
+        payload.append('whatsapp', `+${whatsappNumber}`);
+
+        fetch(`https://formspree.io/f/${formspreeFormId}`, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: payload,
+        })
+            .then((res) => {
+                if (!res.ok) throw new Error(`Formspree error: ${res.status}`);
+                setStatus('sent');
+                setForm({ name: '', email: '', message: '' });
+            })
+            .catch(() => {
+                setStatus('error');
+            });
     };
 
     return (
@@ -35,8 +67,18 @@ const Contact = ({ t }) => {
                         ) : null}
                         <a href="https://www.instagram.com/proposal.in.paris.kozak?igsh=MWswajdwbmhmdDl2bw==" className="text-blue-600 hover:underline">Instagram</a>
                     </div>
-                    {submitted ? (
-                        <p className="text-green-700 mb-4">Thanks! WhatsApp opened with your message.</p>
+                    {status === 'sending' ? (
+                        <p className="text-gray-700 mb-4">{t?.contactForm?.sending || 'Sending...'}</p>
+                    ) : null}
+                    {status === 'sent' ? (
+                        <p className="text-green-700 mb-4">
+                            {t?.contactForm?.sent || 'Thanks! Your message was sent by email and WhatsApp opened.'}
+                        </p>
+                    ) : null}
+                    {status === 'error' ? (
+                        <p className="text-red-700 mb-4">
+                            {t?.contactForm?.error || 'WhatsApp opened, but email sending failed. Please try again or email us.'}
+                        </p>
                     ) : null}
                     <form className="w-full max-w-md" onSubmit={onSubmit}>
                         <input
