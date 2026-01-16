@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Contact = ({ t }) => {
-    const contactEmail = (import.meta.env.VITE_CONTACT_EMAIL || '').trim();
+    const contactEmail = (import.meta.env.VITE_CONTACT_EMAIL || 'bogdanakozak570@gmail.com').trim();
     const emailHref = contactEmail ? `mailto:${contactEmail}` : '';
     const whatsappNumber = '380961146599';
     const [form, setForm] = React.useState({ name: '', email: '', message: '' });

@@ -3,7 +3,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = ({ t, language, setLanguage }) => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const contactEmail = (import.meta.env.VITE_CONTACT_EMAIL || '').trim();
+    const contactEmail = (import.meta.env.VITE_CONTACT_EMAIL || 'bogdanakozak570@gmail.com').trim();
     const facebookUrl = (import.meta.env.VITE_FACEBOOK_URL || '').trim();
     const emailHref = contactEmail ? `mailto:${contactEmail}` : '';
 
