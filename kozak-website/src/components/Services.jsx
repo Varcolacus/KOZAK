@@ -90,6 +90,29 @@ const Services = ({ t }) => {
         }));
     };
 
+    const goToContactWithPackage = (pkg) => {
+        const packageTitle = (pkg?.title || '').toString();
+        const prefillText = packageTitle
+            ? `Hello! I'm interested in the package: ${packageTitle}`
+            : `Hello! I'm interested in a package.`;
+
+        window.dispatchEvent(
+            new CustomEvent('kozak:contactPrefill', {
+                detail: {
+                    packageTitle,
+                    message: prefillText,
+                },
+            })
+        );
+
+        const contactEl = document.getElementById('contact');
+        if (contactEl?.scrollIntoView) {
+            contactEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            window.location.hash = '#contact';
+        }
+    };
+
     React.useEffect(() => {
         if (!lightbox.open) return;
 
@@ -192,16 +215,25 @@ const Services = ({ t }) => {
                                         ))}
                                     </ul>
                                     <p className="text-lg font-bold text-pink-600 mb-3 flex-none">{pkg.price}</p>
+
+                                    <button
+                                        type="button"
+                                        onClick={() => goToContactWithPackage(pkg)}
+                                        className="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded-lg font-semibold flex-none"
+                                    >
+                                        {t.bookPackage || 'Book this package'}
+                                    </button>
+
                                     {isLongDesc ? (
                                         <button
                                             type="button"
-                                            className="text-blue-600 hover:underline mt-auto flex-none"
+                                            className="text-blue-600 hover:underline mt-3 flex-none"
                                             onClick={() => toggleExpanded(index)}
                                         >
                                             {isExpanded ? (t.seeLess || 'See less') : (t.seeMore || 'See more')}
                                         </button>
                                     ) : (
-                                        <div className="mt-auto" />
+                                        <div className="mt-3" />
                                     )}
                                 </div>
                             </div>

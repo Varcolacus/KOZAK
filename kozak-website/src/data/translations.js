@@ -342,6 +342,8 @@ const translations = {
         seeMore: 'See more',
         seeLess: 'See less',
 
+        bookPackage: 'Book this package',
+
         packages: basePackagesEn,
         faqs: baseFaqsEn,
 
@@ -416,6 +418,8 @@ const translations = {
 
         seeMore: 'Voir plus',
         seeLess: 'Voir moins',
+
+        bookPackage: 'Réserver ce forfait',
 
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {
@@ -842,6 +846,8 @@ const translations = {
         seeMore: 'Показать больше',
         seeLess: 'Показать меньше',
 
+        bookPackage: 'Забронировать пакет',
+
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {
                 return {
@@ -1265,6 +1271,8 @@ const translations = {
 
         seeMore: 'Показати більше',
         seeLess: 'Показати менше',
+
+        bookPackage: 'Забронювати пакет',
 
         packages: basePackagesEn.map((p, idx) => {
             if (idx === 0) {

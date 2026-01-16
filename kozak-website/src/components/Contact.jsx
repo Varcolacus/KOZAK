@@ -7,6 +7,38 @@ const Contact = ({ t }) => {
     const whatsappNumber = '380961146599';
     const [form, setForm] = React.useState({ name: '', email: '', message: '' });
     const [status, setStatus] = React.useState('idle'); // idle | sending | sent | error
+    const messageRef = React.useRef(null);
+
+    React.useEffect(() => {
+        const onPrefill = (e) => {
+            const details = e?.detail || {};
+            const packageTitle = (details.packageTitle || '').toString().trim();
+            const incomingMessage = (details.message || '').toString().trim();
+
+            const defaultPrefill = packageTitle
+                ? `Hello! I'm interested in the package: ${packageTitle}`
+                : "Hello! I'm interested in a package.";
+
+            const prefillLine = incomingMessage || defaultPrefill;
+
+            setStatus('idle');
+            setForm((prev) => {
+                const existing = (prev.message || '').toString();
+                if (existing.includes(prefillLine)) return prev;
+                const nextMessage = existing
+                    ? `${prefillLine}\n\n${existing}`
+                    : `${prefillLine}\n\n`;
+                return { ...prev, message: nextMessage };
+            });
+
+            window.setTimeout(() => {
+                messageRef.current?.focus?.();
+            }, 150);
+        };
+
+        window.addEventListener('kozak:contactPrefill', onPrefill);
+        return () => window.removeEventListener('kozak:contactPrefill', onPrefill);
+    }, []);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -106,6 +138,7 @@ const Contact = ({ t }) => {
                             required
                             value={form.message}
                             onChange={(e) => setForm((v) => ({ ...v, message: e.target.value }))}
+                            ref={messageRef}
                         />
                         <button type="submit" className="bg-pink-600 text-white py-2 px-6 rounded-lg hover:bg-pink-700">{t.contactForm.submit}</button>
                     </form>
