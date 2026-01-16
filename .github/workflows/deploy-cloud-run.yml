@@ -10,9 +10,9 @@ permissions:
   id-token: write
 
 env:
-  SERVICE_NAME: ${{ secrets.GCP_SERVICE_NAME }}
-  REGION: ${{ secrets.GCP_REGION }}
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  SERVICE_NAME: kozak-website
+  REGION: europe-west1
+  PROJECT_ID: mythical-device-484408-k3
 
 jobs:
   deploy:
@@ -24,8 +24,8 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          workload_identity_provider: projects/746729851961/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider
+          service_account: github-actions-deployer@mythical-device-484408-k3.iam.gserviceaccount.com
 
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
