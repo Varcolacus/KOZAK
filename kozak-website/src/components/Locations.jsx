@@ -15,7 +15,7 @@ const Locations = ({ t }) => {
                                 <img
                                     src={assetUrl(String(loc.image || '').replace(/^\//, ''))}
                                     alt={loc.title}
-                                    className="max-w-full max-h-full object-contain"
+                                    className="w-full h-full object-cover object-center"
                                 />
                             </div>
                             <div className="p-6">
