@@ -121,11 +121,13 @@ const Services = ({ t }) => {
                         return (
                             <div
                                 key={index}
-                                className="package-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
+                                className={`package-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col ${
+                                    isExpanded ? '' : 'h-450 sm:h-480'
+                                }`}
                             >
                                 {/* Carousel Container */}
                                 {pkgInfo && pkgInfo.count > 0 ? (
-                                    <div className="relative flex-none h-64 sm:h-72">
+                                    <div className="relative flex-none h-300 sm:h-320">
                                         {/* Image */}
                                         <img 
                                             src={getImagePath(index, currentImageIdx + 1)} 
@@ -164,7 +166,7 @@ const Services = ({ t }) => {
                                     <img 
                                         src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                                         alt={pkg.alt} 
-                                        className="w-full h-64 sm:h-72 object-cover object-center bg-gray-100 flex-none"
+                                        className="w-full h-300 sm:h-320 object-cover object-center bg-gray-100 flex-none"
                                         onError={(e) => { 
                                             e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
                                         }} 
@@ -172,18 +174,28 @@ const Services = ({ t }) => {
                                 )}
                                 
                                 {/* Content */}
-                                <div className="p-6 flex flex-col">
-                                    <h3 className="text-xl font-semibold font-playfair mb-4">{pkg.title}</h3>
-                                    <ul className="text-gray-600 mb-4 text-sm">
+                                <div
+                                    className={`p-4 sm:p-5 flex flex-col ${
+                                        isExpanded ? '' : 'flex-1 min-h-0'
+                                    }`}
+                                >
+                                    <h3 className="text-xl font-semibold font-playfair mb-2 flex-none">{pkg.title}</h3>
+                                    <ul
+                                        className={`text-gray-600 text-sm ${
+                                            isExpanded
+                                                ? 'mb-4'
+                                                : 'mb-3 flex-1 min-h-0 overflow-hidden'
+                                        }`}
+                                    >
                                         {visibleDesc.map((item, i) => (
                                             <li key={i} className="mb-2">• {item}</li>
                                         ))}
                                     </ul>
-                                    <p className="text-lg font-bold text-pink-600 mb-4">{pkg.price}</p>
+                                    <p className="text-lg font-bold text-pink-600 mb-3 flex-none">{pkg.price}</p>
                                     {isLongDesc ? (
                                         <button
                                             type="button"
-                                            className="text-blue-600 hover:underline mt-auto"
+                                            className="text-blue-600 hover:underline mt-auto flex-none"
                                             onClick={() => toggleExpanded(index)}
                                         >
                                             {isExpanded ? (t.seeLess || 'See less') : (t.seeMore || 'See more')}
