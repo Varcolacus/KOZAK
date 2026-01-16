@@ -121,13 +121,11 @@ const Services = ({ t }) => {
                         return (
                             <div
                                 key={index}
-                                className={`package-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col ${
-                                    isExpanded ? '' : 'h-[520px] sm:h-[560px]'
-                                }`}
+                                className="package-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
                             >
                                 {/* Carousel Container */}
                                 {pkgInfo && pkgInfo.count > 0 ? (
-                                    <div className={`relative flex-none ${isExpanded ? 'h-64 sm:h-72' : 'h-1/2'}`}>
+                                    <div className="relative flex-none h-64 sm:h-72">
                                         {/* Image */}
                                         <img 
                                             src={getImagePath(index, currentImageIdx + 1)} 
@@ -166,9 +164,7 @@ const Services = ({ t }) => {
                                     <img 
                                         src="https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                                         alt={pkg.alt} 
-                                        className={`w-full object-cover object-center bg-gray-100 flex-none ${
-                                            isExpanded ? 'h-64 sm:h-72' : 'h-1/2'
-                                        }`}
+                                        className="w-full h-64 sm:h-72 object-cover object-center bg-gray-100 flex-none"
                                         onError={(e) => { 
                                             e.target.src = 'https://placehold.co/600x400/png?text=Image+Not+Loaded'; 
                                         }} 
@@ -176,7 +172,7 @@ const Services = ({ t }) => {
                                 )}
                                 
                                 {/* Content */}
-                                <div className="p-6 flex-1 min-h-0 flex flex-col">
+                                <div className="p-6 flex flex-col">
                                     <h3 className="text-xl font-semibold font-playfair mb-4">{pkg.title}</h3>
                                     <ul className="text-gray-600 mb-4 text-sm">
                                         {visibleDesc.map((item, i) => (
