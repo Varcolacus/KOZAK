@@ -11,7 +11,7 @@ const Locations = ({ t }) => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {locations.map((loc, idx) => (
                         <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden">
-                            <div className="mx-auto w-full max-w-xs h-72 sm:w-72 sm:max-w-none sm:h-96 md:w-80 md:h-112 lg:w-96 lg:h-128 bg-white overflow-hidden flex items-center justify-center">
+                            <div className="w-full h-72 sm:h-96 md:h-112 lg:h-128 overflow-hidden flex items-center justify-center">
                                 <img
                                     src={assetUrl(String(loc.image || '').replace(/^\//, ''))}
                                     alt={loc.title}
